@@ -1,6 +1,6 @@
 <script>
 // @ts-nocheck
-
+    import cookie from 'cookie';
     import { 
         Styles,
         Collapse,
@@ -33,6 +33,8 @@
 
     let open = false;
     const toggle = () => (open = !open);
+
+    const cookies = cookie.parse(req.headers.cookie || '');
 </script>
 
 <Styles />
@@ -58,12 +60,14 @@
                 <DropdownItem>Reset</DropdownItem>
             </DropdownMenu>
             </Dropdown-->
+            {#if cookies.disco_access_token}
             <NavItem>
             <NavLink on:click={toggle}>ล็อกอินผ่านรหัสในเกม</NavLink>
             </NavItem>
             <NavItem>
                 <Button style="background-color: #5865F2;" href="https://discord.com/api/oauth2/authorize?client_id=625822290675892234&redirect_uri=https%3A%2F%2Fbpminecraft.com%2Fapi%2Fdiscordcallback&response_type=code&scope=identify%20guilds">ล็อกอินผ่าน Discord</Button>
             </NavItem>
+            {/if}
         </Nav>
         </Collapse>
     </Container>

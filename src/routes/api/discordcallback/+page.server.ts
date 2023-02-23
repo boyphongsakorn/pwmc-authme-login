@@ -55,10 +55,12 @@ export async function load({ url, cookies }) { //= {
 
         if (response.error) {
             console.log(response);
-            return {
-                status: 400,
-                body: response
-            };
+            // redirect to main page
+            throw redirect(307, '/');
+            // return {
+            //     status: 400,
+            //     body: response
+            // };
         }
 
         const access_token_expires_in = new Date(Date.now() + response.expires_in); // 10 minutes
