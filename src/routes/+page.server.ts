@@ -18,7 +18,6 @@ export const load: PageServerLoad = async (event) => {
         const response = await request.json()
         //check status
         if (response.message === '401: Unauthorized') {
-            //redirect to login
         } else {
             //get user
             disco_name = response.username
