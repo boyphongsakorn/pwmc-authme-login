@@ -1,6 +1,5 @@
 <script>
 // @ts-nocheck
-    import cookie from 'cookie';
     import { 
         Styles,
         Collapse,
@@ -33,8 +32,6 @@
 
     let open = false;
     const toggle = () => (open = !open);
-
-    const cookies = cookie.parse(req.headers.cookie || '');
 </script>
 
 <Styles />
