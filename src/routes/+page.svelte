@@ -59,12 +59,18 @@
             </DropdownMenu>
             </Dropdown-->
             <NavItem>
-            <NavLink on:click={toggle}>Login</NavLink>
+            <NavLink on:click={toggle}>ล็อกอินผ่านรหัสในเกม</NavLink>
+            </NavItem>
+            <NavItem>
+                <Button style="background-color: #5865F2;" on:click={toggle}>ล็อกอินผ่าน Discord</Button>
             </NavItem>
         </Nav>
         </Collapse>
     </Container>
 </Navbar>
+
+<Container fluid style="background-image: url('https://imgul.teamquadb.in.th/images/2023/02/23/Survival_The_End.png');background-position: left, right;background-repeat: no-repeat;background-size: cover;height: 500px;">
+</Container>
 
 <div>
 <Modal isOpen={open} {toggle}>
