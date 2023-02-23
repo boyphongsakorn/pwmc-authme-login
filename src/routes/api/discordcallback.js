@@ -1,5 +1,3 @@
-import {fail, redirect} from "@sveltejs/kit";
-
 export async function get({ query }) {
     const DISCORD_CLIENT_ID = import.meta.env.VITE_DISCORD_CLIENT_ID;
     const DISCORD_CLIENT_SECRET = import.meta.env.VITE_DISCORD_CLIENT_SECRET;
@@ -15,7 +13,7 @@ export async function get({ query }) {
       grant_type: 'authorization_code',
       redirect_uri: 'https://bpminecraft.com/api/discordcallback',
       code: returnCode,
-      scope: 'identify email guilds'
+      scope: 'identify guilds'
     };
   
     // performing a Fetch request to Discord's token endpoint
