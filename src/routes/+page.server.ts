@@ -62,4 +62,4 @@ export const load: LayoutServerLoad = async (event) => {
     }
 }
 
-export const prerender = true;
+export const prerender = false;
