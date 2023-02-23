@@ -20,7 +20,7 @@
         ModalHeader,
         Button
     } from 'sveltestrap';
-
+    import { page } from '$app/stores';
     let isOpen = false;
 
     /**
@@ -32,6 +32,8 @@
 
     let open = false;
     const toggle = () => (open = !open);
+
+    console.log($page);
 </script>
 
 <Styles />
@@ -57,7 +59,7 @@
                 <DropdownItem>Reset</DropdownItem>
             </DropdownMenu>
             </Dropdown-->
-            {#if cookies.disco_access_token}
+            {#if $page.data.props.disco_access_token !== undefined || $page.data.props.disco_access_token !== 'undefined'}
             <NavItem>
             <NavLink on:click={toggle}>ล็อกอินผ่านรหัสในเกม</NavLink>
             </NavItem>
