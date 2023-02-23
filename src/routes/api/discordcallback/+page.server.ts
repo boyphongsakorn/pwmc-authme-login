@@ -5,8 +5,8 @@ import type { PageServerLoad, Actions } from './$types';
 import * as bcrypt from 'bcrypt';
 import { dev } from '$app/environment';
 
-export default async function load(request, cookies) {
-    //default: async ({ request, cookies }) => {
+export const load = {
+    default: async ({ request, cookies }) => {
         // const form = await request.formData();
         // const email = form.get('email');
         // const password = form.get('password');
@@ -77,5 +77,5 @@ export default async function load(request, cookies) {
             maxAge: 60 * 60 * 24 * 30
         });
         throw redirect(307, '/');
-    //}
+    }
 };
