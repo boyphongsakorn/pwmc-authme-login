@@ -22,13 +22,13 @@ export const load: PageServerLoad = async (event) => {
             //get user
             disco_name = response.username
         }
-    }
-    //pass to $app/stores
-    return {
-        props: {
-            disco_access_token: event.cookies.get('disco_access_token'),
-            disco_refresh_token: event.cookies.get('disco_refresh_token'),
-            disco_name: disco_name
+        return {
+            props: {
+                disco_access_token: event.cookies.get('disco_access_token'),
+                disco_refresh_token: event.cookies.get('disco_refresh_token'),
+                disco_name: disco_name
+            }
         }
     }
+    //pass to $app/stores
 }
