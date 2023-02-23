@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     import { onMount } from "svelte";
     import { page } from '$app/stores';
     const DISCORD_CLIENT_ID = import.meta.env.VITE_DISCORD_CLIENT_ID;
@@ -36,15 +36,17 @@
         const access_token_expires_in = new Date(Date.now() + response.expires_in); // 10 minutes
         const refresh_token_expires_in = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
         console.log('redirect to / with cookies');
-        return {
-            headers: {
-                'set-cookie': [
-                    `disco_access_token=${response.access_token}; Path=/; HttpOnly; SameSite=Strict; Expires=${access_token_expires_in}}`,
-                    `disco_refresh_token=${response.refresh_token}; Path=/; HttpOnly; SameSite=Strict; Expires=${refresh_token_expires_in}`,
-                ],
-                Location: '/'
-            },
-            status: 302
-        }
+        // return {
+        //     headers: {
+        //         'set-cookie': [
+        //             `disco_access_token=${response.access_token}; Path=/; HttpOnly; SameSite=Strict; Expires=${access_token_expires_in}}`,
+        //             `disco_refresh_token=${response.refresh_token}; Path=/; HttpOnly; SameSite=Strict; Expires=${refresh_token_expires_in}`,
+        //         ],
+        //         Location: '/'
+        //     },
+        //     status: 302
+        // }
+        //set cookie and redirect
+
     });
-</script>
+</script> -->
