@@ -33,19 +33,10 @@ export const load: PageServerLoad = async (event) => {
     }
 }
 
-//create from when redirect to this page
-export const actions: Actions = {
-    async redirect({ request, resolve }) {
-        const response = await resolve(request);
-        console.log(response)
-        if (response.status === 307) {
-            return {
-                status: 307,
-                headers: {
-                    'Location': response.headers['Location']
-                }
-            }
-        }
-        return response;
+//load for the page
+export const handle: Actions = {
+    //get the code from the url
+    async load({ url, cookies }) {
+        console.log(url)
     }
 }
