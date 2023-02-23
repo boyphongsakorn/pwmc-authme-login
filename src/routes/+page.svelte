@@ -29,9 +29,9 @@
 
 <Styles />
 
-<Navbar color="light" light expand="md">
+<Navbar color="dark" dark expand="md">
     <Container sm class="d-flex justify-content-between">
-        <NavbarBrand href="/">sveltestrap</NavbarBrand>
+        <NavbarBrand href="/">PW Minecraft Server</NavbarBrand>
         <NavbarToggler on:click={() => (isOpen = !isOpen)} />
         <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
         <Nav class="ms-auto" navbar>
