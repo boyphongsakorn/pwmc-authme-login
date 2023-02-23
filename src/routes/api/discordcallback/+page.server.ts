@@ -70,14 +70,14 @@ export async function load({ url, cookies }) { //= {
             path: '/',
             httpOnly: true,
             sameSite: 'strict',
-            secure: !dev,
+            //secure: !dev,
             maxAge: 60 * 60 * 24 * 30
         });
         await cookies.set('disco_refresh_token', response.refresh_token, {
             path: '/',
             httpOnly: true,
             sameSite: 'strict',
-            secure: !dev,
+            //secure: !dev,
             maxAge: 60 * 60 * 24 * 30
         });
         throw redirect(302, '/');
