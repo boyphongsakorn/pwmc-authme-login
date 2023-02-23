@@ -7,8 +7,12 @@ specifiers:
   prettier-plugin-svelte: ^2.8.1
   svelte: ^3.54.0
   svelte-check: ^3.0.1
+  sveltestrap: ^5.10.0
   typescript: ^4.9.3
   vite: ^4.0.0
+
+dependencies:
+  sveltestrap: 5.10.0_svelte@3.55.1
 
 devDependencies:
   '@sveltejs/adapter-auto': 2.0.0_@sveltejs+kit@1.8.3
@@ -260,6 +264,10 @@ packages:
   /@polka/url/1.0.0-next.21:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
+
+  /@popperjs/core/2.11.6:
+    resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
+    dev: false
 
   /@sveltejs/adapter-auto/2.0.0_@sveltejs+kit@1.8.3:
     resolution: {integrity: sha512-b+gkHFZgD771kgV3aO4avHFd7y1zhmMYy9i6xOK7m/rwmwaRO8gnF5zBc0Rgca80B2PMU1bKNxyBTHA14OzUAQ==}
@@ -940,7 +948,15 @@ packages:
   /svelte/3.55.1:
     resolution: {integrity: sha512-S+87/P0Ve67HxKkEV23iCdAh/SX1xiSfjF1HOglno/YTbSTW7RniICMCofWGdJJbdjw3S+0PfFb1JtGfTXE0oQ==}
     engines: {node: '>= 8'}
-    dev: true
+
+  /sveltestrap/5.10.0_svelte@3.55.1:
+    resolution: {integrity: sha512-k6Ob+6G2AMYvBidXHBKM9W28fJqFHbmosqCe/NC8pv6TV7K+v47Yw+zmnLWkjqCzzmjkSLkL48SrHZrlWc9mYQ==}
+    peerDependencies:
+      svelte: ^3.29.0
+    dependencies:
+      '@popperjs/core': 2.11.6
+      svelte: 3.55.1
+    dev: false
 
   /tiny-glob/0.2.9:
     resolution: {integrity: sha512-g/55ssRPUjShh+xkfx9UPDXqhckHEsHr4Vd9zX55oSdGZc/MD0m3sferOkwWtp98bv+kcVfEHtRJgBVJzelrzg==}
