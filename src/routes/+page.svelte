@@ -73,9 +73,9 @@
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua.
     </ModalBody>
-    <ModalFooter>
+    <!-- <ModalFooter>
       <Button color="primary" on:click={toggle}>Do Something</Button>
       <Button color="secondary" on:click={toggle}>Cancel</Button>
-    </ModalFooter>
+    </ModalFooter> -->
   </Modal>
 </div>
