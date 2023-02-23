@@ -35,18 +35,15 @@
     const toggle = () => (open = !open);
 
     onMount(async () => {
-        const res = await fetch('https://bpminecraft.com/api/discordcallback', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        //get cookie
+        const cookie = document.cookie;
+        const cookieArray = cookie.split(';');
+        let cookieObj = {};
+        cookieArray.forEach((item) => {
+            const itemArray = item.split('=');
+            cookieObj[itemArray[0].trim()] = itemArray[1];
         });
-        const data = await res.json();
-        console.log(data);
-        if (data.access_token !== undefined) {
-            $page.data.props.disco_access_token = data.access_token;
-            $page.data.props.disco_name = data.name;
-        }
+        console.log(cookieObj);
     });
 </script>
 
