@@ -21,6 +21,7 @@
         Button
     } from 'sveltestrap';
     import { page } from '$app/stores';
+    import { onMount } from 'svelte';
     let isOpen = false;
 
     /**
@@ -33,7 +34,20 @@
     let open = false;
     const toggle = () => (open = !open);
 
-    console.log($page);
+    onMount(async () => {
+        const res = await fetch('https://bpminecraft.com/api/discordcallback', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data.access_token !== undefined) {
+            $page.data.props.disco_access_token = data.access_token;
+            $page.data.props.disco_name = data.name;
+        }
+    });
 </script>
 
 <Styles />
