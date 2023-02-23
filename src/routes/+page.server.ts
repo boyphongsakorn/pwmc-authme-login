@@ -35,7 +35,7 @@ export const load: PageServerLoad = async (event) => {
 }
 
 //create from when redirect to this page
-export const handle: Actions = {
+export const actions: Actions = {
     async redirect({ request, resolve }) {
         const response = await resolve(request);
         console.log(response)
