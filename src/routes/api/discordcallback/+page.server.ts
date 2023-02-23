@@ -66,14 +66,14 @@ export async function load({ url, cookies }) { //= {
         const access_token_expires_in = new Date(Date.now() + response.expires_in); // 10 minutes
         const refresh_token_expires_in = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
         console.log('redirect to / with cookies');
-        cookies.set('disco_access_token', response.access_token, {
+        await cookies.set('disco_access_token', response.access_token, {
             path: '/',
             httpOnly: true,
             sameSite: 'strict',
             secure: !dev,
             maxAge: 60 * 60 * 24 * 30
         });
-        cookies.set('disco_refresh_token', response.refresh_token, {
+        await cookies.set('disco_refresh_token', response.refresh_token, {
             path: '/',
             httpOnly: true,
             sameSite: 'strict',
