@@ -59,7 +59,7 @@
                 <DropdownItem>Reset</DropdownItem>
             </DropdownMenu>
             </Dropdown-->
-            {#if $page.data.props.disco_access_token !== undefined && $page.data.props.disco_access_token !== 'undefined'}
+            {#if $page.data.props.disco_access_token !== undefined}
             <NavItem>
             <NavLink on:click={toggle}>ล็อกอินผ่านรหัสในเกม</NavLink>
             </NavItem>
