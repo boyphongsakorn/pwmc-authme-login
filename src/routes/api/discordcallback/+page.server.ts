@@ -5,8 +5,8 @@ import type { PageServerLoad, Actions } from './$types';
 import * as bcrypt from 'bcrypt';
 import { dev } from '$app/environment';
 
-export const load = {
-    default: async ({ request, cookies }) => {
+export async function load({ url, cookies }) { //= {
+    //default: async ({ request, cookies }) => {
         // const form = await request.formData();
         // const email = form.get('email');
         // const password = form.get('password');
@@ -33,7 +33,8 @@ export const load = {
         //get the code from the url
         const DISCORD_CLIENT_ID = import.meta.env.VITE_DISCORD_CLIENT_ID;
         const DISCORD_CLIENT_SECRET = import.meta.env.VITE_DISCORD_CLIENT_SECRET;
-        const code = request.query.get('code');
+        console.log(url)
+        const code = url.searchParams.get('code');
         console.log(code);
         const dataObject = {
             client_id: DISCORD_CLIENT_ID,
@@ -53,6 +54,7 @@ export const load = {
         const response = await requestdis.json();
 
         if (response.error) {
+            console.log(response);
             return {
                 status: 400,
                 body: response
@@ -77,5 +79,5 @@ export const load = {
             maxAge: 60 * 60 * 24 * 30
         });
         throw redirect(307, '/');
-    }
+    //}
 };
