@@ -33,6 +33,18 @@
 
     let open = false;
     const toggle = () => (open = !open);
+
+    onMount(async () => {
+        //read cookie
+        const cookie = document.cookie;
+        const cookieArray = cookie.split(';');
+        let cookieObj = {};
+        cookieArray.forEach((item) => {
+            const itemArray = item.split('=');
+            cookieObj[itemArray[0].trim()] = itemArray[1];
+        });
+        console.log(cookieObj);
+    });
 </script>
 
 <Styles />
