@@ -39,7 +39,7 @@
 
 <Navbar color="dark" dark expand="md">
     <Container sm class="d-flex justify-content-between">
-        <NavbarBrand href="/">PW Minecraft Server</NavbarBrand>
+        <NavbarBrand href="/">BP Minecraft Server</NavbarBrand>
         <NavbarToggler on:click={() => (isOpen = !isOpen)} />
         <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
         <Nav class="ms-auto" navbar>
