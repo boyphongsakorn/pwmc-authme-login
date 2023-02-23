@@ -5,8 +5,8 @@ import type { PageServerLoad, Actions } from './$types';
 import * as bcrypt from 'bcrypt';
 import { dev } from '$app/environment';
 
-export const actions = {
-    default: async ({ request, cookies }) => {
+export default async function load(request, cookies) {
+    //default: async ({ request, cookies }) => {
         // const form = await request.formData();
         // const email = form.get('email');
         // const password = form.get('password');
@@ -77,5 +77,5 @@ export const actions = {
             maxAge: 60 * 60 * 24 * 30
         });
         throw redirect(307, '/');
-    }
+    //}
 };
