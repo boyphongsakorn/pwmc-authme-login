@@ -33,18 +33,6 @@
 
     let open = false;
     const toggle = () => (open = !open);
-
-    onMount(async () => {
-        //get cookie
-        const cookie = document.cookie;
-        const cookieArray = cookie.split(';');
-        let cookieObj = {};
-        cookieArray.forEach((item) => {
-            const itemArray = item.split('=');
-            cookieObj[itemArray[0].trim()] = itemArray[1];
-        });
-        console.log(cookieObj);
-    });
 </script>
 
 <Styles />
@@ -70,7 +58,7 @@
                 <DropdownItem>Reset</DropdownItem>
             </DropdownMenu>
             </Dropdown-->
-            {#if $page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined'}
+            {#if $page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null}
                 <NavItem>
                 <NavLink on:click={toggle}>ล็อกอินผ่านรหัสในเกม</NavLink>
                 </NavItem>

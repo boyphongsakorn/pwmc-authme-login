@@ -29,6 +29,14 @@ export const load: PageServerLoad = async (event) => {
                 disco_name: disco_name
             }
         }
+    } else {
+        return {
+            props: {
+                disco_access_token: null,
+                disco_refresh_token: null,
+                disco_name: null
+            }
+        }
     }
     //pass to $app/stores
 }
