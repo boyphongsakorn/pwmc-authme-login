@@ -97,7 +97,7 @@
     </Container>
 </Navbar>
 
-<Container fluid style="background-image: url('https://imgul.teamquadb.in.th/images/2023/02/23/Survival_The_End.png');background-position: left, right;background-repeat: no-repeat;background-size: cover;height: 500px;">
+<Container fluid style="background-image: url('https://imgul.teamquadb.in.th/images/2023/02/23/Survival_The_End.png');background-position: center center;background-repeat: no-repeat;background-size: cover;height: 500px;">
 </Container>
 
 <div>
