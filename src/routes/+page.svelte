@@ -49,7 +49,7 @@
 
     onMount(async () => {
         if ($page.url.searchParams.get('code')) {
-            goto('/');
+            goto('/', { invalidateAll: true });
         }
     });
 </script>
