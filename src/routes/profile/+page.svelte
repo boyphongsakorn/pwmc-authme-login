@@ -160,8 +160,14 @@
     <h1>Profile</h1>
     <Row>
         <Col>
-            <p>คุณ {$page.data.props.disco_name}</p>
-            <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" size="60px" />
+            <Row>
+                <Col>
+                    <p>คุณ {$page.data.props.disco_name}</p>
+                </Col>
+                <Col>
+                    <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" size="60px" />
+                </Col>
+            </Row>
         </Col>
         <Col>
             <Card class="mb-3">
