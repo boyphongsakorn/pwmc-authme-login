@@ -5,14 +5,14 @@ import type { PageServerLoad, Actions } from './$types';
 import * as bcrypt from 'bcrypt';
 import { dev } from '$app/environment';
 
-export const load: PageServerLoad = async (event) => {
+export const load: PageServerLoad = async ({ cookies }) => {
     //console.log(event)
     //console.log(event.cookies.get('disco_access_token'))
     let disco_name = null
-    if (event.cookies.get('disco_access_token')) {
+    if (cookies.get('disco_access_token')) {
         const request = await fetch('https://discord.com/api/users/@me', {
             headers: {
-                'Authorization': `Bearer ${event.cookies.get('disco_access_token')}`
+                'Authorization': `Bearer ${cookies.get('disco_access_token')}`
             }
         })
         const response = await request.json()
@@ -24,8 +24,8 @@ export const load: PageServerLoad = async (event) => {
         }
         return {
             props: {
-                disco_access_token: event.cookies.get('disco_access_token'),
-                disco_refresh_token: event.cookies.get('disco_refresh_token'),
+                disco_access_token: cookies.get('disco_access_token'),
+                disco_refresh_token: cookies.get('disco_refresh_token'),
                 disco_name: disco_name
             }
         }
