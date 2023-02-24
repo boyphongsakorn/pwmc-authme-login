@@ -76,7 +76,7 @@
                     if (result.status === 'OK') {
                         minecraftname = result.name;
                     } else {
-                        minecraftname = null;
+                        minecraftname = 'ไม่สามารถดึงข้อมูลได้ (อาจเป็นบัญชี Crack หรือ API ขัดข้อง)';
                         ismccrack = true;
                     }
                 })
