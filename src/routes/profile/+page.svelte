@@ -167,10 +167,12 @@
                 </Col>
                 <Col>
                     <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" size="60px" />
-                    {#if $page.data.props.disco_name}
-                        เข้าสู่ระบบด้วย Discord
-                    {/if}
                 </Col>
+                {#if $page.data.props.disco_name}
+                    <Col>
+                        เข้าสู่ระบบด้วย Discord
+                    </Col> 
+                {/if}
             </Row>
             ประวัติการใช้จ่าย
             <Table bordered>
