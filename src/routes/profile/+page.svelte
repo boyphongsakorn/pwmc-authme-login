@@ -53,12 +53,13 @@
     let linkmcsuccess = null;
     let minecraftname = null;
     let minecraftuuid = null;
+    let ismccrack = false;
 
     onMount(async () => {
         if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
             goto('/', { invalidateAll: true });
         } else {
-            fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + $page.data.props.disco_id)
+            await fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + $page.data.props.disco_id)
                 .then(response => response.json())
                 .then(result => {
                     if (result.status === 200) {
@@ -66,6 +67,17 @@
                         minecraftuuid = result.minecraftid;
                     } else {
                         linkmcsuccess = false;
+                    }
+                })
+                .catch(error => console.log('error', error));
+            await fetch("https://api.minetools.eu/uuid/"+minecraftuuid)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === 'OK') {
+                        minecraftname = result.name;
+                    } else {
+                        minecraftname = null;
+                        ismccrack = true;
                     }
                 })
                 .catch(error => console.log('error', error));
