@@ -21,7 +21,9 @@
         Form,
         FormGroup,
         Input,
-        Alert
+        Alert,
+        CardBody,
+        Card
     } from 'sveltestrap';
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
@@ -50,7 +52,7 @@
             fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + $page.data.props.disco_id)
                 .then(response => response.json())
                 .then(result => {
-                    if (result.status === '200') {
+                    if (result.status === 200) {
                         linkmcsuccess = true;
                     } else {
                         linkmcsuccess = false;
@@ -137,10 +139,9 @@
     <Button style="background-color: #5865F2;" on:click={toggle}>ลิงก์บัญชี Discord กับบัญชีเกม</Button>
     {#if linkmcsuccess !== null}
         {#if linkmcsuccess === true}
-            <Alert color="success">คุณได้ลิงก์บัญชีกับ</Alert>
-        {/if}
-        {#if linkmcsuccess === false}
-            <Alert color="danger">ลิงก์บัญชีไม่สำเร็จ</Alert>
+            <Card>
+                <CardBody>คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม)</CardBody>
+            </Card>
         {/if}
     {/if}
 </Container>
