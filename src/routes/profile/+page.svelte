@@ -47,7 +47,7 @@
         if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
             goto('/', { invalidateAll: true });
         } else {
-            fetch("http://localhost:3000/discordsrv_accounts/checklink?discordid=" + $page.data.props.disco_id)
+            fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + $page.data.props.disco_id)
                 .then(response => response.json())
                 .then(result => {
                     if (result.status === '200') {
