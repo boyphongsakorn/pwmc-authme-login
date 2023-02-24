@@ -111,14 +111,14 @@
                     await fetch("https://cpsql.pwisetthon.com/user/find/uuid/"+minecraftuuid)
                         .then(response => response.json())
                         .then(result => {
-                            if (result.status === 200) {
+                            //if (result.status === 200) {
                                 co_user_id = result.userid;
                                 if (ismccrack == true) {
                                     minecraftname = result.user + ' (ผู้เล่น Crack)';
                                 }
-                            } else {
-                                co_user_id = null;
-                            }
+                            //} else {
+                            //    co_user_id = null;
+                            //}
                         })
                         .catch(error => {
                             co_user_id = null;
@@ -127,12 +127,12 @@
                 await fetch("https://cpsql.pwisetthon.com/chat/history/"+co_user_id)
                     .then(response => response.json())
                     .then(result => {
-                        if (result.status === 200) {
+                        //if (result.status === 200) {
                             chat_history = result;
                             console.log(chat_history);
-                        } else {
-                            chat_history = null;
-                        }
+                        //} else {
+                        //    chat_history = null;
+                        //}
                     }).catch(error => {
                         chat_history = null;
                     });
