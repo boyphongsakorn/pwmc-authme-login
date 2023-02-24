@@ -101,6 +101,9 @@
                 <FormGroup floating label="ชื่อในเกม">
                     <Input placeholder="Enter your Minecraft username" />
                 </FormGroup>
+                <FormGroup floating label="รหัสผ่าน">
+                    <Input placeholder="Enter your Minecraft password" type="password" />
+                </FormGroup>
             </Form>
         </ModalBody>
         <!-- <ModalFooter>
