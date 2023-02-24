@@ -179,7 +179,12 @@
                 <CardFooter>
                     {#if linkmcsuccess !== null}
                         {#if linkmcsuccess === true}
-                            คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม)
+                            {#if ismccrack === true}
+                                คุณลิงก์บัญชีเกมแล้ว แต่บัญชีเกมของคุณเป็นบัญชี Crack จึงไม่สามารถดึงข้อมูลได้
+                            {/if}
+                            {#if ismccrack === false}
+                                คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม)
+                            {/if}
                         {/if}
                     {/if}
                 </CardFooter>
