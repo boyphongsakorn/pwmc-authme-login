@@ -56,6 +56,8 @@
     let minecraftname = null;
     let minecraftuuid = null;
     let ismccrack = null;
+    let minecraftuser = null;
+    let minecraftpass = null;
 
     onMount(async () => {
         if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
@@ -93,8 +95,8 @@
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "username": "boyphongsakorn",
-            "password": "team1556th"
+            "username": minecraftuser,
+            "password": minecraftpass
         });
 
         var requestOptions = {
@@ -247,10 +249,10 @@
         <ModalBody>
             <Form>
                 <FormGroup floating label="ชื่อในเกม">
-                    <Input placeholder="Enter your Minecraft username" />
+                    <Input placeholder="Enter your Minecraft username" bind:value={minecraftuser} />
                 </FormGroup>
                 <FormGroup floating label="รหัสผ่าน">
-                    <Input placeholder="Enter your Minecraft password" type="password" />
+                    <Input placeholder="Enter your Minecraft password" bind:value={minecraftpass} />
                 </FormGroup>
             </Form>
         </ModalBody>
