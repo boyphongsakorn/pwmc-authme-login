@@ -51,6 +51,7 @@
 
     console.log($page);
 
+    let isdiscordlinkmc = null;
     let linkmcsuccess = null;
     let minecraftname = null;
     let minecraftuuid = null;
@@ -64,10 +65,10 @@
                 .then(response => response.json())
                 .then(result => {
                     if (result.status === 200) {
-                        linkmcsuccess = true;
+                        isdiscordlinkmc = true;
                         minecraftuuid = result.minecraftid;
                     } else {
-                        linkmcsuccess = false;
+                        isdiscordlinkmc = false;
                     }
                 })
                 .catch(error => console.log('error', error));
@@ -106,14 +107,14 @@
             .then(response => response.json())
             .then(result => {
                 if (result.result === 'Login success') {
-                    linkmcsuccess = true;
+                    isdiscordlinkmc = true;
                 } else {
-                    linkmcsuccess = false;
+                    isdiscordlinkmc = false;
                 }
             })
             .catch(error => {
                 console.log('error', error);
-                linkmcsuccess = false;
+                isdiscordlinkmc = false;
             });
     }
 </script>
@@ -221,8 +222,8 @@
                   <!-- <Button>Button</Button> -->
                 </CardBody>
                 <CardFooter class="text-center">
-                    {#if linkmcsuccess !== null && ismccrack !== null}
-                        {#if linkmcsuccess === true}
+                    {#if isdiscordlinkmc !== null && ismccrack !== null}
+                        {#if isdiscordlinkmc === true}
                             {#if ismccrack === true}
                                 คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม) แต่บัญชีเกมของคุณเป็นบัญชี Crack จึงไม่สามารถดึงข้อมูลได้ 
                                 <br>ไม่ใช่? ลองเข้าเกมแล้วลิงก์บัญชีใหม่ หรือกดลิงก์<a on:click={toggle} class="text-primary">ที่นี่</a>
