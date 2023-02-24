@@ -149,13 +149,6 @@
             <p>คุณ {$page.data.props.disco_name}</p>
             <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" size="60px" />
             <Button style="background-color: #5865F2;" on:click={toggle}>ลิงก์บัญชี Discord กับบัญชีเกม</Button>
-            {#if linkmcsuccess !== null}
-                {#if linkmcsuccess === true}
-                    <Card>
-                        <CardBody>คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม)</CardBody>
-                    </Card>
-                {/if}
-            {/if}
         </Col>
         <Col>
             <Card class="mb-3">
@@ -171,7 +164,13 @@
                   <img src="https://crafatar.com/renders/body/{minecraftuuid}" />
                   <!-- <Button>Button</Button> -->
                 </CardBody>
-                <CardFooter>Footer</CardFooter>
+                <CardFooter>
+                    {#if linkmcsuccess !== null}
+                        {#if linkmcsuccess === true}
+                            คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม)
+                        {/if}
+                    {/if}
+                </CardFooter>
             </Card>
         </Col>
     </Row>
