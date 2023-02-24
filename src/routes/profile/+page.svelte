@@ -53,7 +53,7 @@
     let linkmcsuccess = null;
     let minecraftname = null;
     let minecraftuuid = null;
-    let ismccrack = false;
+    let ismccrack = null;
 
     onMount(async () => {
         if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
@@ -177,7 +177,7 @@
                   <!-- <Button>Button</Button> -->
                 </CardBody>
                 <CardFooter>
-                    {#if linkmcsuccess !== null}
+                    {#if linkmcsuccess !== null && ismccrack !== null}
                         {#if linkmcsuccess === true}
                             {#if ismccrack === true}
                                 คุณลิงก์บัญชีเกมแล้ว แต่บัญชีเกมของคุณเป็นบัญชี Crack จึงไม่สามารถดึงข้อมูลได้ ไม่ใช่? ลองเข้าเกมแล้วลิงก์บัญชีใหม่ หรือกดลิงก์<a on:click={toggle}>ที่นี่</a>
