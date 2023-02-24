@@ -337,6 +337,7 @@
                 <CardBody class="text-left">
                     {#if chat_history !== null}
                         {#each chat_history as chat}
+                            <img src="https://crafatar.com/renders/head/{minecraftuuid}" width="30px" />
                             <p> {minecraftname} : {chat.message} (เวลา {convertUnixTime(chat.time)})</p>
                         {/each}
                     {/if}
