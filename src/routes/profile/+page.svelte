@@ -374,7 +374,7 @@
                     {#if chat_history !== null}
                         {#each chat_history as chat}
                             <img src="https://crafatar.com/renders/head/{minecraftuuid}" width="30px" />
-                            <p class="d-inline"> {minecraftname.replace(' (ตัวละคร Crack)', '')} พูดว่า "{chat.message}" เมื่อ {convertUnixTime(chat.time)}</p>
+                            <p class="d-inline"> {minecraftname.replace(' (ตัวละคร Crack)', '')} พูดว่า "{chat.message}" เมื่อ {convertUnixTime(chat.time)}</p><br>
                             <!-- } : {chat.message} (เวลา {convertUnixTime(chat.time)})</p><br> -->
                         {/each}
                     {/if}
