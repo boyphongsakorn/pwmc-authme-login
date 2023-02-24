@@ -9,6 +9,9 @@ export const load: PageServerLoad = async ({ cookies }) => {
     //console.log(event)
     //console.log(event.cookies.get('disco_access_token'))
     let disco_name = null
+    let disco_img = null
+    let disco_id = null
+    let disco_avatar = null
     if (cookies.get('disco_access_token')) {
         const request = await fetch('https://discord.com/api/users/@me', {
             headers: {
@@ -22,12 +25,15 @@ export const load: PageServerLoad = async ({ cookies }) => {
         } else {
             //get user
             disco_name = response.username
+            disco_id = response.id
+            disco_avatar = response.avatar
         }
         return {
             props: {
                 disco_access_token: cookies.get('disco_access_token'),
                 disco_refresh_token: cookies.get('disco_refresh_token'),
-                disco_name: disco_name
+                disco_name: disco_name,
+                disco_img: 'https://cdn.discordapp.com/avatars/'+disco_id+'/'+disco_avatar+'.png'
             }
         }
     } else {

@@ -22,6 +22,7 @@
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
     import { goto } from '$app/navigation';
+    import Avatar from "svelte-avatar";
     let isOpen = false;
 
     /**
@@ -37,9 +38,9 @@
     console.log($page);
 
     onMount(async () => {
-        // if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
-        //     goto('/', { invalidateAll: true });
-        // }
+        if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
+            goto('/', { invalidateAll: true });
+        }
     });
 </script>
 
@@ -85,5 +86,5 @@
     {/if} -->
     <h1>Profile</h1>
     <p>คุณ {$page.data.props.disco_name}</p>
-    
+    <Avatar size="100" name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" />
 </Container>
