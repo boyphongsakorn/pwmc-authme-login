@@ -169,7 +169,7 @@
                     the card's content.
                   </CardText> -->
                   <img src="https://crafatar.com/renders/body/{minecraftuuid}" />
-                  <Button>Button</Button>
+                  <!-- <Button>Button</Button> -->
                 </CardBody>
                 <CardFooter>Footer</CardFooter>
             </Card>
