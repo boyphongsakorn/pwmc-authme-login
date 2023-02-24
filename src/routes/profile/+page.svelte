@@ -351,7 +351,7 @@
                     </Col> 
                 {/if}
             </Row>
-            ประวัติการใช้จ่าย
+            <center>ประวัติการใช้จ่าย</center>
             <!-- <Table bordered>
                 <thead>
                   <tr>
