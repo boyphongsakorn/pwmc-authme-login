@@ -35,6 +35,10 @@
     const toggle = () => (open = !open);
 
     console.log($page);
+
+    //create load
+    export let data;
+    console.log(data);
 </script>
 
 <Styles />
