@@ -64,7 +64,7 @@
             body: raw        
         };
 
-        fetch("https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/authme/check", requestOptions)
+        fetch("https://cpsql.pwisetthon.com/authme/check", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result.result === 'Login success') {
