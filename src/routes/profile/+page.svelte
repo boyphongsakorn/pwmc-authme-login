@@ -162,7 +162,7 @@
     <Row>
         <Col>
             <Row>
-                <Col>
+                <Col class="my-auto">
                     <p>คุณ {$page.data.props.disco_name}</p>
                 </Col>
                 <Col>
