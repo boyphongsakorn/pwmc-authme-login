@@ -80,7 +80,9 @@
                         ismccrack = true;
                     }
                 })
-                .catch(error => console.log('error', error));
+                .catch(error => {
+                    minecraftname = 'ไม่สามารถดึงข้อมูลได้ (API ขัดข้อง)';
+                });
         }
     });
 
