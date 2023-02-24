@@ -39,6 +39,11 @@
     //create load
     export let data;
     console.log(data);
+
+    //if url has code refresh page to /
+    if ($page.query.code) {
+        window.location.href = '/';
+    }
 </script>
 
 <Styles />
