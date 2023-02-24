@@ -42,7 +42,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
             props: {
                 disco_access_token: null,
                 disco_refresh_token: null,
-                disco_name: null
+                disco_name: null,
                 disco_img: null,
                 disco_id: null
             }
