@@ -146,6 +146,20 @@
                             });
                     }
                 }
+                if (isimpossible == true) {
+                    await fetch("https://cpsql.pwisetthon.com/user/find/user/"+minecraftname.replace(' (ผู้เล่น Crack)', '').replace(' (ตัวละคร Crack)', ''))
+                        .then(response => response.json())
+                        .then(result => {
+                            //if (result.status === 200) {
+                                co_user_id = result.userid;
+                            //} else {
+                            //    co_user_id = null;
+                            //}
+                        })
+                        .catch(error => {
+                            co_user_id = null;
+                        });
+                }
                 await fetch("https://cpsql.pwisetthon.com/chat/history/"+co_user_id)
                     .then(response => response.json())
                     .then(result => {
