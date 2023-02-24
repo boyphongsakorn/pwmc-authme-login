@@ -211,7 +211,7 @@
                 <CardHeader>
                   <CardTitle>ชื่อในเกม : {minecraftname}</CardTitle>
                 </CardHeader>
-                <CardBody>
+                <CardBody class="d-flex justify-content-center">
                   <!-- <CardSubtitle>Card subtitle</CardSubtitle>
                   <CardText>
                     Some quick example text to build on the card title and make up the bulk of
