@@ -6,8 +6,8 @@ import * as bcrypt from 'bcrypt';
 import { dev } from '$app/environment';
 
 export const load: PageServerLoad = async (event) => {
-    console.log(event)
-    console.log(event.cookies.get('disco_access_token'))
+    //console.log(event)
+    //console.log(event.cookies.get('disco_access_token'))
     let disco_name = null
     if (event.cookies.get('disco_access_token')) {
         const request = await fetch('https://discord.com/api/users/@me', {
