@@ -63,7 +63,7 @@
         if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
             goto('/', { invalidateAll: true });
         } else {
-            await fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + $page.data.props.disco_id)
+            await fetch("https://cpsql.pwisetthon.com/discordmclink/checklink?discordid=" + $page.data.props.disco_id)
                 .then(response => response.json())
                 .then(result => {
                     if (result.status === 200) {
@@ -75,7 +75,7 @@
                 })
                 .catch(error => console.log('error', error));
             if (isdiscordlinkmc == false) {
-                await fetch("https://cpsql.pwisetthon.com/discordmclink/checklink?discordid=" + $page.data.props.disco_id)
+                await fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + $page.data.props.disco_id)
                     .then(response => response.json())
                     .then(result => {
                         if (result.status === 200) {
