@@ -74,23 +74,38 @@
                     }
                 })
                 .catch(error => console.log('error', error));
-            await fetch("https://api.minetools.eu/uuid/"+minecraftuuid)
-                .then(response => response.json())
-                .then(result => {
-                    if (result.status === 'OK') {
-                        minecraftname = result.name;
-                    } else {
-                        minecraftname = 'ไม่สามารถดึงข้อมูลได้ (อาจเป็นบัญชี Crack หรือ API ขัดข้อง)';
-                        ismccrack = true;
-                    }
-                })
-                .catch(error => {
-                    minecraftname = 'ไม่สามารถดึงข้อมูลได้ (API ขัดข้อง)';
-                });
+            if (isdiscordlinkmc == false) {
+                await fetch("https://cpsql.pwisetthon.com/discordmclink/checklink?discordid=" + $page.data.props.disco_id)
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.status === 200) {
+                            isdiscordlinkmc = true;
+                            minecraftuuid = result.minecraftid;
+                        } else {
+                            isdiscordlinkmc = false;
+                        }
+                    })
+                    .catch(error => console.log('error', error));
+            }
+            if (minecraftuuid != null) {
+                await fetch("https://api.minetools.eu/uuid/"+minecraftuuid)
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.status === 'OK') {
+                            minecraftname = result.name;
+                        } else {
+                            minecraftname = 'ไม่สามารถดึงข้อมูลได้ (อาจเป็นบัญชี Crack หรือ API ขัดข้อง)';
+                            ismccrack = true;
+                        }
+                    })
+                    .catch(error => {
+                        minecraftname = 'ไม่สามารถดึงข้อมูลได้ (API ขัดข้อง)';
+                    });
+            }
         }
     });
 
-    function linkminecraft() {
+    async function linkminecraft() {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -105,7 +120,9 @@
             body: raw        
         };
 
-        fetch("https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/authme/check", requestOptions)
+        let uuidsearch = "";
+
+        await fetch("https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/authme/check", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result.result === 'Login success') {
@@ -116,8 +133,48 @@
             })
             .catch(error => {
                 console.log('error', error);
-                isdiscordlinkmc = false;
+                linkmcsuccess = false;
             });
+        await fetch("https://api.minetools.eu/uuid/"+minecraftuser)
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === 'OK') {
+                    uuidsearch = result.id;
+                } else {
+                    uuidsearch = null;
+                }
+            })
+            .catch(error => {
+                uuidsearch = null;
+            });
+        if (linkmcsuccess == true) {
+            raw = JSON.stringify({
+                "discord": $page.data.props.disco_id,
+                "uuid": uuidsearch,
+                "authme_id": minecraftuser,
+                "uuidfrom": "official"
+            });
+
+            requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw        
+            };
+
+            await fetch("https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/discordmclink/link", requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === 200) {
+                        linkmcsuccess = true;
+                    } else {
+                        linkmcsuccess = false;
+                    }
+                })
+                .catch(error => {
+                    console.log('error', error);
+                    linkmcsuccess = false;
+                });
+        }
     }
 </script>
 
@@ -252,7 +309,7 @@
                     <Input placeholder="Enter your Minecraft username" bind:value={minecraftuser} />
                 </FormGroup>
                 <FormGroup floating label="รหัสผ่าน">
-                    <Input placeholder="Enter your Minecraft password" bind:value={minecraftpass} />
+                    <Input placeholder="Enter your Minecraft password" bind:value={minecraftpass} type="password" />
                 </FormGroup>
             </Form>
         </ModalBody>
