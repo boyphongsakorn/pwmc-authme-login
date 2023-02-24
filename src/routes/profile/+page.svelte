@@ -127,7 +127,7 @@
                         .catch(error => {
                             co_user_id = null;
                         });
-                    if (co_user_id -= null) {
+                    if (co_user_id == null) {
                         await fetch("https://cpsql.pwisetthon.com/user_log/log/uuid/"+minecraftuuid)
                             .then(response => response.json())
                             .then(result => {
