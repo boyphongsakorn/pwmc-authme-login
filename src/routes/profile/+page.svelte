@@ -87,4 +87,19 @@
     <h1>Profile</h1>
     <p>คุณ {$page.data.props.disco_name}</p>
     <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" size="60px" />
+    <Button style="background-color: #5865F2;" on:click={toggle}>ลิงก์บัญชี Discord กับบัญชีเกม</Button>
 </Container>
+
+<div>
+    <Modal isOpen={open} {toggle}>
+        <ModalHeader {toggle}>ลิงก์บัญชี Discord กับบัญชีเกม</ModalHeader>
+        <ModalBody>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.
+        </ModalBody>
+        <!-- <ModalFooter>
+          <Button color="primary" on:click={toggle}>Do Something</Button>
+          <Button color="secondary" on:click={toggle}>Cancel</Button>
+        </ModalFooter> -->
+      </Modal>
+    </div>
