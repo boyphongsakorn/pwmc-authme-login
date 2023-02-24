@@ -80,6 +80,6 @@ export async function load({ url, cookies }) { //= {
             //secure: !dev,
             maxAge: 60 * 60 * 24 * 30
         });
-        throw redirect(300, '/');
+        throw redirect(302, '/');
     //}
 };

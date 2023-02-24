@@ -76,7 +76,7 @@
                     <NavLink href="https://bpminecraft.com/profile">คุณ {$page.data.props.disco_name}</NavLink>
                 </NavItem>
                 <NavItem>
-                    <Button style="background-color: #5865F2;" href="https://bpminecraft.com/api/discordlogout">ออกจากระบบ</Button>
+                    <Button style="background-color: #5865F2;" href="https://bpminecraft.com/api/discordlogout" rel="external">ออกจากระบบ</Button>
                 </NavItem>
             {/if}
         </Nav>
