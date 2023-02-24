@@ -307,8 +307,8 @@
                 </CardHeader>
                 <CardBody>
                     {#if chat_history !== null}
-                        {#each message as chat}
-                            <p>{chat}</p>
+                        {#each chat_history as chat}
+                            <p>{chat.message}</p>
                         {/each}
                     {/if}
                   <!-- <CardSubtitle>Card subtitle</CardSubtitle>
