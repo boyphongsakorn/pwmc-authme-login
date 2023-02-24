@@ -60,14 +60,14 @@
     async function getmainserverinto() {
         const response = await fetch('https://api.mcsrvstat.us/2/playmc.pwisetthon.com');
         const json = await response.json();
-        console.log(json);
+        //console.log(json);
         return json;
     }
 
     async function getodpserverinto() {
         const response = await fetch('https://api.mcsrvstat.us/2/154.208.140.118');
         const json = await response.json();
-        console.log(json);
+        //console.log(json);
         return json;
     }
 </script>
@@ -79,6 +79,14 @@
         <NavbarBrand href="/">BP Minecraft Server</NavbarBrand>
         <NavbarToggler on:click={() => (isOpen = !isOpen)} />
         <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
+        <Nav navbar>
+            <NavItem>
+                <NavLink href="/">หน้าหลัก</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="/chat">แชทในเกม</NavLink>
+            </NavItem>
+        </Nav>
         <Nav class="ms-auto" navbar>
             <!--NavItem>
             <NavLink href="#components/">Components</NavLink>
@@ -158,6 +166,29 @@
                     </Row>
                 </Card>
             {/await}
+        </Col>
+    </Row>
+</Container>
+
+<Container sm>
+    <Row>
+        <Col class="d-flex justify-content-center">
+            <img src="https://i.imgur.com/NUGzfyS.png" class="rounded-2 w-75 shadow my-2" />
+        </Col>
+        <Col class="text-center my-auto">
+            <a href="https://log.bpminecraft.com" class="text-decoration-none"><h2>Log เซิฟเวอร์</h2></a>
+            <p>เว็บไซต์ดู Log เซิฟเวอร์ การทุบบล็อก/วาง หรือ เปิดกล่อง</p>
+        </Col>
+    </Row>
+</Container>
+<Container sm>
+    <Row>
+        <Col class="text-center my-auto">
+            <a href="https://log.bpminecraft.com" class="text-decoration-none"><h2>Map เซิฟเวอร์</h2></a>
+            <p>เว็บไซต์ดู Map โลกของเซิฟเวอร์</p>
+        </Col>
+        <Col class="d-flex justify-content-center">
+            <img src="https://screenshot-xi.vercel.app/api?url=https://map.bpminecraft.com&width=1280&height=720" class="rounded-2 w-75 shadow my-2" />
         </Col>
     </Row>
 </Container>
