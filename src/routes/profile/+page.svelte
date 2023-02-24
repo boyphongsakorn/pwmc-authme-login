@@ -59,6 +59,8 @@
     let minecraftuser = null;
     let minecraftpass = null;
     let islinkfromweb = null;
+    let co_user_id = null;
+    let chat_history = null;
 
     onMount(async () => {
         if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
@@ -105,6 +107,34 @@
                     .catch(error => {
                         minecraftname = 'ไม่สามารถดึงข้อมูลได้ (API ขัดข้อง)';
                     });
+                if (ismccrack == true) {
+                    await fetch("https://cpsql.pwisetthon.com/user/find/uuid/"+minecraftuuid)
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.status === 200) {
+                                co_user_id = result.rowid;
+                            } else {
+                                co_user_id = null;
+                            }
+                        })
+                        .catch(error => {
+                            co_user_id = null;
+                        });
+                    await fetch("https://cpsql.pwisetthon.com/chat/history/"+co_user_id)
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.status === 200) {
+                                chat_history = result;
+                                console.log(chat_history);
+                            } else {
+                                chat_history = null;
+                            }
+                        })
+                        .catch(error => {
+                            chat_history = null;
+                        });
+                }
+                
             }
         }
     });
@@ -239,7 +269,7 @@
                 {/if}
             </Row>
             ประวัติการใช้จ่าย
-            <Table bordered>
+            <!-- <Table bordered>
                 <thead>
                   <tr>
                     <th>#</th>
@@ -268,7 +298,27 @@
                     <td>@twitter</td>
                   </tr>
                 </tbody>
-            </Table>
+            </Table> -->
+            <Alert color="primary">Coming Soon</Alert>
+            <Card class="mb-3">
+                <CardHeader>
+                  <CardTitle>ประวัติแชท</CardTitle>
+                </CardHeader>
+                <CardBody>
+                    {#if chat_history !== null}
+                        {#each message as chat}
+                            <p>{chat}</p>
+                        {/each}
+                    {/if}
+                  <!-- <CardSubtitle>Card subtitle</CardSubtitle>
+                  <CardText>
+                    Some quick example text to build on the card title and make up the bulk of
+                    the card's content.
+                  </CardText>
+                  <Button>Button</Button> -->
+                </CardBody>
+                <!-- <CardFooter>Footer</CardFooter> -->
+            </Card>
         </Col>
         <Col>
             <Card class="mb-3">
