@@ -167,6 +167,9 @@
                 </Col>
                 <Col>
                     <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" size="60px" />
+                    {#if $page.data.props.disco_name}
+                        เข้าสู่ระบบด้วย Discord
+                    {/if}
                 </Col>
             </Row>
             ประวัติการใช้จ่าย
