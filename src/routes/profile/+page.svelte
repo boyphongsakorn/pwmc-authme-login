@@ -160,7 +160,7 @@
     {/if} -->
     <h1>Profile</h1>
     <Row>
-        <Col>
+        <Col class="text-center">
             <Row>
                 <Col class="my-auto">
                     <p>คุณ {$page.data.props.disco_name}</p>
@@ -220,7 +220,7 @@
                   <img src="https://crafatar.com/renders/body/{minecraftuuid}" />
                   <!-- <Button>Button</Button> -->
                 </CardBody>
-                <CardFooter class="d-flex justify-content-center">
+                <CardFooter class="text-center">
                     {#if linkmcsuccess !== null && ismccrack !== null}
                         {#if linkmcsuccess === true}
                             {#if ismccrack === true}
