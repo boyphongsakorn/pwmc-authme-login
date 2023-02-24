@@ -112,7 +112,7 @@
                         .then(response => response.json())
                         .then(result => {
                             if (result.status === 200) {
-                                co_user_id = result.rowid;
+                                co_user_id = result.userid;
                                 if (ismccrack == true) {
                                     minecraftname = result.user + ' (ผู้เล่น Crack)';
                                 }
