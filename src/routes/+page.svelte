@@ -22,7 +22,7 @@
     } from 'sveltestrap';
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
-    import { goto } from '$app/environment';
+    import { goto } from '$app/navigation';
     let isOpen = false;
 
     /**
