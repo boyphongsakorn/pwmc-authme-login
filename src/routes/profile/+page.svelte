@@ -209,7 +209,7 @@
         <Col>
             <Card class="mb-3">
                 <CardHeader>
-                  <CardTitle>ชื่อในเกม : {minecraftname}</CardTitle>
+                  <CardTitle class="text-center">ชื่อในเกม : {minecraftname}</CardTitle>
                 </CardHeader>
                 <CardBody class="d-flex justify-content-center">
                   <!-- <CardSubtitle>Card subtitle</CardSubtitle>
