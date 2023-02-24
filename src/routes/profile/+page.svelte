@@ -160,7 +160,6 @@
         <Col>
             <p>คุณ {$page.data.props.disco_name}</p>
             <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" size="60px" />
-            <Button style="background-color: #5865F2;" on:click={toggle}>ลิงก์บัญชี Discord กับบัญชีเกม</Button>
         </Col>
         <Col>
             <Card class="mb-3">
@@ -185,6 +184,8 @@
                             {#if ismccrack === false}
                                 คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม)
                             {/if}
+                        {:else}
+                            <Button style="background-color: #5865F2;" on:click={toggle}>ลิงก์บัญชี Discord กับบัญชีเกม</Button>
                         {/if}
                     {/if}
                 </CardFooter>
