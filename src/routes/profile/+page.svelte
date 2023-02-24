@@ -148,7 +148,7 @@
                     <Alert color="danger">ลิงก์บัญชีไม่สำเร็จ</Alert>
                 {/if}
             {/if}
-          <Button color="success">ลิงก์บัญชี</Button>
+          <Button color="success" on:click={linkminecraft}>ลิงก์บัญชี</Button>
         </ModalFooter>
       </Modal>
     </div>
