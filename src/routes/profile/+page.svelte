@@ -80,11 +80,11 @@
     </Container>
 </Navbar>
 
-<Container sm>
+<Container sm class="text-center">
     <!-- {#if $page.data.props.disco_access_token !== undefined && $page.data.props.disco_access_token !== 'undefined' && $page.data.props.disco_access_token !== null}
     
     {/if} -->
     <h1>Profile</h1>
     <p>คุณ {$page.data.props.disco_name}</p>
-    <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" />
+    <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" size="10" />
 </Container>
