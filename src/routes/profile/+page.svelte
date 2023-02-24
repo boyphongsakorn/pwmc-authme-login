@@ -211,6 +211,35 @@
                 });
         }
     }
+
+    function convertUnixTime(unix_timestamp) {
+      var date = new Date(unix_timestamp * 1000);
+      var hours = date.getHours();
+      var minutes = "0" + date.getMinutes();
+      var seconds = "0" + date.getSeconds();
+      var formattedTime =
+        hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
+      //convert getMonth() to thai month
+      var month = date.getMonth();
+      var day = date.getDate();
+      var year = date.getFullYear();
+      var thaiMonth = [
+        "มกราคม",
+        "กุมภาพันธ์",
+        "มีนาคม",
+        "เมษายน",
+        "พฤษภาคม",
+        "มิถุนายน",
+        "กรกฎาคม",
+        "สิงหาคม",
+        "กันยายน",
+        "ตุลาคม",
+        "พฤศจิกายน",
+        "ธันวาคม",
+      ];
+      var thaiDate = day + " " + thaiMonth[month] + " " + (year + 543);
+      return thaiDate + " เวลา " + formattedTime;
+    }
 </script>
 
 <Styles />
@@ -305,10 +334,10 @@
                 <CardHeader>
                   <CardTitle>ประวัติแชท</CardTitle>
                 </CardHeader>
-                <CardBody>
+                <CardBody class="text-left">
                     {#if chat_history !== null}
                         {#each chat_history as chat}
-                            <p>{chat.message}</p>
+                            <p> {minecraftname} : {chat.message} (เวลา {convertUnixTime(chat.time)})</p>
                         {/each}
                     {/if}
                   <!-- <CardSubtitle>Card subtitle</CardSubtitle>
