@@ -6,8 +6,8 @@ export function load({ params }) {
         content: `Content for ${params.slug} goes here`
       },
       props: {
-            disco_access_token: params.cookies.get('disco_access_token'),
-            disco_refresh_token: params.cookies.get('disco_refresh_token'),
+            disco_access_token: null,
+            disco_refresh_token: null,
             disco_name: null
         }
     };
