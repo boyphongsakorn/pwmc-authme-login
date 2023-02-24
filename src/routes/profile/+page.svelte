@@ -145,6 +145,22 @@
                                 ismccrack = true;
                             });
                     }
+                }else{
+                    await fetch("https://cpsql.pwisetthon.com/user/find/uuid/"+minecraftuuid)
+                        .then(response => response.json())
+                        .then(result => {
+                            //if (result.status === 200) {
+                                co_user_id = result.userid;
+                                if (ismccrack == true) {
+                                    minecraftname = result.user + ' (ผู้เล่น Crack)';
+                                }
+                            //} else {
+                            //    co_user_id = null;
+                            //}
+                        })
+                        .catch(error => {
+                            co_user_id = null;
+                        });
                 }
                 if (isimpossible == true) {
                     await fetch("https://cpsql.pwisetthon.com/user/find/user/"+minecraftname.replace(' (ผู้เล่น Crack)', '').replace(' (ตัวละคร Crack)', ''))
