@@ -17,7 +17,10 @@
         ModalBody,
         ModalFooter,
         ModalHeader,
-        Button
+        Button,
+        Form,
+        FormGroup,
+        Input
     } from 'sveltestrap';
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
@@ -94,8 +97,11 @@
     <Modal isOpen={open} {toggle}>
         <ModalHeader {toggle}>ลิงก์บัญชี Discord กับบัญชีเกม</ModalHeader>
         <ModalBody>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua.
+            <Form>
+                <FormGroup floating label="ชื่อในเกม">
+                    <Input placeholder="Enter your Minecraft username" />
+                </FormGroup>
+            </Form>
         </ModalBody>
         <!-- <ModalFooter>
           <Button color="primary" on:click={toggle}>Do Something</Button>
