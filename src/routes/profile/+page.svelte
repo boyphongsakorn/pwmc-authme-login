@@ -237,6 +237,7 @@
                 .then(result => {
                     if (result.status === 200) {
                         linkmcsuccess = true;
+                        goto('/profile', { invalidateAll: true });
                     } else {
                         linkmcsuccess = false;
                     }
