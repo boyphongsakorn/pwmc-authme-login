@@ -284,8 +284,8 @@
     {/if} -->
     <h1>Profile</h1>
     <Row>
-        <Col class="text-center">
-            <Row>
+        <Col>
+            <Row class="text-center">
                 <Col class="my-auto">
                     <p>คุณ {$page.data.props.disco_name}</p>
                 </Col>
@@ -329,10 +329,10 @@
                   </tr>
                 </tbody>
             </Table> -->
-            <Alert color="primary">Coming Soon</Alert>
+            <Alert color="primary" class="text-center">Coming Soon</Alert>
             <Card class="mb-3">
                 <CardHeader>
-                  <CardTitle>ประวัติแชท</CardTitle>
+                  <CardTitle class="text-center">ประวัติแชท</CardTitle>
                 </CardHeader>
                 <CardBody class="text-left">
                     {#if chat_history !== null}
