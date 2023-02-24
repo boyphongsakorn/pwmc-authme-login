@@ -6,6 +6,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     if (session) {
         console.log('session exists');
         console.log(session);
+        event.locals.session = session;
     }
 
     return resolve(event);
