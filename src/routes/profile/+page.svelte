@@ -23,7 +23,14 @@
         Input,
         Alert,
         CardBody,
-        Card
+        Card,
+        Row,
+        Col,
+        CardHeader,
+        CardTitle,
+        CardSubtitle,
+        CardText,
+        CardFooter
     } from 'sveltestrap';
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
@@ -44,6 +51,8 @@
     console.log($page);
 
     let linkmcsuccess = null;
+    let minecraftname = null;
+    let minecraftuuid = null;
 
     onMount(async () => {
         if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
@@ -54,6 +63,7 @@
                 .then(result => {
                     if (result.status === 200) {
                         linkmcsuccess = true;
+                        minecraftuuid = result.minecraftid;
                     } else {
                         linkmcsuccess = false;
                     }
@@ -134,16 +144,37 @@
     
     {/if} -->
     <h1>Profile</h1>
-    <p>คุณ {$page.data.props.disco_name}</p>
-    <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" size="60px" />
-    <Button style="background-color: #5865F2;" on:click={toggle}>ลิงก์บัญชี Discord กับบัญชีเกม</Button>
-    {#if linkmcsuccess !== null}
-        {#if linkmcsuccess === true}
-            <Card>
-                <CardBody>คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม)</CardBody>
+    <Row>
+        <Col>
+            <p>คุณ {$page.data.props.disco_name}</p>
+            <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" size="60px" />
+            <Button style="background-color: #5865F2;" on:click={toggle}>ลิงก์บัญชี Discord กับบัญชีเกม</Button>
+            {#if linkmcsuccess !== null}
+                {#if linkmcsuccess === true}
+                    <Card>
+                        <CardBody>คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม)</CardBody>
+                    </Card>
+                {/if}
+            {/if}
+        </Col>
+        <Col>
+            <Card class="mb-3">
+                <CardHeader>
+                  <CardTitle>ชื่อในเกม : {minecraftname}</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <!-- <CardSubtitle>Card subtitle</CardSubtitle>
+                  <CardText>
+                    Some quick example text to build on the card title and make up the bulk of
+                    the card's content.
+                  </CardText> -->
+                  <img src="https://crafatar.com/renders/body/{minecraftuuid}" />
+                  <Button>Button</Button>
+                </CardBody>
+                <CardFooter>Footer</CardFooter>
             </Card>
-        {/if}
-    {/if}
+        </Col>
+    </Row>
 </Container>
 
 <div>
