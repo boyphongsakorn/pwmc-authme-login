@@ -58,6 +58,7 @@
     let ismccrack = null;
     let minecraftuser = null;
     let minecraftpass = null;
+    let islinkfromweb = null;
 
     onMount(async () => {
         if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
@@ -69,6 +70,7 @@
                     if (result.status === 200) {
                         isdiscordlinkmc = true;
                         minecraftuuid = result.minecraftid;
+                        islinkfromweb = true;
                     } else {
                         isdiscordlinkmc = false;
                     }
@@ -81,6 +83,7 @@
                         if (result.status === 200) {
                             isdiscordlinkmc = true;
                             minecraftuuid = result.minecraftid;
+                            islinkfromweb = false;
                         } else {
                             isdiscordlinkmc = false;
                         }
@@ -288,7 +291,11 @@
                                 คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม) แต่บัญชีเกมของคุณเป็นบัญชี Crack จึงไม่สามารถดึงข้อมูลได้ 
                                 <br>ไม่ใช่? ลองเข้าเกมแล้วลิงก์บัญชีใหม่ หรือกดลิงก์<a on:click={toggle} class="text-primary">ที่นี่</a>
                             {:else}
-                                คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม)
+                                {#if islinkfromweb === true}
+                                    คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านเว็บ)
+                                {:else}
+                                    คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม)
+                                {/if}
                             {/if}
                         {:else}
                             <Button style="background-color: #5865F2;" on:click={toggle}>ลิงก์บัญชี Discord กับบัญชีเกม</Button>
