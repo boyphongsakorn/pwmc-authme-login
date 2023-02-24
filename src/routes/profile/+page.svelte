@@ -100,19 +100,22 @@
                             minecraftname = result.name;
                             ismccrack = false;
                         } else {
-                            minecraftname = 'ไม่สามารถดึงข้อมูลได้ (อาจเป็นบัญชี Crack หรือ API ขัดข้อง)';
+                            //minecraftname = 'ไม่สามารถดึงข้อมูลได้ (อาจเป็นบัญชี Crack หรือ API ขัดข้อง)';
                             ismccrack = true;
                         }
                     })
                     .catch(error => {
                         minecraftname = 'ไม่สามารถดึงข้อมูลได้ (API ขัดข้อง)';
                     });
-                if (ismccrack == true) {
+                //if (ismccrack == true) {
                     await fetch("https://cpsql.pwisetthon.com/user/find/uuid/"+minecraftuuid)
                         .then(response => response.json())
                         .then(result => {
                             if (result.status === 200) {
                                 co_user_id = result.rowid;
+                                if (ismccrack == true) {
+                                    minecraftname = result.user + ' (ผู้เล่น Crack)';
+                                }
                             } else {
                                 co_user_id = null;
                             }
@@ -120,21 +123,19 @@
                         .catch(error => {
                             co_user_id = null;
                         });
-                    await fetch("https://cpsql.pwisetthon.com/chat/history/"+co_user_id)
-                        .then(response => response.json())
-                        .then(result => {
-                            if (result.status === 200) {
-                                chat_history = result;
-                                console.log(chat_history);
-                            } else {
-                                chat_history = null;
-                            }
-                        })
-                        .catch(error => {
+                //}
+                await fetch("https://cpsql.pwisetthon.com/chat/history/"+co_user_id)
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.status === 200) {
+                            chat_history = result;
+                            console.log(chat_history);
+                        } else {
                             chat_history = null;
-                        });
-                }
-                
+                        }
+                    }).catch(error => {
+                        chat_history = null;
+                    });
             }
         }
     });
