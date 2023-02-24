@@ -33,7 +33,8 @@ export const load: PageServerLoad = async ({ cookies }) => {
                 disco_access_token: cookies.get('disco_access_token'),
                 disco_refresh_token: cookies.get('disco_refresh_token'),
                 disco_name: disco_name,
-                disco_img: 'https://cdn.discordapp.com/avatars/'+disco_id+'/'+disco_avatar+'.png'
+                disco_img: 'https://cdn.discordapp.com/avatars/'+disco_id+'/'+disco_avatar+'.png',
+                disco_id: disco_id
             }
         }
     } else {
@@ -42,6 +43,8 @@ export const load: PageServerLoad = async ({ cookies }) => {
                 disco_access_token: null,
                 disco_refresh_token: null,
                 disco_name: null
+                disco_img: null,
+                disco_id: null
             }
         }
     }

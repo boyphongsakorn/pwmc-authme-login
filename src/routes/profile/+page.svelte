@@ -41,13 +41,24 @@
 
     console.log($page);
 
+    let linkmcsuccess = null;
+
     onMount(async () => {
         if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
             goto('/', { invalidateAll: true });
+        } else {
+            fetch("http://localhost:3000/discordsrv_accounts/checklink?discordid={$page.data.props.disco_id}")
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === '200') {
+                        linkmcsuccess = true;
+                    } else {
+                        linkmcsuccess = false;
+                    }
+                })
+                .catch(error => console.log('error', error));
         }
     });
-
-    let linkmcsuccess = null;
 
     function linkminecraft() {
         var myHeaders = new Headers();
@@ -124,6 +135,14 @@
     <p>คุณ {$page.data.props.disco_name}</p>
     <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" size="60px" />
     <Button style="background-color: #5865F2;" on:click={toggle}>ลิงก์บัญชี Discord กับบัญชีเกม</Button>
+    {#if linkmcsuccess !== null}
+        {#if linkmcsuccess === true}
+            <Alert color="success">คุณได้ลิงก์บัญชีกับ</Alert>
+        {/if}
+        {#if linkmcsuccess === false}
+            <Alert color="danger">ลิงก์บัญชีไม่สำเร็จ</Alert>
+        {/if}
+    {/if}
 </Container>
 
 <div>
