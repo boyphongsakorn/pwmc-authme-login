@@ -33,6 +33,8 @@
 
     let open = false;
     const toggle = () => (open = !open);
+
+    console.log($page);
 </script>
 
 <Styles />
