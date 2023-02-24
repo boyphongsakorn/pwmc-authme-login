@@ -22,6 +22,7 @@
     } from 'sveltestrap';
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
+    import { goto } from '$app/environment';
     let isOpen = false;
 
     /**
@@ -42,7 +43,8 @@
 
     //if url has code refresh page to /
     if ($page.url.searchParams.get('code')) {
-        window.location.href = '/';
+        //window.location.href = '/';
+        goto('/');
     }
 </script>
 
