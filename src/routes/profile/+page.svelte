@@ -149,8 +149,8 @@
             });
         if (linkmcsuccess == true) {
             raw = JSON.stringify({
-                "discord": $page.data.props.disco_id,
-                "uuid": uuidsearch,
+                "discordid": $page.data.props.disco_id,
+                "minecraftid": uuidsearch,
                 "authme_id": minecraftuser,
                 "uuidfrom": "official"
             });
