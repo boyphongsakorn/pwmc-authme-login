@@ -220,7 +220,7 @@
                   <img src="https://crafatar.com/renders/body/{minecraftuuid}" />
                   <!-- <Button>Button</Button> -->
                 </CardBody>
-                <CardFooter>
+                <CardFooter class="d-flex justify-content-center">
                     {#if linkmcsuccess !== null && ismccrack !== null}
                         {#if linkmcsuccess === true}
                             {#if ismccrack === true}
