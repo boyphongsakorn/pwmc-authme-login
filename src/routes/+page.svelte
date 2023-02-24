@@ -18,11 +18,15 @@
         ModalBody,
         ModalFooter,
         ModalHeader,
-        Button
+        Button,
+        Row,
+        Col,
+        Card
     } from 'sveltestrap';
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
     import { goto } from '$app/navigation';
+    import Avatar from "svelte-avatar";
     let isOpen = false;
 
     /**
@@ -52,6 +56,20 @@
             goto('/', { invalidateAll: true });
         }
     });
+
+    async function getmainserverinto() {
+        const response = await fetch('https://api.mcsrvstat.us/2/playmc.pwisetthon.com');
+        const json = await response.json();
+        console.log(json);
+        return json;
+    }
+
+    async function getodpserverinto() {
+        const response = await fetch('https://api.mcsrvstat.us/2/154.208.140.118');
+        const json = await response.json();
+        console.log(json);
+        return json;
+    }
 </script>
 
 <Styles />
@@ -98,6 +116,50 @@
 </Navbar>
 
 <Container fluid style="background-image: url('https://imgul.teamquadb.in.th/images/2023/02/23/Survival_The_End.png');background-position: center center;background-repeat: no-repeat;background-size: cover;height: 500px;">
+</Container>
+<Container sm>
+    <Row>
+        <Col>
+            {#await getmainserverinto() then test }
+                <Card body>
+                    <Row>
+                        <Col xs="auto">
+                            <Avatar name="{test.motd.clean[0]}" src="{test.icon}" />
+                        </Col>
+                        <Col class="d-flex align-items-center">
+                            Just A Normal Server
+                        </Col>
+                        <Col xs="auto" class="my-auto">
+                            {test.players.online}/{test.players.max}
+                        </Col>
+                        <Col xs="auto" class="my-auto">
+                            Online
+                        </Col>
+                    </Row>
+                </Card>
+            {/await}
+        </Col>
+        <Col>
+            {#await getodpserverinto() then test }
+                <Card body>
+                    <Row>
+                        <Col xs="auto">
+                            <Avatar name="{test.motd.clean[0]}" src="{test.icon}" />
+                        </Col>
+                        <Col class="d-flex align-items-center">
+                            One Day Project
+                        </Col>
+                        <Col xs="auto" class="my-auto">
+                            {test.players.online}/50
+                        </Col>
+                        <Col xs="auto" class="my-auto">
+                            Online
+                        </Col>
+                    </Row>
+                </Card>
+            {/await}
+        </Col>
+    </Row>
 </Container>
 
 <div>
