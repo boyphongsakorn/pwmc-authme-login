@@ -20,7 +20,8 @@
         Button,
         Form,
         FormGroup,
-        Input
+        Input,
+        Alert
     } from 'sveltestrap';
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
@@ -45,6 +46,38 @@
             goto('/', { invalidateAll: true });
         }
     });
+
+    let linkmcsuccess = null;
+
+    function linkminecraft() {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "username": "boyphongsakorn",
+            "password": "team1556th"
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw        
+        };
+
+        fetch("https://cpsql.pwisetthon.com/authme/check", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                if (result.result === 'Login success') {
+                    linkmcsuccess = true;
+                } else {
+                    linkmcsuccess = false;
+                }
+            })
+            .catch(error => {
+                console.log('error', error);
+                linkmcsuccess = false;
+            });
+    }
 </script>
 
 <Styles />
@@ -107,6 +140,14 @@
             </Form>
         </ModalBody>
         <ModalFooter>
+            {#if linkmcsuccess !== null}
+                {#if linkmcsuccess === true}
+                    <Alert color="success">ลิงก์บัญชีสำเร็จ</Alert>
+                {/if}
+                {#if linkmcsuccess === false}
+                    <Alert color="danger">ลิงก์บัญชีไม่สำเร็จ</Alert>
+                {/if}
+            {/if}
           <Button color="success">ลิงก์บัญชี</Button>
         </ModalFooter>
       </Modal>
