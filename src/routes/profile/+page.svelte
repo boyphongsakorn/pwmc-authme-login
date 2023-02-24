@@ -65,10 +65,9 @@
         };
 
         fetch("https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/authme/check", requestOptions)
-            .then(response => response.text())
+            .then(response => response.json())
             .then(result => {
-                console.log('result', result);
-                if (result === 'Login success') {
+                if (result.result === 'Login success') {
                     linkmcsuccess = true;
                 } else {
                     linkmcsuccess = false;
