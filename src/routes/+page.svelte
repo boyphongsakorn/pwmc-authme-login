@@ -42,10 +42,16 @@
     console.log(data);
 
     //if url has code refresh page to /
-    if ($page.url.searchParams.get('code')) {
-        //window.location.href = '/';
-        goto('/');
-    }
+    // if ($page.url.searchParams.get('code')) {
+    //     //window.location.href = '/';
+    //     goto('/');
+    // }
+
+    onMount(async () => {
+        if ($page.url.searchParams.get('code')) {
+            goto('/');
+        }
+    });
 </script>
 
 <Styles />
