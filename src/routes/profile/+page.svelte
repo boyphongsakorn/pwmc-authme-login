@@ -154,7 +154,7 @@
     </Container>
 </Navbar>
 
-<Container sm class="text-center">
+<Container sm>
     <!-- {#if $page.data.props.disco_access_token !== undefined && $page.data.props.disco_access_token !== 'undefined' && $page.data.props.disco_access_token !== null}
     
     {/if} -->
