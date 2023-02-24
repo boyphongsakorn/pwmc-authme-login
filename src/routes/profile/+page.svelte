@@ -86,5 +86,5 @@
     {/if} -->
     <h1>Profile</h1>
     <p>คุณ {$page.data.props.disco_name}</p>
-    <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" size="10" />
+    <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" style="width: 10px;" />
 </Container>
