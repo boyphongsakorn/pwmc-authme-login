@@ -107,9 +107,9 @@
             .then(response => response.json())
             .then(result => {
                 if (result.result === 'Login success') {
-                    isdiscordlinkmc = true;
+                    linkmcsuccess = true;
                 } else {
-                    isdiscordlinkmc = false;
+                    linkmcsuccess = false;
                 }
             })
             .catch(error => {
