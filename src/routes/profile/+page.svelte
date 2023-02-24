@@ -61,6 +61,7 @@
     let islinkfromweb = null;
     let co_user_id = null;
     let chat_history = null;
+    let isimpossible = false;
 
     onMount(async () => {
         if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
@@ -93,6 +94,7 @@
                     .catch(error => console.log('error', error));
             }
             if (minecraftuuid != null) {
+                let uuidnotfound = false;
                 await fetch("https://api.minetools.eu/uuid/"+minecraftuuid)
                     .then(response => response.json())
                     .then(result => {
@@ -101,13 +103,15 @@
                             ismccrack = false;
                         } else {
                             //minecraftname = 'ไม่สามารถดึงข้อมูลได้ (อาจเป็นบัญชี Crack หรือ API ขัดข้อง)';
+                            //ismccrack = true;
+                            uuidnotfound = true;
                             ismccrack = true;
                         }
                     })
                     .catch(error => {
                         minecraftname = 'ไม่สามารถดึงข้อมูลได้ (API ขัดข้อง)';
                     });
-                //if (ismccrack == true) {
+                if (uuidnotfound == true){
                     await fetch("https://cpsql.pwisetthon.com/user/find/uuid/"+minecraftuuid)
                         .then(response => response.json())
                         .then(result => {
@@ -123,7 +127,25 @@
                         .catch(error => {
                             co_user_id = null;
                         });
-                //}
+                    if (co_user_id -= null) {
+                        await fetch("https://cpsql.pwisetthon.com/user_log/log/uuid/"+minecraftuuid)
+                            .then(response => response.json())
+                            .then(result => {
+                                //if (result.status === 200) {
+                                    minecraftname = result.user + ' (ตัวละคร Crack)';
+                                    isimpossible = true;
+                                    //ismccrack = true;
+                                //} else {
+                                //    minecraftname = 'ไม่สามารถดึงข้อมูลได้ (อาจเป็นบัญชี Crack หรือ API ขัดข้อง)';
+                                //    ismccrack = true;
+                                //}
+                            })
+                            .catch(error => {
+                                minecraftname = 'ไม่สามารถดึงข้อมูลได้ (อาจเป็นบัญชี Crack หรือ API ขัดข้อง)';
+                                ismccrack = true;
+                            });
+                    }
+                }
                 await fetch("https://cpsql.pwisetthon.com/chat/history/"+co_user_id)
                     .then(response => response.json())
                     .then(result => {
@@ -368,9 +390,12 @@
                 <CardFooter class="text-center">
                     {#if isdiscordlinkmc !== null && ismccrack !== null}
                         {#if isdiscordlinkmc === true}
-                            {#if ismccrack === true}
+                            {#if ismccrack === true && isimpossible === false}
                                 คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม) แต่บัญชีเกมของคุณเป็นบัญชี Crack จึงไม่สามารถดึงข้อมูลได้ 
                                 <br>ไม่ใช่? ลองเข้าเกมแล้วลิงก์บัญชีใหม่ หรือกดลิงก์<a on:click={toggle} class="text-primary">ที่นี่</a>
+                            {:else if ismccrack === true && isimpossible === true}
+                                คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม) แต่บัญชีเกมของคุณเป็นบัญชี Crack จึงไม่สามารถดึงข้อมูลได้ 
+                                <br>ถ้าตอนนี้คุณเลิกใช้บัญชี Crack แล้ว ลองลิงก์ใหม่<a on:click={toggle} class="text-primary">ที่นี่</a>
                             {:else}
                                 {#if islinkfromweb === true}
                                     คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านเว็บ)
