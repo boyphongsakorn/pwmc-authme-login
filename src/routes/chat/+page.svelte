@@ -84,11 +84,11 @@
 			) {
 				newMessage =
 					$page.data.props.disco_name + ' (จากเว็บ) ' + newMessage.replace('(Guest จากเว็บ) ', '');
-				messagesinfo = [...messagesinfo, 1];
+				messagesinfo = [...messagesinfo, 'wc'$page.data.props.disco_id];
 				discordid = $page.data.props.disco_id;
 				user = 1;
 			} else {
-				messagesinfo = [...messagesinfo, 'Guest'];
+				messagesinfo = [...messagesinfo, 'wc0'];
 			}
 			messages = [...messages, ogmessage];
 			//rcon.send('จากหน้าเว็บ' + newMessage);
