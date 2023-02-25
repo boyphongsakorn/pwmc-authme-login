@@ -53,6 +53,7 @@
     function handleUploadSkin(event) {
         console.log(event);
         isuploadskin = event.target.checked;
+        textureurl = '';
     }
 
     function handleSkinName(event) {
@@ -352,6 +353,14 @@
         <NavbarBrand href="/">BP Minecraft Server</NavbarBrand>
         <NavbarToggler on:click={() => (isOpen = !isOpen)} />
         <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
+        <Nav navbar>
+            <NavItem>
+                <NavLink href="/">หน้าหลัก</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="/chat">แชทในเกม</NavLink>
+            </NavItem>
+        </Nav>
         <Nav class="ms-auto" navbar>
             <!--NavItem>
             <NavLink href="#components/">Components</NavLink>
