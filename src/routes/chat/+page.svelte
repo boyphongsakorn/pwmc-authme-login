@@ -325,6 +325,13 @@
 				await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/webchat/history')
 					.then((response) => response.json())
 					.then((data) => {
+						data.forEach(function (item) {
+							if (item.user === 0 || item.discord === null) {
+								item.user = 'wc' + item.user;
+							} else {
+								item.user = 'wc' + item.discord;
+							}
+						});
 						//add data to allchat
 						allchat = [...allchat, ...data];
 						//ascending order data
