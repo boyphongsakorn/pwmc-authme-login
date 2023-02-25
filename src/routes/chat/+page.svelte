@@ -311,7 +311,7 @@
         };
         let name;
         let avatar;
-        await fetch('https://discord.com/api/v9/users/' + rowid.replace('wc', ''), { headers: headers })
+        await fetch('https://anywhere.pwisetthon.com/https://discord.com/api/v9/users/' + rowid.replace('wc', ''), { headers: headers })
           .then((response) => response.json())
           .then((data) => {
             name = data.username;
