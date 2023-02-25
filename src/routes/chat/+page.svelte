@@ -209,6 +209,23 @@
 				document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
 			}, 100);
 		}
+		var myHeaders = new Headers();
+		myHeaders.append("key", "change_me");
+
+		var requestOptions = {
+			method: 'GET',
+			headers: myHeaders
+		};
+
+		fetch("https://jnsinfo.bpminecraft.com/v1/players", requestOptions)
+			.then(response => response.json())
+			.then(result => {
+				//push every displayName to users
+				result.forEach(function (item) {
+					users = [...users, item.displayName];
+				});
+			})
+			.catch(error => console.log('error', error));
 	});
 
 	let nonewmessage = 0;
