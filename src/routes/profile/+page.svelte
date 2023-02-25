@@ -146,7 +146,7 @@
 
     onMount(async () => {
         if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
-            // goto('/', { invalidateAll: true });
+            goto('/', { invalidateAll: true });
         } else {
             await fetch("https://cpsql.pwisetthon.com/discordmclink/checklink?discordid=" + $page.data.props.disco_id)
                 .then(response => response.json())
