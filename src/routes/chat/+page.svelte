@@ -48,7 +48,7 @@
     messages = [...messages, newMessage];
     newMessage = '(Guest จากหน้าเว็บ) ' + newMessage;
     if ($page.data.props.disco_access_token != undefined && $page.data.props.disco_access_token !== 'undefined' && $page.data.props.disco_access_token !== null){
-      newMessage = $page.data.props.disco_name +' (จากหน้าเว็บ) ' + newMessage;
+      newMessage = $page.data.props.disco_name +' (จากหน้าเว็บ) ' + newMessage.replace('(Guest จากหน้าเว็บ) ', '');
     }
     //rcon.send('จากหน้าเว็บ' + newMessage);
     fetch("https://anywhere.pwisetthon.com/https://localpost.teamquadb.in.th/sendrcon?message="+newMessage)
