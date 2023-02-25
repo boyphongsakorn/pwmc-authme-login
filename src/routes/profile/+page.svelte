@@ -71,7 +71,7 @@
             })
     }
 
-    const handleUploadSkinFile = (e)=>{
+    const handleUploadSkinFile = async (e) =>{
         var formdata = new FormData();
         formdata.append("file", e.target.files[0]);
 
@@ -81,7 +81,7 @@
             redirect: 'follow'
         };
 
-        fetch("https://api.mineskin.org/generate/upload", requestOptions)
+        await fetch("https://api.mineskin.org/generate/upload", requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result);
@@ -90,6 +90,24 @@
                 textureurl = result.data.texture.url;
             })
             .catch(error => console.log('error', error));
+        
+        var raw = JSON.stringify({
+            Nick: minecraftname,
+            Value: texturevalue,
+            Signature: texturesignature
+        });
+
+        requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw        
+        };
+
+        await fetch("https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/addskin", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+            })
+            .catch(error => console.log('error', error))
     }
 
     let open = false;

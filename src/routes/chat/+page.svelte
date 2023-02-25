@@ -238,14 +238,14 @@
 			//remove blank message
 			allchat = allchat.filter((item) => item.message !== '');
 			//remove duplicate message or same message
-			allchat = allchat.filter((item, index, self) => {
-				return (
-					index ===
-					self.findIndex((t) => {
-						return t.message === item.message;
-					})
-				);
-			});
+			// allchat = allchat.filter((item, index, self) => {
+			// 	return (
+			// 		index ===
+			// 		self.findIndex((t) => {
+			// 			return t.message === item.message;
+			// 		})
+			// 	);
+			// });
 			allchat.forEach(function (item) {
 				messages = [...messages, item.message];
 				messagesinfo = [...messagesinfo, item.user];
@@ -351,14 +351,14 @@
 				//remove blank message
 				allchat = allchat.filter((item) => item.message !== '');
 				//remove duplicate message or same message
-				allchat = allchat.filter((item, index, self) => {
-					return (
-						index ===
-						self.findIndex((t) => {
-							return t.message === item.message;
-						})
-					);
-				});
+				// allchat = allchat.filter((item, index, self) => {
+				// 	return (
+				// 		index ===
+				// 		self.findIndex((t) => {
+				// 			return t.message === item.message;
+				// 		})
+				// 	);
+				// });
 				if (allchat.length > messages.length) {
 					//order by time
 					allchat.sort(function (a, b) {
