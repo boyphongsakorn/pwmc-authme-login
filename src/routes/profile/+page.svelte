@@ -288,6 +288,8 @@
                         .then(result => {
                             //decode base64 of result.Value
                             var decoded = atob(result.Value);
+                            decoded = JSON.parse(decoded);
+                            console.log(decoded);
                             skinchangeurl = decoded.textures.SKIN.url;
                             let skinViewer = new skinview3d.SkinViewer({
                                 canvas: document.getElementById("skin_change_container"),
