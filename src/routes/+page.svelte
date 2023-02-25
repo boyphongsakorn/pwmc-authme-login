@@ -188,7 +188,7 @@
             <p>เว็บไซต์ดู Map โลกของเซิฟเวอร์</p>
         </Col>
         <Col class="d-flex justify-content-center">
-            <img src="https://screenshot-xi.vercel.app/api?url=https://map.bpminecraft.com&width=1280&height=720" class="rounded-2 w-75 shadow my-2" />
+            <img src="https://screenshot-xi.vercel.app/api?url=https://map.bpminecraft.com&width=640&height=360" class="rounded-2 w-75 shadow my-2" />
         </Col>
     </Row>
 </Container>
