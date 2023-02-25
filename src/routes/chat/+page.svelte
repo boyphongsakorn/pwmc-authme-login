@@ -143,10 +143,10 @@
 		}else{
 			Swal.fire({
 				position: 'top-end',
-				icon: 'success',
-				title: 'Your work has been saved',
+				icon: 'error',
+				title: 'ข้อความไม่ถูกต้อง',
 				showConfirmButton: false,
-				timer: 1500
+				timer: 500
 			})
 		}
 		newMessage = '';
@@ -234,6 +234,17 @@
 			//order by time
 			allchat.sort(function (a, b) {
 				return a.time - b.time;
+			});
+			//remove blank message
+			allchat = allchat.filter((item) => item.message !== '');
+			//remove duplicate message or same message
+			allchat = allchat.filter((item, index, self) => {
+				return (
+					index ===
+					self.findIndex((t) => {
+						return t.message === item.message;
+					})
+				);
 			});
 			allchat.forEach(function (item) {
 				messages = [...messages, item.message];
