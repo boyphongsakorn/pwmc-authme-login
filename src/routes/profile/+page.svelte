@@ -530,7 +530,11 @@
         <Col>
             <Card class="mb-3">
                 <CardHeader>
-                  <CardTitle class="text-center">ชื่อในเกม : {minecraftname}</CardTitle>
+                    {#if minecraftuuid !== null}
+                        <CardTitle class="text-center">ชื่อในเกม : {minecraftname}</CardTitle>
+                    {:else}
+                        <CardTitle class="text-center">ชื่อในเกม : ยังไม่ได้เชื่อมบัญชี</CardTitle>
+                    {/if}
                 </CardHeader>
                 <CardBody class="text-center">
                   <!-- <CardSubtitle>Card subtitle</CardSubtitle>
@@ -538,49 +542,53 @@
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                   </CardText> -->
-                    {#if itchangeskin !== true}
-                        <img src="https://crafatar.com/renders/body/{minecraftuuid}" />
-                    {:else}
-                        <canvas id="skin_change_container"></canvas>
+                    {#if minecraftuuid !== null}
+                        {#if itchangeskin !== true}
+                            <img src="https://crafatar.com/renders/body/{minecraftuuid}" />
+                        {:else}
+                            <canvas id="skin_change_container"></canvas>
+                        {/if}
                     {/if}
                   <!-- <Button>Button</Button> -->
                   <br>
-                  <Alert color="secondary">
-                    <h5 class="text-center">เปลี่ยนสกิน</h5>
-                    <FormGroup class="d-inline-block">
-                        <Input type="switch" label="อัพโหลดสกินเอง" value={isuploadskin} on:change={handleUploadSkin} />
-                    </FormGroup>
-                    {#if isuploadskin === false}
-                        <FormGroup floating label="ชื่อสกินที่ต้องการเปลี่ยน">
-                            <Input placeholder="Enter a value" value={skinname} on:input={(e) => handleSkinName(e)} />
+                  {#if minecraftuuid !== null}
+                    <Alert color="secondary">
+                        <h5 class="text-center">เปลี่ยนสกิน</h5>
+                        <FormGroup class="d-inline-block">
+                            <Input type="switch" label="อัพโหลดสกินเอง" value={isuploadskin} on:change={handleUploadSkin} />
                         </FormGroup>
-                        <!-- <iframe src="https://minecraft-api.com/api/skins/{skinname}/body/10.5" width="100%" height="450px"></iframe> -->
-                        <img src={textureurl} />
-                    {:else}
-                        <FormGroup>
-                            <!-- <Label for="exampleFile">File</Label> -->
-                                <Input type="file" name="file" id="exampleFile" on:change={(e) => handleUploadSkinFile(e)} />
-                            <!-- <FormText color="muted">
-                                This is some placeholder block-level help text for the above input. It's a
-                                bit lighter and easily wraps to a new line.
-                            </FormText> -->
-                        </FormGroup>
-                        <InputGroup class="mb-3">
-                            <InputGroupText>Texture Value</InputGroupText>
-                            <Input placeholder="Texture Value" disabled value={texturevalue}/>
-                        </InputGroup>
-                        <InputGroup class="mb-3">
-                            <InputGroupText>Texture Signature</InputGroupText>
-                            <Input placeholder="Texture Signature" disabled value={texturesignature}/>
-                        </InputGroup>
-                        <!-- <img src={textureurl} /> -->
-                        <canvas id="skin_container"></canvas><br>
-                        <Button color="primary" on:click={confirmUploadSkinChange}>ยืนยันการเปลี่ยนสกิน</Button>
-                    {/if}
-                  </Alert>
+                        {#if isuploadskin === false}
+                            <FormGroup floating label="ชื่อสกินที่ต้องการเปลี่ยน">
+                                <Input placeholder="Enter a value" value={skinname} on:input={(e) => handleSkinName(e)} />
+                            </FormGroup>
+                            <!-- <iframe src="https://minecraft-api.com/api/skins/{skinname}/body/10.5" width="100%" height="450px"></iframe> -->
+                            <img src={textureurl} />
+                        {:else}
+                            <FormGroup>
+                                <!-- <Label for="exampleFile">File</Label> -->
+                                    <Input type="file" name="file" id="exampleFile" on:change={(e) => handleUploadSkinFile(e)} />
+                                <!-- <FormText color="muted">
+                                    This is some placeholder block-level help text for the above input. It's a
+                                    bit lighter and easily wraps to a new line.
+                                </FormText> -->
+                            </FormGroup>
+                            <InputGroup class="mb-3">
+                                <InputGroupText>Texture Value</InputGroupText>
+                                <Input placeholder="Texture Value" disabled value={texturevalue}/>
+                            </InputGroup>
+                            <InputGroup class="mb-3">
+                                <InputGroupText>Texture Signature</InputGroupText>
+                                <Input placeholder="Texture Signature" disabled value={texturesignature}/>
+                            </InputGroup>
+                            <!-- <img src={textureurl} /> -->
+                            <canvas id="skin_container"></canvas><br>
+                            <Button color="primary" on:click={confirmUploadSkinChange}>ยืนยันการเปลี่ยนสกิน</Button>
+                        {/if}
+                    </Alert>
+                  {/if}
                 </CardBody>
                 <CardFooter class="text-center">
-                    {#if isdiscordlinkmc !== null && ismccrack !== null}
+                    {#if isdiscordlinkmc !== null}
                         {#if isdiscordlinkmc === true}
                             {#if ismccrack === true && isimpossible === false}
                                 คุณได้ลิงก์บัญชีกับบัญชีเกมแล้ว (ผ่านในเกม) แต่บัญชีเกมของคุณเป็นบัญชี Crack
