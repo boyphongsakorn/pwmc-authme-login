@@ -509,21 +509,23 @@
                 <CardHeader>
                   <CardTitle class="text-center">ประวัติแชท</CardTitle>
                 </CardHeader>
-                <CardBody class="text-left">
-                    {#if chat_history !== null}
-                        {#each chat_history as chat}
-                            <img src="https://crafatar.com/renders/head/{minecraftuuid}" width="30px" />
-                            <p class="d-inline"> {minecraftname.replace(' (ตัวละคร Crack)', '')} พูดว่า "{chat.message}" เมื่อ {convertUnixTime(chat.time)}</p><br>
-                            <!-- } : {chat.message} (เวลา {convertUnixTime(chat.time)})</p><br> -->
-                        {/each}
-                    {/if}
-                  <!-- <CardSubtitle>Card subtitle</CardSubtitle>
-                  <CardText>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                  </CardText>
-                  <Button>Button</Button> -->
-                </CardBody>
+                {#if chat_history !== null}
+                    <CardBody class="text-left">
+                        
+                            {#each chat_history as chat}
+                                <img src="https://crafatar.com/renders/head/{minecraftuuid}" width="30px" />
+                                <p class="d-inline"> {minecraftname.replace(' (ตัวละคร Crack)', '')} พูดว่า "{chat.message}" เมื่อ {convertUnixTime(chat.time)}</p><br>
+                                <!-- } : {chat.message} (เวลา {convertUnixTime(chat.time)})</p><br> -->
+                            {/each}
+                        
+                    <!-- <CardSubtitle>Card subtitle</CardSubtitle>
+                    <CardText>
+                        Some quick example text to build on the card title and make up the bulk of
+                        the card's content.
+                    </CardText>
+                    <Button>Button</Button> -->
+                    </CardBody>
+                {/if}
                 <!-- <CardFooter>Footer</CardFooter> -->
             </Card>
         </Col>
@@ -536,57 +538,55 @@
                         <CardTitle class="text-center">ชื่อในเกม : ยังไม่ได้เชื่อมบัญชี</CardTitle>
                     {/if}
                 </CardHeader>
-                <CardBody class="text-center">
-                  <!-- <CardSubtitle>Card subtitle</CardSubtitle>
-                  <CardText>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                  </CardText> -->
-                    {#if minecraftuuid !== null}
+                {#if minecraftuuid !== null}
+                    <CardBody class="text-center">
+                        <!-- <CardSubtitle>Card subtitle</CardSubtitle>
+                        <CardText>
+                            Some quick example text to build on the card title and make up the bulk of
+                            the card's content.
+                        </CardText> -->
                         {#if itchangeskin !== true}
                             <img src="https://crafatar.com/renders/body/{minecraftuuid}" />
                         {:else}
                             <canvas id="skin_change_container"></canvas>
                         {/if}
-                    {/if}
-                  <!-- <Button>Button</Button> -->
-                  <br>
-                  {#if minecraftuuid !== null}
-                    <Alert color="secondary">
-                        <h5 class="text-center">เปลี่ยนสกิน</h5>
-                        <FormGroup class="d-inline-block">
-                            <Input type="switch" label="อัพโหลดสกินเอง" value={isuploadskin} on:change={handleUploadSkin} />
-                        </FormGroup>
-                        {#if isuploadskin === false}
-                            <FormGroup floating label="ชื่อสกินที่ต้องการเปลี่ยน">
-                                <Input placeholder="Enter a value" value={skinname} on:input={(e) => handleSkinName(e)} />
+                        <!-- <Button>Button</Button> -->
+                        <br>
+                        <Alert color="secondary">
+                            <h5 class="text-center">เปลี่ยนสกิน</h5>
+                            <FormGroup class="d-inline-block">
+                                <Input type="switch" label="อัพโหลดสกินเอง" value={isuploadskin} on:change={handleUploadSkin} />
                             </FormGroup>
-                            <!-- <iframe src="https://minecraft-api.com/api/skins/{skinname}/body/10.5" width="100%" height="450px"></iframe> -->
-                            <img src={textureurl} />
-                        {:else}
-                            <FormGroup>
-                                <!-- <Label for="exampleFile">File</Label> -->
-                                    <Input type="file" name="file" id="exampleFile" on:change={(e) => handleUploadSkinFile(e)} />
-                                <!-- <FormText color="muted">
-                                    This is some placeholder block-level help text for the above input. It's a
-                                    bit lighter and easily wraps to a new line.
-                                </FormText> -->
-                            </FormGroup>
-                            <InputGroup class="mb-3">
-                                <InputGroupText>Texture Value</InputGroupText>
-                                <Input placeholder="Texture Value" disabled value={texturevalue}/>
-                            </InputGroup>
-                            <InputGroup class="mb-3">
-                                <InputGroupText>Texture Signature</InputGroupText>
-                                <Input placeholder="Texture Signature" disabled value={texturesignature}/>
-                            </InputGroup>
-                            <!-- <img src={textureurl} /> -->
-                            <canvas id="skin_container"></canvas><br>
-                            <Button color="primary" on:click={confirmUploadSkinChange}>ยืนยันการเปลี่ยนสกิน</Button>
-                        {/if}
-                    </Alert>
-                  {/if}
-                </CardBody>
+                            {#if isuploadskin === false}
+                                <FormGroup floating label="ชื่อสกินที่ต้องการเปลี่ยน">
+                                    <Input placeholder="Enter a value" value={skinname} on:input={(e) => handleSkinName(e)} />
+                                </FormGroup>
+                                <!-- <iframe src="https://minecraft-api.com/api/skins/{skinname}/body/10.5" width="100%" height="450px"></iframe> -->
+                                <img src={textureurl} />
+                            {:else}
+                                <FormGroup>
+                                    <!-- <Label for="exampleFile">File</Label> -->
+                                        <Input type="file" name="file" id="exampleFile" on:change={(e) => handleUploadSkinFile(e)} />
+                                    <!-- <FormText color="muted">
+                                        This is some placeholder block-level help text for the above input. It's a
+                                        bit lighter and easily wraps to a new line.
+                                    </FormText> -->
+                                </FormGroup>
+                                <InputGroup class="mb-3">
+                                    <InputGroupText>Texture Value</InputGroupText>
+                                    <Input placeholder="Texture Value" disabled value={texturevalue}/>
+                                </InputGroup>
+                                <InputGroup class="mb-3">
+                                    <InputGroupText>Texture Signature</InputGroupText>
+                                    <Input placeholder="Texture Signature" disabled value={texturesignature}/>
+                                </InputGroup>
+                                <!-- <img src={textureurl} /> -->
+                                <canvas id="skin_container"></canvas><br>
+                                <Button color="primary" on:click={confirmUploadSkinChange}>ยืนยันการเปลี่ยนสกิน</Button>
+                            {/if}
+                        </Alert>
+                    </CardBody>
+                {/if}
                 <CardFooter class="text-center">
                     {#if isdiscordlinkmc !== null}
                         {#if isdiscordlinkmc === true}
