@@ -21,7 +21,10 @@
 		Button,
 		Row,
 		Col,
-		Card
+		Card,
+		CardBody,
+		CardHeader,
+    	CardTitle
 	} from 'sveltestrap';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
@@ -144,6 +147,32 @@
 		newMessage = '';
 	}
 
+	async function getuuidbyname(i) {
+		let uuid = '';
+		var myHeaders = new Headers();
+		myHeaders.append("key", "change_me");
+
+		var requestOptions = {
+			method: 'GET',
+			headers: myHeaders
+		};
+
+		await fetch("https://jnsinfo.bpminecraft.com/v1/players", requestOptions)
+			.then(response => response.json())
+			.then(result => {
+				//find displayName is same as i
+				result.forEach(function (item) {
+					if (item.displayName === i) {
+						//if found, push uuid to users
+						uuid = item.uuid;
+					}
+				});
+			})
+			.catch(error => console.log('error', error));
+
+		return uuid;
+	}
+
 	console.log($page);
 
 	onMount(async () => {
@@ -217,7 +246,7 @@
 			headers: myHeaders
 		};
 
-		fetch("https://jnsinfo.bpminecraft.com/v1/players", requestOptions)
+		await fetch("https://jnsinfo.bpminecraft.com/v1/players", requestOptions)
 			.then(response => response.json())
 			.then(result => {
 				//push every displayName to users
@@ -479,12 +508,28 @@
 		<div class="col-12 col-md-3 h-100">
 			<!-- User list -->
 			<div class="user-list h-100">
-				<h5>Online Users:</h5>
-				<ul class="list-unstyled">
+				<!-- <h5>Online Users:</h5> -->
+				<!-- <ul class="list-unstyled"> -->
+					<Card>
+						<CardHeader>
+							<h5>Online Users:</h5>
+						</CardHeader>
 					{#each users as user}
-						<li>{user}</li>
+						<!-- <li>{user}</li> -->
+						<CardBody>
+							{#await getuuidbyname(user) then test}
+								<img
+									src="https://crafatar.com/renders/head/{test}"
+									class="rounded-circle"
+									width="30"
+									height="30"
+								/>
+							{/await}
+							{user}
+						</CardBody>
 					{/each}
-				</ul>
+					</Card>
+				<!-- </ul> -->
 			</div>
 		</div>
 	</div>
