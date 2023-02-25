@@ -33,9 +33,6 @@
   let messagesinfo = [];
   let users = [];
   let newMessage = '';
-  // let rcon;
-  // rcon = new Rcon('192.168.31.220', 25575, 'minecraft')
-  // await rcon.connect();
 
 	/**
 	 * @param {{ detail: { isOpen: boolean; }; }} event
@@ -47,19 +44,19 @@
 	let open = false;
 	const toggle = () => (open = !open);
 
-    function sendMessage() {
-        messages = [...messages, newMessage];
-        //rcon.send('จากหน้าเว็บ' + newMessage);
-        fetch("https://localpost.teamquadb.in.th/sendrcon?message=broadcast%20chat%20"+newMessage)
-          .then(response => response.text())
-          .then(data => {
-            console.log(data);
-            document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
-          }).catch(error => {
-            document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
-          });
-        newMessage = '';
-    }
+  function sendMessage() {
+    messages = [...messages, newMessage];
+    //rcon.send('จากหน้าเว็บ' + newMessage);
+    fetch("https://localpost.teamquadb.in.th/sendrcon?message="+newMessage)
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
+      }).catch(error => {
+        document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
+      });
+    newMessage = '';
+  }
 
 	console.log($page);
 
