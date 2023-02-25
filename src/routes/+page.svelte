@@ -184,7 +184,7 @@
 <Container sm>
     <Row>
         <Col class="text-center my-auto">
-            <a href="https://log.bpminecraft.com" class="text-decoration-none"><h2>Map เซิฟเวอร์</h2></a>
+            <a href="https://map.bpminecraft.com" class="text-decoration-none"><h2>Map เซิฟเวอร์</h2></a>
             <p>เว็บไซต์ดู Map โลกของเซิฟเวอร์</p>
         </Col>
         <Col class="d-flex justify-content-center">
@@ -192,13 +192,23 @@
         </Col>
     </Row>
 </Container>
+<Container sm>
+    <Row>
+        <Col class="d-flex justify-content-center">
+            <img src="https://img.gs/fhcphvsghs/quality=low/https://screenshot-xi.vercel.app/api?url=https://bpminecraft.com/chat&width=640&height=360" class="rounded-2 w-75 shadow my-2" />
+        </Col>
+        <Col class="text-center my-auto">
+            <a href="https://log.bpminecraft.com" class="text-decoration-none"><h2>Chat เซิฟเวอร์</h2></a>
+            <p>ระบบ Chat ในเซิฟเวอร์บนหน้าเว็บ</p>
+        </Col>
+    </Row>
+</Container>
 
 <div>
 <Modal isOpen={open} {toggle}>
-    <ModalHeader {toggle}>Modal title</ModalHeader>
+    <ModalHeader {toggle}>Minecraft Authme Login</ModalHeader>
     <ModalBody>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
+      Coming Soon
     </ModalBody>
     <!-- <ModalFooter>
       <Button color="primary" on:click={toggle}>Do Something</Button>
