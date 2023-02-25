@@ -143,6 +143,9 @@
     let texturesignature = '';
     let textureurl = '';
     let skinname = '';
+    let itchangeskin = false;
+    let skinlink = '';
+    let skinchangeurl = '';
 
     onMount(async () => {
         if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
@@ -269,6 +272,34 @@
                     }).catch(error => {
                         chat_history = null;
                     });
+                await fetch("https://cpsql.pwisetthon.com/skinsrestorer/skinlink/"+minecraftname)
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.Nick != result.Skin) {
+                            itchangeskin = true;
+                            skinlink = result.Skin;
+                        }
+                    }).catch(error => {
+                        itchangeskin = false;
+                    });
+                if (itchangeskin == true) {
+                    await fetch("https://cpsql.pwisetthon.com/skinsrestorer/getskin/"+skinlink)
+                        .then(response => response.json())
+                        .then(result => {
+                            //decode base64 of result.Value
+                            var decoded = atob(result.Value);
+                            skinchangeurl = decoded.textures.SKIN.url;
+                            let skinViewer = new skinview3d.SkinViewer({
+                                canvas: document.getElementById("skin_change_container"),
+                                width: 300,
+                                height: 400,
+                                skin: skinchangeurl
+                            });
+                        })
+                        .catch(error => {
+                            skinlink = 'ไม่สามารถดึงข้อมูลได้ (API ขัดข้อง)';
+                        });
+                }
             }
         }
     });
@@ -505,7 +536,11 @@
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                   </CardText> -->
-                  <img src="https://crafatar.com/renders/body/{minecraftuuid}" />
+                    {#if itchangeskin !== true}
+                        <img src="https://crafatar.com/renders/body/{minecraftuuid}" />
+                    {:else}
+                        <canvas id="skin_change_container"></canvas>
+                    {/if}
                   <!-- <Button>Button</Button> -->
                   <br>
                   <Alert color="secondary">
