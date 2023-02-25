@@ -552,20 +552,24 @@
 					<CardHeader>
 						<h5>Online Users:</h5>
 					</CardHeader>
-					{#each users as user}
-						<!-- <li>{user}</li> -->
-						<CardBody>
-							{#await getuuidbyname(user) then test}
-								<img
-									src="https://crafatar.com/renders/head/{test}"
-									class="rounded-circle"
-									width="30"
-									height="30"
-								/>
-							{/await}
-							{user}
-						</CardBody>
-					{/each}
+					{#if users.length === 0}
+						<CardBody>ไม่มีผู้เล่นออนไลน์</CardBody>
+					{:else}
+						{#each users as user}
+							<!-- <li>{user}</li> -->
+							<CardBody>
+								{#await getuuidbyname(user) then test}
+									<img
+										src="https://crafatar.com/renders/head/{test}"
+										class="rounded-circle"
+										width="30"
+										height="30"
+									/>
+								{/await}
+								{user}
+							</CardBody>
+						{/each}
+					{/if}
 				</Card>
 				<!-- </ul> -->
 			</div>
