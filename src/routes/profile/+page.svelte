@@ -93,6 +93,9 @@
     }
 
     async function confirmUploadSkinChange() {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        
         var raw = JSON.stringify({
             Nick: minecraftname,
             Value: texturevalue,
