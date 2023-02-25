@@ -511,19 +511,18 @@
                 </CardHeader>
                 {#if chat_history !== null}
                     <CardBody class="text-left">
+                        {#each chat_history as chat}
+                            <img src="https://crafatar.com/renders/head/{minecraftuuid}" width="30px" />
+                            <p class="d-inline"> {minecraftname.replace(' (ตัวละคร Crack)', '')} พูดว่า "{chat.message}" เมื่อ {convertUnixTime(chat.time)}</p><br>
+                            <!-- } : {chat.message} (เวลา {convertUnixTime(chat.time)})</p><br> -->
+                        {/each}
                         
-                            {#each chat_history as chat}
-                                <img src="https://crafatar.com/renders/head/{minecraftuuid}" width="30px" />
-                                <p class="d-inline"> {minecraftname.replace(' (ตัวละคร Crack)', '')} พูดว่า "{chat.message}" เมื่อ {convertUnixTime(chat.time)}</p><br>
-                                <!-- } : {chat.message} (เวลา {convertUnixTime(chat.time)})</p><br> -->
-                            {/each}
-                        
-                    <!-- <CardSubtitle>Card subtitle</CardSubtitle>
-                    <CardText>
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's content.
-                    </CardText>
-                    <Button>Button</Button> -->
+                        <!-- <CardSubtitle>Card subtitle</CardSubtitle>
+                        <CardText>
+                            Some quick example text to build on the card title and make up the bulk of
+                            the card's content.
+                        </CardText>
+                        <Button>Button</Button> -->
                     </CardBody>
                 {/if}
                 <!-- <CardFooter>Footer</CardFooter> -->
