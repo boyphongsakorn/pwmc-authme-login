@@ -115,7 +115,7 @@
             body: raw        
         };
 
-        await fetch("https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/addskin", requestOptions)
+        await fetch("https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/skinsrestorer/addskin", requestOptions)
             .then(response => response.json())
             .then(result => {
             })
