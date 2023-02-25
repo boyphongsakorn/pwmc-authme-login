@@ -310,12 +310,14 @@
           'Authorization': 'Bot ' + import.meta.env.VITE_DISCORD_BOT_TOKEN
         };
         let name;
+        let avatar;
         await fetch('https://discord.com/api/v9/users/' + rowid.replace('wc', ''), { headers: headers })
           .then((response) => response.json())
           .then((data) => {
             name = data.username;
+            avatar = data.avatar;
           });
-        return { user: name + ' (จากเว็บ)', uuid: 'test' };
+        return { user: name + ' (จากเว็บ)', uuid: 'discord-'+avatar };
       }
 			return { user: 'Guest (จากหน้าเว็บ)', uuid: '00000000-0000-0000-0000-000000000000' };
 		}
@@ -408,12 +410,27 @@
 					<Card body>
 						<div class="d-inline">
 							{#await getplayerinfo(i) then test}
-								<img
+                {#if test.uuid.includes('discord-')}
+                  <img
+                    src="{test.uuid.replace('discord-', '')}"
+                    class="rounded-circle"
+                    width="30"
+                    height="30"
+                  />
+                {:else}
+                  <img
+                    src="https://crafatar.com/renders/head/{test.uuid}"
+                    class="rounded-circle"
+                    width="30"
+                    height="30"
+                  />
+                {/if}
+								<!-- <img
 									src="https://crafatar.com/renders/head/{test.uuid}"
 									class="rounded-circle"
 									width="30"
 									height="30"
-								/>
+								/> -->
 								{test.user} :
 							{/await}
 							{message}
