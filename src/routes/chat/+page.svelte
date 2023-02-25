@@ -84,7 +84,7 @@
 			) {
 				newMessage =
 					$page.data.props.disco_name + ' (จากเว็บ) ' + newMessage.replace('(Guest จากเว็บ) ', '');
-				messagesinfo = [...messagesinfo, 'wc'$page.data.props.disco_id];
+				messagesinfo = [...messagesinfo, 'wc'+$page.data.props.disco_id];
 				discordid = $page.data.props.disco_id;
 				user = 1;
 			} else {
