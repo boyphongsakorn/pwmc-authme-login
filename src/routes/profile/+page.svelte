@@ -90,14 +90,16 @@
                 textureurl = result.data.texture.url;
             })
             .catch(error => console.log('error', error));
-        
+    }
+
+    async function confirmUploadSkinChange() {
         var raw = JSON.stringify({
             Nick: minecraftname,
             Value: texturevalue,
             Signature: texturesignature
         });
 
-        requestOptions = {
+        var requestOptions = {
             method: 'POST',
             headers: myHeaders,
             body: raw        
@@ -187,7 +189,7 @@
                             //if (result.status === 200) {
                                 co_user_id = result.userid;
                                 if (ismccrack == true) {
-                                    minecraftname = result.user + ' (ผู้เล่น Crack)';
+                                    minecraftname = result.user;
                                 }
                             //} else {
                             //    co_user_id = null;
@@ -201,7 +203,7 @@
                             .then(response => response.json())
                             .then(result => {
                                 //if (result.status === 200) {
-                                    minecraftname = result.user + ' (ตัวละคร Crack)';
+                                    minecraftname = result.user;
                                     isimpossible = true;
                                     //ismccrack = true;
                                 //} else {
@@ -221,7 +223,7 @@
                             //if (result.status === 200) {
                                 co_user_id = result.userid;
                                 if (ismccrack == true) {
-                                    minecraftname = result.user + ' (ผู้เล่น Crack)';
+                                    minecraftname = result.user;
                                 }
                             //} else {
                             //    co_user_id = null;
