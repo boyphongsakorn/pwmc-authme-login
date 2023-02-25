@@ -41,6 +41,7 @@
     import { onMount } from 'svelte';
     import { goto } from '$app/navigation';
     import Avatar from "svelte-avatar";
+    import * as skinview3d from "skinview3d";
     let isOpen = false;
 
     /**
@@ -88,6 +89,12 @@
                 texturevalue = result.data.texture.value;
                 texturesignature = result.data.texture.signature;
                 textureurl = result.data.texture.url;
+                let skinViewer = new skinview3d.SkinViewer({
+                    canvas: document.getElementById("skin_container"),
+                    width: 300,
+                    height: 400,
+                    skin: result.data.texture.url
+                });
             })
             .catch(error => console.log('error', error));
     }
@@ -95,7 +102,7 @@
     async function confirmUploadSkinChange() {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        
+
         var raw = JSON.stringify({
             Nick: minecraftname,
             Value: texturevalue,
@@ -529,7 +536,8 @@
                             <InputGroupText>Texture Signature</InputGroupText>
                             <Input placeholder="Texture Signature" disabled value={texturesignature}/>
                         </InputGroup>
-                        <img src={textureurl} />
+                        <!-- <img src={textureurl} /> -->
+                        <canvas id="skin_container"></canvas><br>
                         <Button color="primary" on:click={confirmUploadSkinChange()}>ยืนยันการเปลี่ยนสกิน</Button>
                     {/if}
                   </Alert>
