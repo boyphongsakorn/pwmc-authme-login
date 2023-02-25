@@ -527,6 +527,7 @@
                             <Input placeholder="Texture Signature" disabled value={texturesignature}/>
                         </InputGroup>
                         <img src={textureurl} />
+                        <Button color="primary" on:click={confirmUploadSkinChange()}>ยืนยันการเปลี่ยนสกิน</Button>
                     {/if}
                   </Alert>
                 </CardBody>
