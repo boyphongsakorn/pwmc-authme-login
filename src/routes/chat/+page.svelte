@@ -24,12 +24,13 @@
 		Card,
 		CardBody,
 		CardHeader,
-    	CardTitle
+		CardTitle
 	} from 'sveltestrap';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Avatar from 'svelte-avatar';
+	import Swal from "sweetalert2";
 
 	let isOpen = false;
 	let messages = [];
@@ -75,91 +76,95 @@
 			}
 		}
 		newMessage = '(Guest จากเว็บ) ' + newMessage;
-		if (
-			$page.data.props.disco_access_token != undefined &&
-			$page.data.props.disco_access_token !== 'undefined' &&
-			$page.data.props.disco_access_token !== null
-		) {
-			newMessage =
-				$page.data.props.disco_name +
-				' (จากเว็บ) ' +
-				newMessage.replace('(Guest จากเว็บ) ', '');
-			messagesinfo = [
-				...messagesinfo,
-				1
-			];
-			discordid = $page.data.props.disco_id;
-			user = 1;
-		} else {
-			messagesinfo = [...messagesinfo, 'Guest'];
+		if (ogmessage.trim() !== '') {
+			if (
+				$page.data.props.disco_access_token != undefined &&
+				$page.data.props.disco_access_token !== 'undefined' &&
+				$page.data.props.disco_access_token !== null
+			) {
+				newMessage =
+					$page.data.props.disco_name + ' (จากเว็บ) ' + newMessage.replace('(Guest จากเว็บ) ', '');
+				messagesinfo = [...messagesinfo, 1];
+				discordid = $page.data.props.disco_id;
+				user = 1;
+			} else {
+				messagesinfo = [...messagesinfo, 'Guest'];
+			}
+			messages = [...messages, ogmessage];
+			//rcon.send('จากหน้าเว็บ' + newMessage);
+			await fetch(
+				'https://anywhere.pwisetthon.com/https://localpost.teamquadb.in.th/sendrcon?message=' +
+					newMessage
+			)
+				.then((response) => response.text())
+				.then((data) => {
+					console.log(data);
+					document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
+				})
+				.catch((error) => {
+					document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
+				});
+
+			//get unix time now
+			var unixtime = Math.round(+new Date() / 1000);
+
+			var myHeaders = new Headers();
+			myHeaders.append('Content-Type', 'application/json');
+
+			var raw = JSON.stringify({
+				time: unixtime,
+				user: user,
+				discord: discordid,
+				message: ogmessage
+			});
+
+			var requestOptions = {
+				method: 'POST',
+				headers: myHeaders,
+				body: raw
+			};
+
+			await fetch(
+				'https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/webchat/newchat/',
+				requestOptions
+			)
+				.then((response) => response.json())
+				.then((result) => {
+					// if (result.result === 'Login success') {
+					//     linkmcsuccess = true;
+					// } else {
+					//     linkmcsuccess = false;
+					// }
+				})
+				.catch((error) => {
+					console.log('error', error);
+					// linkmcsuccess = false;
+				});
+		}else{
+			Swal.fire({
+				position: 'top-end',
+				icon: 'success',
+				title: 'Your work has been saved',
+				showConfirmButton: false,
+				timer: 1500
+			})
 		}
-		messages = [...messages, ogmessage];
-		//rcon.send('จากหน้าเว็บ' + newMessage);
-		await fetch(
-			'https://anywhere.pwisetthon.com/https://localpost.teamquadb.in.th/sendrcon?message=' +
-				newMessage
-		)
-			.then((response) => response.text())
-			.then((data) => {
-				console.log(data);
-				document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
-			})
-			.catch((error) => {
-				document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
-			});
-
-		//get unix time now
-		var unixtime = Math.round(+new Date() / 1000);
-
-		var myHeaders = new Headers();
-		myHeaders.append('Content-Type', 'application/json');
-
-		var raw = JSON.stringify({
-			time: unixtime,
-			user: user,
-			discord: discordid,
-			message: ogmessage
-		});
-
-		var requestOptions = {
-			method: 'POST',
-			headers: myHeaders,
-			body: raw
-		};
-
-		await fetch(
-			'https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/webchat/newchat/',
-			requestOptions
-		)
-			.then((response) => response.json())
-			.then((result) => {
-				// if (result.result === 'Login success') {
-				//     linkmcsuccess = true;
-				// } else {
-				//     linkmcsuccess = false;
-				// }
-			})
-			.catch((error) => {
-				console.log('error', error);
-				// linkmcsuccess = false;
-			});
-
 		newMessage = '';
 	}
 
 	async function getuuidbyname(i) {
 		let uuid = '';
 		var myHeaders = new Headers();
-		myHeaders.append("key", "change_me");
+		myHeaders.append('key', 'change_me');
 
 		var requestOptions = {
 			method: 'GET',
 			headers: myHeaders
 		};
 
-		await fetch("https://jnsinfo.bpminecraft.com/v1/players", requestOptions)
-			.then(response => response.json())
-			.then(result => {
+		await fetch('https://jnsinfo.bpminecraft.com/v1/players', requestOptions)
+			.then((response) => response.json())
+			.then((result) => {
 				//find displayName is same as i
 				result.forEach(function (item) {
 					if (item.displayName === i) {
@@ -168,7 +173,7 @@
 					}
 				});
 			})
-			.catch(error => console.log('error', error));
+			.catch((error) => console.log('error', error));
 
 		return uuid;
 	}
@@ -201,14 +206,14 @@
 		await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/webchat/history')
 			.then((response) => response.json())
 			.then((data) => {
-        //add each user with text wc
-        data.forEach(function (item) {
-          if (item.user === 0 || item.discord === null) {
-            item.user = 'wc'+item.user;
-          } else{
-            item.user = 'wc'+item.discord;
-          }
-        });
+				//add each user with text wc
+				data.forEach(function (item) {
+					if (item.user === 0 || item.discord === null) {
+						item.user = 'wc' + item.user;
+					} else {
+						item.user = 'wc' + item.discord;
+					}
+				});
 				//add data to allchat
 				allchat = [...allchat, ...data];
 				//ascending order data
@@ -239,22 +244,22 @@
 			}, 100);
 		}
 		var myHeaders = new Headers();
-		myHeaders.append("key", "change_me");
+		myHeaders.append('key', 'change_me');
 
 		var requestOptions = {
 			method: 'GET',
 			headers: myHeaders
 		};
 
-		await fetch("https://jnsinfo.bpminecraft.com/v1/players", requestOptions)
-			.then(response => response.json())
-			.then(result => {
+		await fetch('https://jnsinfo.bpminecraft.com/v1/players', requestOptions)
+			.then((response) => response.json())
+			.then((result) => {
 				//push every displayName to users
 				result.forEach(function (item) {
 					users = [...users, item.displayName];
 				});
 			})
-			.catch(error => console.log('error', error));
+			.catch((error) => console.log('error', error));
 	});
 
 	let nonewmessage = 0;
@@ -330,15 +335,16 @@
 					allchat.sort(function (a, b) {
 						return a.time - b.time;
 					});
-          messages = [];
-				  messagesinfo = [];
+					messages = [];
+					messagesinfo = [];
 					allchat.forEach(function (item) {
 						messages = [...messages, item.message];
 						messagesinfo = [...messagesinfo, item.user];
 					});
 					setTimeout(() => {
-						document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
-            nonewmessage = 0;
+						document.getElementById('cbbox').scrollTop =
+							document.getElementById('cbbox').scrollHeight;
+						nonewmessage = 0;
 					}, 100);
 				}
 			}
@@ -348,27 +354,30 @@
 
 	async function getplayerinfo(i) {
 		let rowid = messagesinfo[i];
-    console.log(messagesinfo);
+		console.log(messagesinfo);
 		if (isNaN(rowid) || rowid == 0) {
-      //if front rowid is wc
-      if(rowid.includes('wc') && rowid != 'wc0'){
-        // const headers = {
-        //   'Authorization': 'Bot ' + import.meta.env.VITE_DISCORD_BOT_TOKEN
-        // };
-        let name;
-        let avatar;
-        await fetch('https://discordlookup.mesavirep.xyz/v1/user/' + rowid.replace('wc', '')/*, { headers: headers }*/)
-          .then((response) => response.json())
-          .then((data) => {
-            name = data.tag;
-            //find inded of last # in tag
-            let index = name.lastIndexOf('#');
-            //remove last # and everything after it
-            name = name.substring(0, index);
-            avatar = data.avatar.link;
-          });
-        return { user: name + ' (จากเว็บ)', uuid: 'discord-'+avatar };
-      }
+			//if front rowid is wc
+			if (rowid.includes('wc') && rowid != 'wc0') {
+				// const headers = {
+				//   'Authorization': 'Bot ' + import.meta.env.VITE_DISCORD_BOT_TOKEN
+				// };
+				let name;
+				let avatar;
+				await fetch(
+					'https://discordlookup.mesavirep.xyz/v1/user/' +
+						rowid.replace('wc', '') /*, { headers: headers }*/
+				)
+					.then((response) => response.json())
+					.then((data) => {
+						name = data.tag;
+						//find inded of last # in tag
+						let index = name.lastIndexOf('#');
+						//remove last # and everything after it
+						name = name.substring(0, index);
+						avatar = data.avatar.link;
+					});
+				return { user: name + ' (จากเว็บ)', uuid: 'discord-' + avatar };
+			}
 			return { user: 'Guest (จากเว็บ)', uuid: '00000000-0000-0000-0000-000000000000' };
 		}
 		const response = await fetch('https://cpsql.pwisetthon.com/user/find/id/' + rowid);
@@ -460,21 +469,21 @@
 					<Card body>
 						<div class="d-inline">
 							{#await getplayerinfo(i) then test}
-                {#if test.uuid.includes('discord-')}
-                  <img
-                    src="{test.uuid.replace('discord-', '')}"
-                    class="rounded-circle"
-                    width="30"
-                    height="30"
-                  />
-                {:else}
-                  <img
-                    src="https://crafatar.com/renders/head/{test.uuid}"
-                    class="rounded-circle"
-                    width="30"
-                    height="30"
-                  />
-                {/if}
+								{#if test.uuid.includes('discord-')}
+									<img
+										src={test.uuid.replace('discord-', '')}
+										class="rounded-circle"
+										width="30"
+										height="30"
+									/>
+								{:else}
+									<img
+										src="https://crafatar.com/renders/head/{test.uuid}"
+										class="rounded-circle"
+										width="30"
+										height="30"
+									/>
+								{/if}
 								<!-- <img
 									src="https://crafatar.com/renders/head/{test.uuid}"
 									class="rounded-circle"
@@ -510,10 +519,10 @@
 			<div class="user-list h-100">
 				<!-- <h5>Online Users:</h5> -->
 				<!-- <ul class="list-unstyled"> -->
-					<Card>
-						<CardHeader>
-							<h5>Online Users:</h5>
-						</CardHeader>
+				<Card>
+					<CardHeader>
+						<h5>Online Users:</h5>
+					</CardHeader>
 					{#each users as user}
 						<!-- <li>{user}</li> -->
 						<CardBody>
@@ -528,7 +537,7 @@
 							{user}
 						</CardBody>
 					{/each}
-					</Card>
+				</Card>
 				<!-- </ul> -->
 			</div>
 		</div>

@@ -25,6 +25,7 @@
 	"dependencies": {
 		"cookie": "^0.5.0",
 		"svelte-avatar": "^1.2.0",
-		"sveltestrap": "^5.10.0"
+		"sveltestrap": "^5.10.0",
+		"sweetalert2": "^11.7.2"
 	}
 }
