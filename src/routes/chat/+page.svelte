@@ -172,6 +172,14 @@
 		await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/webchat/history')
 			.then((response) => response.json())
 			.then((data) => {
+        //add each user with text wc
+        data.forEach(function (item) {
+          if (item.user === 0 || item.discord === null) {
+            item.user = 'wc'+item.user;
+          } else{
+            item.user = 'wc'+item.discord;
+          }
+        });
 				//add data to allchat
 				allchat = [...allchat, ...data];
 				//ascending order data
@@ -294,7 +302,21 @@
 
 	async function getplayerinfo(i) {
 		let rowid = messagesinfo[i];
+    console.log(messagesinfo);
 		if (isNaN(rowid) || rowid == 0) {
+      //if front rowid is wc
+      if(rowid.includes('wc') && rowid != 'wc0'){
+        const headers = {
+          'Authorization': 'Bot ' + import.meta.env.VITE_DISCORD_BOT_TOKEN
+        };
+        let name;
+        await fetch('https://discord.com/api/v9/users/' + rowid.replace('wc', ''), { headers: headers })
+          .then((response) => response.json())
+          .then((data) => {
+            name = data.username;
+          });
+        return { user: name + ' (จากเว็บ)', uuid: 'test' };
+      }
 			return { user: 'Guest (จากหน้าเว็บ)', uuid: '00000000-0000-0000-0000-000000000000' };
 		}
 		const response = await fetch('https://cpsql.pwisetthon.com/user/find/id/' + rowid);
