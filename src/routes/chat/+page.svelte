@@ -83,7 +83,7 @@
 				newMessage.replace('(Guest จากหน้าเว็บ) ', '');
 			messagesinfo = [
 				...messagesinfo,
-				{ user: $page.data.props.disco_name, uuid: $page.data.props.disco_avatar }
+				1
 			];
 			discordid = $page.data.props.disco_id;
 			user = 1;
