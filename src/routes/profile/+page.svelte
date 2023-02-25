@@ -31,7 +31,11 @@
         CardSubtitle,
         CardText,
         CardFooter,
-        Table
+        Table,
+        Label,
+        FormText,
+        InputGroup,
+        InputGroupText
     } from 'sveltestrap';
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
@@ -44,6 +48,47 @@
 	 */
     function handleUpdate(event) {
         isOpen = event.detail.isOpen;
+    }
+
+    function handleUploadSkin(event) {
+        console.log(event);
+        isuploadskin = event.target.checked;
+    }
+
+    function handleSkinName(event) {
+        console.log(event);
+        skinname = event.target.value;
+        fetch("https://anywhere.pwisetthon.com/https://minecraft-api.com/api/skins/"+skinname+"/body/10.5")
+            .then(response => response.text())
+            .then(result => {
+                //console.log(result);
+                //get src 
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(result, "text/html");
+                var img = doc.getElementsByTagName("img")[0];
+                textureurl = img.src;
+            })
+    }
+
+    const handleUploadSkinFile = (e)=>{
+        var formdata = new FormData();
+        formdata.append("file", e.target.files[0]);
+
+        var requestOptions = {
+            method: 'POST',
+            body: formdata,
+            redirect: 'follow'
+        };
+
+        fetch("https://api.mineskin.org/generate/upload", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+                texturevalue = result.data.texture.value;
+                texturesignature = result.data.texture.signature;
+                textureurl = result.data.texture.url;
+            })
+            .catch(error => console.log('error', error));
     }
 
     let open = false;
@@ -62,10 +107,15 @@
     let co_user_id = null;
     let chat_history = null;
     let isimpossible = false;
+    let isuploadskin = false;
+    let texturevalue = '';
+    let texturesignature = '';
+    let textureurl = '';
+    let skinname = '';
 
     onMount(async () => {
         if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
-            goto('/', { invalidateAll: true });
+            // goto('/', { invalidateAll: true });
         } else {
             await fetch("https://cpsql.pwisetthon.com/discordmclink/checklink?discordid=" + $page.data.props.disco_id)
                 .then(response => response.json())
@@ -339,12 +389,12 @@
     <Row>
         <Col>
             <Row class="text-center">
-                <Col xs="3" class="my-auto">
+                <!-- <Col xs="3" class="my-auto">
                     <p>คุณ {$page.data.props.disco_name}</p>
                 </Col>
                 <Col xs="2">
                     <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" size="60px" />
-                </Col>
+                </Col> -->
                 {#if $page.data.props.disco_name}
                     <Col xs="auto" class="my-auto">
                         <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a69f118df70ad7828d4_icon_clyde_blurple_RGB.svg" width="30px" /> เข้าสู่ระบบด้วยบัญชี Discord
@@ -410,7 +460,7 @@
                 <CardHeader>
                   <CardTitle class="text-center">ชื่อในเกม : {minecraftname}</CardTitle>
                 </CardHeader>
-                <CardBody class="d-flex justify-content-center">
+                <CardBody class="text-center">
                   <!-- <CardSubtitle>Card subtitle</CardSubtitle>
                   <CardText>
                     Some quick example text to build on the card title and make up the bulk of
@@ -418,6 +468,38 @@
                   </CardText> -->
                   <img src="https://crafatar.com/renders/body/{minecraftuuid}" />
                   <!-- <Button>Button</Button> -->
+                  <br>
+                  <Alert color="secondary">
+                    <h5 class="text-center">เปลี่ยนสกิน</h5>
+                    <FormGroup class="d-inline-block">
+                        <Input type="switch" label="อัพโหลดสกินเอง" value={isuploadskin} on:change={handleUploadSkin} />
+                    </FormGroup>
+                    {#if isuploadskin === false}
+                        <FormGroup floating label="ชื่อสกินที่ต้องการเปลี่ยน">
+                            <Input placeholder="Enter a value" value={skinname} on:input={(e) => handleSkinName(e)} />
+                        </FormGroup>
+                        <!-- <iframe src="https://minecraft-api.com/api/skins/{skinname}/body/10.5" width="100%" height="450px"></iframe> -->
+                        <img src={textureurl} />
+                    {:else}
+                        <FormGroup>
+                            <!-- <Label for="exampleFile">File</Label> -->
+                                <Input type="file" name="file" id="exampleFile" on:change={(e) => handleUploadSkinFile(e)} />
+                            <!-- <FormText color="muted">
+                                This is some placeholder block-level help text for the above input. It's a
+                                bit lighter and easily wraps to a new line.
+                            </FormText> -->
+                        </FormGroup>
+                        <InputGroup class="mb-3">
+                            <InputGroupText>Texture Value</InputGroupText>
+                            <Input placeholder="Texture Value" disabled value={texturevalue}/>
+                        </InputGroup>
+                        <InputGroup class="mb-3">
+                            <InputGroupText>Texture Signature</InputGroupText>
+                            <Input placeholder="Texture Signature" disabled value={texturesignature}/>
+                        </InputGroup>
+                        <img src={textureurl} />
+                    {/if}
+                  </Alert>
                 </CardBody>
                 <CardFooter class="text-center">
                     {#if isdiscordlinkmc !== null && ismccrack !== null}
