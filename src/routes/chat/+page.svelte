@@ -246,18 +246,6 @@
 					})
 				);
 			});
-			//split message and check if all split message is same
-			allchat.forEach((item) => {
-				let splitmessage = item.message.split(' ');
-				//check if all split message is same
-				let isallsame = splitmessage.every((val, i, arr) => val === arr[0]);
-				if (isallsame) {
-					//if all split message is same, remove it
-					item.message = '';
-				}
-			});
-			//remove blank message
-			allchat = allchat.filter((item) => item.message !== '');
 			allchat.forEach(function (item) {
 				messages = [...messages, item.message];
 				messagesinfo = [...messagesinfo, item.user];
@@ -371,18 +359,6 @@
 						})
 					);
 				});
-				//split message and check if all split message is same
-				allchat.forEach((item) => {
-					let splitmessage = item.message.split(' ');
-					//check if all split message is same
-					let isallsame = splitmessage.every((val, i, arr) => val === arr[0]);
-					if (isallsame) {
-						//if all split message is same, remove it
-						item.message = '';
-					}
-				});
-				//remove blank message
-				allchat = allchat.filter((item) => item.message !== '');
 				if (allchat.length > messages.length) {
 					//order by time
 					allchat.sort(function (a, b) {
