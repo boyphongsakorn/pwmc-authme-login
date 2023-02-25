@@ -46,8 +46,12 @@
 
   function sendMessage() {
     messages = [...messages, newMessage];
+    newMessage = '(Guest จากหน้าเว็บ) ' + newMessage;
+    if ($page.data.props.disco_access_token != undefined && $page.data.props.disco_access_token !== 'undefined' && $page.data.props.disco_access_token !== null){
+      newMessage = $page.data.props.disco_name +' (จากหน้าเว็บ) ' + newMessage;
+    }
     //rcon.send('จากหน้าเว็บ' + newMessage);
-    fetch("https://localpost.teamquadb.in.th/sendrcon?message="+newMessage)
+    fetch("https://anywhere.pwisetthon.com/https://localpost.teamquadb.in.th/sendrcon?message="+newMessage)
       .then(response => response.text())
       .then(data => {
         console.log(data);
@@ -79,6 +83,38 @@
                 }, 100);
             });
     });
+
+    let nonewmessage = 0;
+    setInterval(async () => {
+      if (messages.length > 0) {
+        if(((nonewmessage > 10 && nonewmessage % 10 == 0)) || nonewmessage <= 10) {
+          await fetch("https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/chat/history/")
+              .then(response => response.json())
+              .then(data => {
+                  //ascending order data
+                  data.sort(function (a, b) {
+                      return a.rowid - b.rowid;
+                  });
+                  //push each data.message to messages
+                  if (data.length > messages.length) {
+                    messages = [];
+                    messagesinfo = [];
+                    data.forEach(function (item) {
+                        messages = [...messages, item.message];
+                        messagesinfo = [...messagesinfo, item.user];
+                    });
+                    setTimeout(() => {
+                        document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
+                        nonewmessage = 0;
+                    }, 100);
+                  } else {
+                    console.log('no new message');
+                  }
+              });
+        }
+        nonewmessage++;
+      }
+    }, 1000);
 
     async function getplayerinfo(i) {
         let rowid = messagesinfo[i];
