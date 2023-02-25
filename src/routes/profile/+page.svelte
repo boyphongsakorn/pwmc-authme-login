@@ -538,7 +538,7 @@
                         </InputGroup>
                         <!-- <img src={textureurl} /> -->
                         <canvas id="skin_container"></canvas><br>
-                        <Button color="primary" on:click={confirmUploadSkinChange()}>ยืนยันการเปลี่ยนสกิน</Button>
+                        <Button color="primary" on:click={confirmUploadSkinChange}>ยืนยันการเปลี่ยนสกิน</Button>
                     {/if}
                   </Alert>
                 </CardBody>
