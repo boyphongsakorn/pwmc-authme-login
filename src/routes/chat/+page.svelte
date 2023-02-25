@@ -71,7 +71,7 @@
 				newMessage = newMessage.replace(engbadword[i], '***');
 			}
 		}
-		newMessage = '(Guest จากหน้าเว็บ) ' + newMessage;
+		newMessage = '(Guest จากเว็บ) ' + newMessage;
 		if (
 			$page.data.props.disco_access_token != undefined &&
 			$page.data.props.disco_access_token !== 'undefined' &&
@@ -79,8 +79,8 @@
 		) {
 			newMessage =
 				$page.data.props.disco_name +
-				' (จากหน้าเว็บ) ' +
-				newMessage.replace('(Guest จากหน้าเว็บ) ', '');
+				' (จากเว็บ) ' +
+				newMessage.replace('(Guest จากเว็บ) ', '');
 			messagesinfo = [
 				...messagesinfo,
 				1
@@ -306,20 +306,24 @@
 		if (isNaN(rowid) || rowid == 0) {
       //if front rowid is wc
       if(rowid.includes('wc') && rowid != 'wc0'){
-        const headers = {
-          'Authorization': 'Bot ' + import.meta.env.VITE_DISCORD_BOT_TOKEN
-        };
+        // const headers = {
+        //   'Authorization': 'Bot ' + import.meta.env.VITE_DISCORD_BOT_TOKEN
+        // };
         let name;
         let avatar;
-        await fetch('https://anywhere.pwisetthon.com/https://discord.com/api/v9/users/' + rowid.replace('wc', ''), { headers: headers })
+        await fetch('https://discordlookup.mesavirep.xyz/v1/user/' + rowid.replace('wc', '')/*, { headers: headers }*/)
           .then((response) => response.json())
           .then((data) => {
-            name = data.username;
-            avatar = data.avatar;
+            name = data.tag;
+            //find inded of last # in tag
+            let index = name.lastIndexOf('#');
+            //remove last # and everything after it
+            name = name.substring(0, index);
+            avatar = data.avatar.link;
           });
         return { user: name + ' (จากเว็บ)', uuid: 'discord-'+avatar };
       }
-			return { user: 'Guest (จากหน้าเว็บ)', uuid: '00000000-0000-0000-0000-000000000000' };
+			return { user: 'Guest (จากเว็บ)', uuid: '00000000-0000-0000-0000-000000000000' };
 		}
 		const response = await fetch('https://cpsql.pwisetthon.com/user/find/id/' + rowid);
 		const json = await response.json();
