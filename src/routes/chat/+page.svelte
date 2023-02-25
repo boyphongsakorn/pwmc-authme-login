@@ -27,11 +27,15 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Avatar from 'svelte-avatar';
+  
 	let isOpen = false;
-    let messages = [];
-    let messagesinfo = [];
-    let users = [];
-    let newMessage = '';
+  let messages = [];
+  let messagesinfo = [];
+  let users = [];
+  let newMessage = '';
+  // let rcon;
+  // rcon = new Rcon('192.168.31.220', 25575, 'minecraft')
+  // await rcon.connect();
 
 	/**
 	 * @param {{ detail: { isOpen: boolean; }; }} event
@@ -45,6 +49,15 @@
 
     function sendMessage() {
         messages = [...messages, newMessage];
+        //rcon.send('จากหน้าเว็บ' + newMessage);
+        fetch("https://localpost.teamquadb.in.th/sendrcon?message=broadcast%20chat%20"+newMessage)
+          .then(response => response.text())
+          .then(data => {
+            console.log(data);
+            document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
+          }).catch(error => {
+            document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
+          });
         newMessage = '';
     }
 
@@ -63,6 +76,10 @@
                     messages = [...messages, item.message];
                     messagesinfo = [...messagesinfo, item.user];
                 });
+                //scroll to bottom
+                setTimeout(() => {
+                    document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
+                }, 100);
             });
     });
 
@@ -137,7 +154,7 @@
       <div class="row">
         <div class="col-12 col-md-9 h-25">
           <!-- Main chat display -->
-          <div class="overflow-scroll overflow-x-auto" style="max-height: {innerHeight-100}px;">
+          <div class="overflow-scroll overflow-x-auto" style="max-height: {innerHeight-100}px;" id="cbbox">
             <!-- <ul class="list-unstyled"> -->
               {#each messages as message, i}
                 <Card body>
