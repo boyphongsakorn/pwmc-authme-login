@@ -43,7 +43,7 @@
     import Avatar from "svelte-avatar";
     import * as skinview3d from "skinview3d";
     import Fa from 'svelte-fa/src/fa.svelte'
-    import { faSpinner } from '@fortawesome/free-regular-svg-icons/index.es'
+    import { faSpinner } from '@fortawesome/free-regular-svg-icons'
     let isOpen = false;
 
     /**
