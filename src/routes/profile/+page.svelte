@@ -42,6 +42,8 @@
     import { goto } from '$app/navigation';
     import Avatar from "svelte-avatar";
     import * as skinview3d from "skinview3d";
+    import Fa from 'svelte-fa/src/fa.svelte'
+    import { faSpinner } from '@fortawesome/free-solid-svg-icons/index.es'
     let isOpen = false;
 
     /**
@@ -532,7 +534,11 @@
             <Card class="mb-3">
                 <CardHeader>
                     {#if minecraftuuid !== null}
-                        <CardTitle class="text-center">ชื่อในเกม : {minecraftname}</CardTitle>
+                        {#if minecraftname !== null}
+                            <CardTitle class="text-center">ชื่อในเกม : {minecraftname}</CardTitle>
+                        {:else}
+                            <CardTitle class="text-center">ชื่อในเกม : กำลังโหลด <Fa icon={faSpinner} size="3x" pulse /></CardTitle>
+                        {/if}
                     {:else}
                         <CardTitle class="text-center">ชื่อในเกม : ยังไม่ได้เชื่อมบัญชี</CardTitle>
                     {/if}
