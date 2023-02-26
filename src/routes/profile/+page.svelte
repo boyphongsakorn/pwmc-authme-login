@@ -537,7 +537,7 @@
                         {#if minecraftname !== null}
                             <CardTitle class="text-center">ชื่อในเกม : {minecraftname}</CardTitle>
                         {:else}
-                            <CardTitle class="text-center">ชื่อในเกม : กำลังโหลด <Fa icon={faSpinner} size="3x" pulse /></CardTitle>
+                            <CardTitle class="text-center">ชื่อในเกม : กำลังโหลด <Fa icon={faSpinner} size="lg" pulse /></CardTitle>
                         {/if}
                     {:else}
                         <CardTitle class="text-center">ชื่อในเกม : ยังไม่ได้เชื่อมบัญชี</CardTitle>
