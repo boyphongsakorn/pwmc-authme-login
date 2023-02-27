@@ -92,33 +92,59 @@
 			}
 			messages = [...messages, ogmessage];
 			//rcon.send('จากหน้าเว็บ' + newMessage);
-			await fetch(
-				'https://anywhere.pwisetthon.com/https://localpost.teamquadb.in.th/sendrcon?message=' +
-					newMessage
-			)
-				.then((response) => response.text())
-				.then((data) => {
-					console.log(data);
+			// await fetch(
+			// 	'https://anywhere.pwisetthon.com/https://localpost.teamquadb.in.th/sendrcon?message=' +
+			// 		newMessage
+			// )
+			// 	.then((response) => response.text())
+			// 	.then((data) => {
+			// 		console.log(data);
+			// 		document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
+			// 	})
+			// 	.catch((error) => {
+			// 		document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
+			// 	});
+
+			var myHeaders = new Headers();
+			myHeaders.append("Content-Type", "application/json");
+
+			var raw = JSON.stringify({
+				"name": "",
+				"message": newMessage
+			});
+
+			var requestOptions = {
+				method: 'POST',
+				headers: myHeaders,
+				body: raw,
+				redirect: 'follow'
+			};
+
+			fetch("https://map.bpminecraft.com/up/sendmessage", requestOptions)
+				.then(response => response.text())
+				.then(result => {
+					console.log(result);
 					document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
 				})
-				.catch((error) => {
+				.catch(error => {
+					console.log('error', error);
 					document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
 				});
 
 			//get unix time now
 			var unixtime = Math.round(+new Date() / 1000);
 
-			var myHeaders = new Headers();
-			myHeaders.append('Content-Type', 'application/json');
+			//var myHeaders = new Headers();
+			//myHeaders.append('Content-Type', 'application/json');
 
-			var raw = JSON.stringify({
+			raw = JSON.stringify({
 				time: unixtime,
 				user: user,
 				discord: discordid,
 				message: ogmessage
 			});
 
-			var requestOptions = {
+			requestOptions = {
 				method: 'POST',
 				headers: myHeaders,
 				body: raw
