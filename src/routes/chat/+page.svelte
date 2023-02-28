@@ -120,52 +120,59 @@
 				redirect: 'follow'
 			};
 
-			fetch("https://anywhere.pwisetthon.com/https://map.bpminecraft.com/up/sendmessage", requestOptions)
+			await fetch("https://anywhere.pwisetthon.com/https://map.bpminecraft.com/up/sendmessage", requestOptions)
 				.then(response => response.text())
-				.then(result => {
+				.then(async (result) => {
 					console.log(result);
+					//get unix time now
+					var unixtime = Math.round(+new Date() / 1000);
+
+					var myHeaders = new Headers();
+					myHeaders.append('Content-Type', 'application/json');
+
+					const raw = JSON.stringify({
+						time: unixtime,
+						user: user,
+						discord: discordid,
+						message: ogmessage
+					});
+
+					const requestOptions = {
+						method: 'POST',
+						headers: myHeaders,
+						body: raw
+					};
+
+					await fetch(
+						'https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/webchat/newchat/',
+						requestOptions
+					)
+						.then((response) => response.json())
+						.then((result) => {
+							// if (result.result === 'Login success') {
+							//     linkmcsuccess = true;
+							// } else {
+							//     linkmcsuccess = false;
+							// }
+						})
+						.catch((error) => {
+							console.log('error', error);
+							// linkmcsuccess = false;
+						});
 					document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
 				})
 				.catch(error => {
 					console.log('error', error);
+					Swal.fire({
+						position: 'top-end',
+						icon: 'error',
+						title: 'Server ข้อความไม่ตอบสนอง หรือ มีปัญหา กรุณาลองใหม่อีกครั้ง',
+						showConfirmButton: false,
+						timer: 500
+					})
 					document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
 				});
 
-			//get unix time now
-			var unixtime = Math.round(+new Date() / 1000);
-
-			//var myHeaders = new Headers();
-			//myHeaders.append('Content-Type', 'application/json');
-
-			raw = JSON.stringify({
-				time: unixtime,
-				user: user,
-				discord: discordid,
-				message: ogmessage
-			});
-
-			requestOptions = {
-				method: 'POST',
-				headers: myHeaders,
-				body: raw
-			};
-
-			await fetch(
-				'https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/webchat/newchat/',
-				requestOptions
-			)
-				.then((response) => response.json())
-				.then((result) => {
-					// if (result.result === 'Login success') {
-					//     linkmcsuccess = true;
-					// } else {
-					//     linkmcsuccess = false;
-					// }
-				})
-				.catch((error) => {
-					console.log('error', error);
-					// linkmcsuccess = false;
-				});
 		}else{
 			Swal.fire({
 				position: 'top-end',
