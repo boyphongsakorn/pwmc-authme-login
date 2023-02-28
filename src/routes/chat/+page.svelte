@@ -120,7 +120,7 @@
 				redirect: 'follow'
 			};
 
-			fetch("https://map.bpminecraft.com/up/sendmessage", requestOptions)
+			fetch("https://anywhere.pwisetthon.com/https://map.bpminecraft.com/up/sendmessage", requestOptions)
 				.then(response => response.text())
 				.then(result => {
 					console.log(result);
