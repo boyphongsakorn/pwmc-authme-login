@@ -530,6 +530,7 @@
 										class="rounded-circle"
 										width="30"
 										height="30"
+										alt="discord avatar"
 									/>
 								{:else}
 									<img
@@ -537,6 +538,7 @@
 										class="rounded-circle"
 										width="30"
 										height="30"
+										alt="minecraft avatar"
 									/>
 								{/if}
 								<!-- <img
@@ -590,6 +592,7 @@
 										class="rounded-circle"
 										width="30"
 										height="30"
+										alt="minecraft avatar"
 									/>
 								{/await}
 								{user}
