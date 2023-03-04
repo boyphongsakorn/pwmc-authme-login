@@ -127,7 +127,7 @@
     </Container>
     <Container sm>
         <Row>
-            <Col>
+            <!-- <Col>
                 {#await getmainserverinto() then test }
                     <Card body>
                         <Row>
@@ -146,7 +146,7 @@
                         </Row>
                     </Card>
                 {/await}
-            </Col>
+            </Col> -->
             <Col>
                 {#await getodpserverinto() then test }
                     <Card body>
@@ -170,7 +170,7 @@
         </Row>
     </Container>
     
-    <Container sm>
+    <!-- <Container sm>
         <Row>
             <Col class="d-flex justify-content-center">
                 <img src="https://i.imgur.com/NUGzfyS.png" class="rounded-2 w-75 shadow my-2" alt="Log" />
@@ -202,7 +202,7 @@
                 <p>ระบบ Chat ในเซิฟเวอร์บนหน้าเว็บ</p>
             </Col>
         </Row>
-    </Container>
+    </Container> -->
     
     <div>
     <Modal isOpen={open} {toggle}>
