@@ -37,6 +37,7 @@
 	let messagesinfo = [];
 	let users = [];
 	let newMessage = '';
+	let headimgurl = '';
 
 	/**
 	 * @param {{ detail: { isOpen: boolean; }; }} event
@@ -304,6 +305,15 @@
 				});
 			})
 			.catch((error) => console.log('error', error));
+		
+		await fetch('https://crafatar.com/renders/head/0c0c0c0c-0c0c-0c0c-0c0c-0c0c0c0c0c0c')
+			.then((response) => response.json())
+			.then((result) => {
+				headimgurl = 'https://crafatar.com/renders/head/';
+			})
+			.catch((error) => {
+				headimgurl = 'https://minotar.net/cube/user/';
+			});
 	});
 
 	let nonewmessage = 0;
@@ -541,7 +551,7 @@
 									/>
 								{:else}
 									<img
-										src="https://crafatar.com/renders/head/{test.uuid}"
+										src="{headimgurl}{test.uuid}"
 										class="rounded-circle"
 										width="30"
 										height="30"
@@ -595,7 +605,7 @@
 							<CardBody>
 								{#await getuuidbyname(user) then test}
 									<img
-										src="https://crafatar.com/renders/head/{test}"
+										src="{headimgurl}{test}"
 										class="rounded-circle"
 										width="30"
 										height="30"
