@@ -37,7 +37,7 @@
 	let messagesinfo = [];
 	let users = [];
 	let newMessage = '';
-	let headimgurl = '';
+	let headimgurl = 'https://api.mineatar.io/head/';
 
 	/**
 	 * @param {{ detail: { isOpen: boolean; }; }} event
