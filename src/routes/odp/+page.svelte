@@ -21,7 +21,8 @@
             Button,
             Row,
             Col,
-            Card
+            Card,
+            Table
         } from 'sveltestrap';
         import { page } from '$app/stores';
         import { onMount } from 'svelte';
@@ -123,7 +124,13 @@
         </Container>
     </Navbar>
     
-    <Container fluid style="background-image: url('https://img.gs/fhcphvsghs/1920x1080,crop=left/https://imgul.teamquadb.in.th/images/2023/02/23/Survival_The_End.png');background-position: center center;background-repeat: no-repeat;background-size: cover;height: 500px;">
+    <Container fluid style="background-image: url('https://img.gs/fhcphvsghs/1920x1080,crop=left/https://imgul.teamquadb.in.th/images/2023/02/23/Survival_The_End.png');background-position: center center;background-repeat: no-repeat;background-size: cover;height: 500px;display: table; overflow: hidden;">
+        <div style="display: table-cell; vertical-align: middle;text-align: center;color: white;">
+            <div>
+                <h1>One Day Project</h1>
+                <h5>เอาชนะ Ender Dragon ภายใน 24 ชั่วโมง</h5>
+            </div>
+        </div>
     </Container>
     <Container sm>
         <Row>
@@ -151,18 +158,18 @@
                 {#await getodpserverinto() then test }
                     <Card body>
                         <Row>
-                            <Col xs="auto">
+                            <!-- <Col xs="auto">
                                 <Avatar name="{test.motd.clean[0]}" src="{test.icon}" />
-                            </Col>
+                            </Col> -->
                             <Col class="d-flex align-items-center">
-                                One Day Project
+                                Event เริ่มแล้ว
                             </Col>
                             <Col xs="auto" class="my-auto">
                                 {test.players.online}/50
                             </Col>
-                            <Col xs="auto" class="my-auto">
+                            <!-- <Col xs="auto" class="my-auto">
                                 Online
-                            </Col>
+                            </Col> -->
                         </Row>
                     </Card>
                 {/await}
@@ -203,6 +210,95 @@
             </Col>
         </Row>
     </Container> -->
+
+    <Container sm>
+        <Row>
+            <Col class="text-center my-auto">
+                <h2>Server เริ่ม 23:30 น. ทุกวัน*</h2>
+                <p>*แต่ Event เริ่ม 00:00 น. ทุกวัน</p>
+            </Col>
+            <Col class="d-flex justify-content-center">
+                
+            </Col>
+        </Row>
+    </Container>
+
+    <Container sm>
+        <Row>
+            <Col class="d-flex justify-content-center">
+                <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/02/23/1.16.5.png" class="rounded-2 w-75 shadow my-2" alt="Minecraft">
+            </Col>
+            <Col class="text-center my-auto">
+                <h2>Event เริ่ม 00:00 น. ทุกวัน*</h2>
+                <p>*ถ้า Event ไม่มีใครฆ่า Ender Dragon ได้ หรือจบหลัง 23:30 น. จะเว้นวันแล้วเริ่มใหม่ในวันต่อไป เช่น ถ้า Event เริ่มวันจันทร์ จะเริ่มใหม่ในวันพุธ</p>
+            </Col>
+        </Row>
+    </Container>
+
+    <Container sm>
+        <Row>
+            <Col class="text-center my-auto">
+                <h2>15 นาทีแรก PVP จะทำการปิด*</h2>
+                <p>*PVP คือ การโจมตีกัน ทำให้เกิดความเสียหายต่อผู้เล่นอื่นได้</p>
+            </Col>
+            <Col class="d-flex justify-content-center">
+                <img src="https://img.gs/fhcphvsghs/quality=low/https://screenshot-xi.vercel.app/api?url=https://bpminecraft.com/chat&width=640&height=360" class="rounded-2 w-75 shadow my-2" alt="Chat">
+            </Col>
+        </Row>
+    </Container>
+
+    <Container sm>
+        <Row>
+            <Col class="d-flex justify-content-center">
+                <img src="https://img.gs/fhcphvsghs/quality=low/https://screenshot-xi.vercel.app/api?url=https://bpminecraft.com/chat&width=640&height=360" class="rounded-2 w-75 shadow my-2" alt="Chat">
+            </Col>
+            <Col class="text-center my-auto">
+                <h2>ผู้ชนะวัดจาก Damage ที่ทำให้ Ender Dragon*</h2>
+                <!-- <p>*ถ้า Damage ที่ทำให้ Ender Dragon มีคนเท่ากัน จะมีการแข่งขันเพื่อเลือกผู้ชนะ</p> -->
+            </Col>
+        </Row>
+    </Container>
+
+    <Container sm>
+        <Row>
+            <Col class="text-center my-auto">
+                <h2>ประวัติ Event*</h2>
+                <p>*แสดง 10 อันดับ Damage สูงสุด</p>
+            </Col>
+            <Col>
+                <Table bordered>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                      </tr>
+                    </tbody>
+                </Table>
+            </Col>
+        </Row>       
+    </Container>
     
     <div>
     <Modal isOpen={open} {toggle}>
