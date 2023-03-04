@@ -312,7 +312,7 @@
 				headimgurl = 'https://crafatar.com/renders/head/';
 			})
 			.catch((error) => {
-				headimgurl = 'https://minotar.net/cube/user/';
+				headimgurl = 'https://api.mineatar.io/head/';
 			});
 	});
 
