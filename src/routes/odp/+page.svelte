@@ -125,7 +125,7 @@
         </Container>
     </Navbar>
 
-    <Alert color="danger" class="mb-0" dismissible>
+    <Alert color="danger" class="mb-0 rounded-0" dismissible>
         <Container sm>
             Event เริ่มแล้ว เข้าร่วมได้ที่ IP : 154.208.140.118
         </Container>
