@@ -254,7 +254,7 @@
             </Col>
             <Col class="text-center my-auto">
                 <h2>ผู้ชนะวัดจาก Damage ที่ทำให้ Ender Dragon*</h2>
-                <!-- <p>*ถ้า Damage ที่ทำให้ Ender Dragon มีคนเท่ากัน จะมีการแข่งขันเพื่อเลือกผู้ชนะ</p> -->
+                <p>*Damage นับจากการโจมตี Ender Dragon โดยใช้ ดาบ (ได้ Damage เต็ม) หรือ นอนเตียง (คนที่ใกล้จุดระเบิดมากที่สุดจะได้ Damage)</p>
             </Col>
         </Row>
     </Container>
