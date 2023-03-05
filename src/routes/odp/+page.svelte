@@ -22,7 +22,8 @@
             Row,
             Col,
             Card,
-            Table
+            Table,
+			Alert
         } from 'sveltestrap';
         import { page } from '$app/stores';
         import { onMount } from 'svelte';
@@ -123,6 +124,12 @@
             </Collapse>
         </Container>
     </Navbar>
+
+    <Alert color="danger" class="mb-0" dismissible>
+        <Container sm>
+            Event เริ่มแล้ว เข้าร่วมได้ที่ IP : 154.208.140.118
+        </Container>
+    </Alert>
     
     <Container fluid style="background-image: url('https://img.gs/fhcphvsghs/1920x1080,crop=left/https://imgul.teamquadb.in.th/images/2023/02/23/Survival_The_End.png');background-position: center center;background-repeat: no-repeat;background-size: cover;height: 500px;display: table; overflow: hidden;">
         <div style="display: table-cell; vertical-align: middle;text-align: center;color: white;">
@@ -132,7 +139,7 @@
             </div>
         </div>
     </Container>
-    <Container sm>
+    <Container sm style="display: none;">
         <Row>
             <!-- <Col>
                 {#await getmainserverinto() then test }
@@ -218,7 +225,7 @@
                 <p>*แต่ Event เริ่ม 00:00 น. ทุกวัน</p>
             </Col>
             <Col class="d-flex justify-content-center">
-                
+                <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/03/05/image.png" class="rounded-2 w-75 shadow my-2" alt="Minecraft">
             </Col>
         </Row>
     </Container>
@@ -226,7 +233,7 @@
     <Container sm>
         <Row>
             <Col class="d-flex justify-content-center">
-                <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/02/23/1.16.5.png" class="rounded-2 w-75 shadow my-2" alt="Minecraft">
+                <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/03/05/image3a87c256f2e1401e.png" class="rounded-2 w-75 shadow my-2" alt="Minecraft">
             </Col>
             <Col class="text-center my-auto">
                 <h2>Event เริ่ม 00:00 น. ทุกวัน*</h2>
@@ -242,7 +249,7 @@
                 <p>*PVP คือ การโจมตีกัน ทำให้เกิดความเสียหายต่อผู้เล่นอื่นได้</p>
             </Col>
             <Col class="d-flex justify-content-center">
-                <img src="https://img.gs/fhcphvsghs/quality=low/https://screenshot-xi.vercel.app/api?url=https://bpminecraft.com/chat&width=640&height=360" class="rounded-2 w-75 shadow my-2" alt="Chat">
+                <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/03/05/imagefcb3ff56f8b33e46.png" class="rounded-2 w-75 shadow my-2" alt="Chat">
             </Col>
         </Row>
     </Container>
@@ -250,7 +257,7 @@
     <Container sm>
         <Row>
             <Col class="d-flex justify-content-center">
-                <img src="https://img.gs/fhcphvsghs/quality=low/https://screenshot-xi.vercel.app/api?url=https://bpminecraft.com/chat&width=640&height=360" class="rounded-2 w-75 shadow my-2" alt="Chat">
+                <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/03/05/image82a528ed86365039.png" class="rounded-2 w-75 shadow my-2" alt="Chat">
             </Col>
             <Col class="text-center my-auto">
                 <h2>ผู้ชนะวัดจาก Damage ที่ทำให้ Ender Dragon*</h2>
