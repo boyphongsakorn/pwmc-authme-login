@@ -37,7 +37,7 @@
 	let messagesinfo = [];
 	let users = [];
 	let newMessage = '';
-	let headimgurl = 'https://api.mineatar.io/head/';
+	let headimgurl = '';
 
 	/**
 	 * @param {{ detail: { isOpen: boolean; }; }} event
@@ -450,8 +450,8 @@
 	}
 
 	async function getheadimageurl(uuid) {
-		await fetch('https://crafatar.com/renders/head/0c0c0c0c-0c0c-0c0c-0c0c-0c0c0c0c0c0c')
-			.then((response) => response.json())
+		await fetch('https://crafatar.com')
+			.then((response) => response.text())
 			.then((result) => {
 				headimgurl = 'https://crafatar.com/renders/head/';
 			})
