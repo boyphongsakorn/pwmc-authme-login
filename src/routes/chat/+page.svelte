@@ -305,15 +305,6 @@
 				});
 			})
 			.catch((error) => console.log('error', error));
-		
-		await fetch('https://crafatar.com/renders/head/0c0c0c0c-0c0c-0c0c-0c0c-0c0c0c0c0c0c')
-			.then((response) => response.json())
-			.then((result) => {
-				headimgurl = 'https://crafatar.com/renders/head/';
-			})
-			.catch((error) => {
-				headimgurl = 'https://api.mineatar.io/head/';
-			});
 	});
 
 	let nonewmessage = 0;
@@ -458,6 +449,18 @@
 		return json;
 	}
 
+	async function getheadimageurl(uuid) {
+		await fetch('https://crafatar.com/renders/head/0c0c0c0c-0c0c-0c0c-0c0c-0c0c0c0c0c0c')
+			.then((response) => response.json())
+			.then((result) => {
+				headimgurl = 'https://crafatar.com/renders/head/';
+			})
+			.catch((error) => {
+				headimgurl = 'https://api.mineatar.io/head/';
+			});
+		return headimgurl + uuid;
+	}
+
 	let innerWidth = 0;
 	let innerHeight = 0;
 
@@ -550,13 +553,15 @@
 										alt="discord avatar"
 									/>
 								{:else}
+									{#await getheadimageurl(test.uuid) then fullheadimgurl}
 									<img
-										src="{headimgurl}{test.uuid}"
+										src={fullheadimgurl}
 										class="rounded-circle"
 										width="30"
 										height="30"
 										alt="minecraft avatar"
 									/>
+									{/await}
 								{/if}
 								<!-- <img
 									src="https://crafatar.com/renders/head/{test.uuid}"
@@ -604,13 +609,15 @@
 							<!-- <li>{user}</li> -->
 							<CardBody>
 								{#await getuuidbyname(user) then test}
-									<img
-										src="{headimgurl}{test}"
-										class="rounded-circle"
-										width="30"
-										height="30"
-										alt="minecraft avatar"
-									/>
+									{#await getheadimageurl(test) then fullheadimgurl}
+										<img
+											src={fullheadimgurl}
+											class="rounded-circle"
+											width="30"
+											height="30"
+											alt="minecraft avatar"
+										/>
+									{/await}
 								{/await}
 								{user}
 							</CardBody>
