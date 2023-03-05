@@ -23,7 +23,10 @@
             Col,
             Card,
             Table,
-			Alert
+			Alert,
+            FormGroup,
+            Label,
+            Input
         } from 'sveltestrap';
         import { page } from '$app/stores';
         import { onMount } from 'svelte';
@@ -58,6 +61,46 @@
                 goto('/', { invalidateAll: true });
             }
         });
+
+        function monthtothai(month) {
+            switch (month) {
+                case 0:
+                    return 'มกราคม';
+                case 1:
+                    return 'กุมภาพันธ์';
+                case 2:
+                    return 'มีนาคม';
+                case 3:
+                    return 'เมษายน';
+                case 4:
+                    return 'พฤษภาคม';
+                case 5:
+                    return 'มิถุนายน';
+                case 6:
+                    return 'กรกฎาคม';
+                case 7:
+                    return 'สิงหาคม';
+                case 8:
+                    return 'กันยายน';
+                case 9:
+                    return 'ตุลาคม';
+                case 10:
+                    return 'พฤศจิกายน';
+                case 11:
+                    return 'ธันวาคม';
+                default:
+                    return 'ไม่รู้จัก';
+            }
+        }
+
+        function unixToDateTime(unix) {
+            console.log(unix);
+            var date = new Date(unix * 1000);
+            console.log(date);
+            //return day month year hour:minute:second
+            return date.getDate() + ' ' + monthtothai(date.getMonth()) + ' ' + (date.getFullYear()+543) + ' เวลา ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+            //return date.toLocaleString();
+        }
     
         async function getmainserverinto() {
             const response = await fetch('https://api.mcsrvstat.us/2/playmc.pwisetthon.com');
@@ -69,6 +112,16 @@
         async function getodpserverinto() {
             const response = await fetch('https://api.mcsrvstat.us/2/154.208.140.118');
             const json = await response.json();
+            //console.log(json);
+            return json;
+        }
+
+        async function getallevent() {
+            const response = await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/oneday/allevent');
+            const json = await response.json();
+            json.forEach(element => {
+                element.event_start_time = unixToDateTime(element.event_start);
+            });
             //console.log(json);
             return json;
         }
@@ -273,13 +326,36 @@
                 <p>*แสดง 10 อันดับ Damage สูงสุด</p>
             </Col>
             <Col>
+                <Row>
+                    <Col>
+                        <FormGroup>
+                            <Label for="exampleSelect">Event ทั้งหมด</Label>
+                            <Input type="select" name="select" id="exampleSelect">
+                                {#await getallevent() then test }
+                                    {#each test as event}
+                                        {#if event.status == 'end'}
+                                            <option>{event.event_start_time} (จบแล้ว)</option>
+                                        {/if}
+                                    {/each}
+                                {/await}
+                              <!-- <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option> -->
+                            </Input>
+                        </FormGroup>
+                    </Col>
+                    <Col>
+                        <Card body>ผู้ชนะ : test</Card>
+                    </Col>
+                </Row>
                 <Table bordered>
                     <thead>
                       <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
+                        <th>ลำดับ</th>
+                        <th>ชื่อ</th>
+                        <th>ดาเมจที่ทำ
                       </tr>
                     </thead>
                     <tbody>
@@ -287,19 +363,16 @@
                         <th scope="row">1</th>
                         <td>Mark</td>
                         <td>Otto</td>
-                        <td>@mdo</td>
                       </tr>
                       <tr>
                         <th scope="row">2</th>
                         <td>Jacob</td>
                         <td>Thornton</td>
-                        <td>@fat</td>
                       </tr>
                       <tr>
                         <th scope="row">3</th>
                         <td>Larry</td>
                         <td>the Bird</td>
-                        <td>@twitter</td>
                       </tr>
                     </tbody>
                 </Table>
