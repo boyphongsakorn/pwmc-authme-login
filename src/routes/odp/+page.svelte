@@ -126,6 +126,10 @@
             json.forEach(element => {
                 element.event_start_time = unixToDateTime(element.event_start);
             });
+            //reorder json by event_start
+            json.sort(function (a, b) {
+                return a.event_start - b.event_start;
+            });
             //set event_id as first event
             event_id = json[0].id;
             //console.log(json);
@@ -402,7 +406,7 @@
                     <Col>
                         <FormGroup>
                             <Label for="exampleSelect">Event ทั้งหมด</Label>
-                            <Input type="select" name="select" id="exampleSelect" onChange={(e) => {event_id = e.target.value;}}>
+                            <Input type="select" name="select" id="exampleSelect" onChange={(e) => {event_id = ''; event_id = e.target.value;}}>
                                 {#await getallevent() then test }
                                     {#each test as event}
                                         {#if event.status == 'start'}
