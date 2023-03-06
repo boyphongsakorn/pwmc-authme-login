@@ -144,7 +144,7 @@
             const response = await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/oneday/allevent');
             const json = await response.json();
             //if last event is not waiting
-            if (json[0].status != 'wait') {
+            if (json[0].status != 'waiting') {
                 //set next event as first event
                 let today = new Date();
                 //get timeleft from now to 23:30:00
@@ -230,7 +230,7 @@
     </Navbar>
 
     {#await getallevent() then test }
-        {#if test[0].status == 'wait' || test[0].status == 'start'}
+        {#if test[0].status == 'waiting' || test[0].status == 'start'}
             <Alert color="danger" class="mb-0 rounded-0" dismissible>
                 <Container sm>
                     Event เริ่มแล้ว เข้าร่วมได้ที่ IP : odp.bpminecraft.com
