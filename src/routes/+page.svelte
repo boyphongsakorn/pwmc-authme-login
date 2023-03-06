@@ -21,7 +21,8 @@
         Button,
         Row,
         Col,
-        Card
+        Card,
+        Alert
     } from 'sveltestrap';
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
@@ -70,6 +71,38 @@
         //console.log(json);
         return json;
     }
+
+    async function getnexttimerun() {
+            const response = await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/oneday/allevent');
+            const json = await response.json();
+            //if last event is not waiting
+            if (json[0].status != 'wait') {
+                //set next event as first event
+                let today = new Date();
+                //get timeleft from now to 23:30:00
+                let timeleft = (new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 30, 0, 0).getTime() - today.getTime()) / 1000;
+                //convert to hour minute second
+                let hour = Math.floor(timeleft / 3600);
+                let minute = Math.floor((timeleft - hour * 3600) / 60);
+                let second = Math.floor(timeleft - hour * 3600 - minute * 60);
+                // if (istoast == false) {
+                //     toast.push('Event ถัดไปจะเริ่มในอีก ' + hour + ' ชั่วโมง ' + minute + ' นาที ' + second + ' วินาที', {
+                //         theme: {
+                //             '--toastColor': 'mintcream',
+                //             '--toastBackground': 'rgba(255,69,0, 0.8)',
+                //             '--toastBarBackground': '#8B0000'
+                //         },
+                //         duration: 20000
+                //     })
+                //     istoast = true;
+                // }
+                return 'เริ่มในอีก ' + hour + ' ชั่วโมง ' + minute + ' นาที ' + second + ' วินาที';
+            } else {
+                return 'เริ่มแล้วตอนนี้';
+            }
+            //console.log(json);
+            // return json;
+        }
 </script>
 
 <Styles />
@@ -148,23 +181,43 @@
             {/await}
         </Col>
         <Col>
-            {#await getodpserverinto() then test }
-                <Card body>
-                    <Row>
-                        <Col xs="auto">
-                            <Avatar name="{test.motd.clean[0]}" src="{test.icon}" />
-                        </Col>
-                        <Col class="d-flex align-items-center">
-                            One Day Project
-                        </Col>
-                        <Col xs="auto" class="my-auto">
-                            {test.players.online}/50
-                        </Col>
-                        <Col xs="auto" class="my-auto">
-                            Online
-                        </Col>
-                    </Row>
-                </Card>
+            {#await getnexttimerun() then test }
+                {#if test != "เริ่มแล้วตอนนี้"}
+                    <a href="/odp" class="text-decoration-none text-dark">
+                        <Card body>
+                            <Row>
+                                <Col xs="auto">
+                                    <Avatar name="One Day Project" src="https://imgul.teamquadb.in.th/images/2023/03/05/image97c2b1afb8011c29.png" />
+                                </Col>
+                                <Col class="d-flex align-items-center">
+                                    One Day Project
+                                </Col>
+                                <Col xs="auto" class="my-auto">
+                                    จะ{test}
+                                </Col>
+                            </Row>
+                        </Card>
+                    </a>
+                {:else}
+                    {#await getodpserverinto() then test }
+                        <Card body>
+                            <Row>
+                                <Col xs="auto">
+                                    <Avatar name="{test.motd.clean[0]}" src="{test.icon}" />
+                                </Col>
+                                <Col class="d-flex align-items-center">
+                                    One Day Project
+                                </Col>
+                                <Col xs="auto" class="my-auto">
+                                    Event เริ่มแล้ว
+                                </Col>
+                                <Col xs="auto" class="my-auto">
+                                    {test.players.online}/50
+                                </Col>
+                            </Row>
+                        </Card>
+                    {/await}
+                {/if}
             {/await}
         </Col>
     </Row>

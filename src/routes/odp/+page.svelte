@@ -32,9 +32,11 @@
         import { onMount } from 'svelte';
         import { goto } from '$app/navigation';
         import Avatar from "svelte-avatar";
+        import { SvelteToast,toast } from '@zerodevx/svelte-toast'
         let isOpen = false;
         let event_id = '';
         let winner = '';
+        let istoast = false;
     
         /**
          * @param {{ detail: { isOpen: boolean; }; }} event
@@ -151,6 +153,17 @@
                 let hour = Math.floor(timeleft / 3600);
                 let minute = Math.floor((timeleft - hour * 3600) / 60);
                 let second = Math.floor(timeleft - hour * 3600 - minute * 60);
+                if (istoast == false) {
+                    toast.push('Event ครั้งต่อไปจะเริ่มในอีก ' + hour + ' ชั่วโมง ' + minute + ' นาที ' + second + ' วินาที', {
+                        theme: {
+                            '--toastColor': 'mintcream',
+                            '--toastBackground': 'rgba(255,69,0, 0.8)',
+                            '--toastBarBackground': '#8B0000'
+                        },
+                        duration: 20000
+                    })
+                    istoast = true;
+                }
                 return 'เริ่มในอีก ' + hour + ' ชั่วโมง ' + minute + ' นาที ' + second + ' วินาที';
             } else {
                 return 'เริ่มแล้วตอนนี้';
@@ -159,6 +172,11 @@
             // return json;
         }
     </script>
+
+    <svelte:head>
+        <title>BPMC - One Day Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </svelte:head>
     
     <Styles />
     
@@ -212,7 +230,7 @@
     </Navbar>
 
     {#await getallevent() then test }
-        {#if test[0].status == 'wait'}
+        {#if test[0].status == 'wait' || test[0].status == 'start'}
             <Alert color="danger" class="mb-0 rounded-0" dismissible>
                 <Container sm>
                     Event เริ่มแล้ว เข้าร่วมได้ที่ IP : 154.208.140.118
@@ -308,10 +326,24 @@
         </Row>
     </Container> -->
 
+    {#await getnexttimerun() then test }
+        {#if test != "เริ่มแล้วตอนนี้"}
+            <Container sm class="d-none">
+                <Alert color="danger" dismissible fade>
+                    <h4 class="alert-heading">Event จะเริ่มในอีก</h4>
+                    <hr>
+                    <p class="mb-0">{test}</p>
+                </Alert>
+                        <!-- <p>{test}</p> -->
+            </Container>
+            <SvelteToast />
+        {/if}
+    {/await}
+
     <Container sm>
         <Row>
             <Col class="text-center my-auto">
-                <h2>Server เริ่ม 23:30 น. ทุกวัน*</h2>
+                <h2>Server เริ่ม 23:30 น. ทุกวัน</h2>
                 <!-- <p>*แต่ Event เริ่ม 00:00 น. ทุกวัน</p> -->
                 {#await getnexttimerun() then test }
                     <p>{test}</p>
@@ -354,7 +386,7 @@
             </Col>
             <Col class="text-center my-auto">
                 <h2>ผู้ชนะวัดจาก Damage ที่ทำให้ Ender Dragon*</h2>
-                <p>*Damage นับจากการโจมตี Ender Dragon โดยใช้ ดาบ (ได้ Damage เต็ม) หรือ นอนเตียง (คนที่ใกล้จุดระเบิดมากที่สุดจะได้ Damage)</p>
+                <p>*Damage นับจากการโจมตี Ender Dragon โดยใช้ ดาบ,ธูน หรือ อาวุธอื่นๆ (ได้ Damage เต็ม) หรือ นอนเตียง (คนที่ใกล้จุดเตียงระเบิดมากที่สุดจะได้ Damage)</p>
             </Col>
         </Row>
     </Container>
