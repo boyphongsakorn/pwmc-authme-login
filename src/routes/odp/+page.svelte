@@ -33,6 +33,8 @@
         import { goto } from '$app/navigation';
         import Avatar from "svelte-avatar";
         let isOpen = false;
+        let event_id = '';
+        let winner = '';
     
         /**
          * @param {{ detail: { isOpen: boolean; }; }} event
@@ -122,8 +124,39 @@
             json.forEach(element => {
                 element.event_start_time = unixToDateTime(element.event_start);
             });
+            //set event_id as first event
+            event_id = json[0].id;
             //console.log(json);
             return json;
+        }
+
+        async function getdata(id) {
+            const response = await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/oneday/damage/' + id);
+            const json = await response.json();
+            winner = json[0].name;
+            //console.log(json);
+            return json;
+        }
+
+        async function getnexttimerun() {
+            const response = await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/oneday/allevent');
+            const json = await response.json();
+            //if last event is not waiting
+            if (json[0].status != 'wait') {
+                //set next event as first event
+                let today = new Date();
+                //get timeleft from now to 23:30:00
+                let timeleft = (new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 30, 0, 0).getTime() - today.getTime()) / 1000;
+                //convert to hour minute second
+                let hour = Math.floor(timeleft / 3600);
+                let minute = Math.floor((timeleft - hour * 3600) / 60);
+                let second = Math.floor(timeleft - hour * 3600 - minute * 60);
+                return 'เริ่มในอีก ' + hour + ' ชั่วโมง ' + minute + ' นาที ' + second + ' วินาที';
+            } else {
+                return 'เริ่มแล้วตอนนี้';
+            }
+            //console.log(json);
+            // return json;
         }
     </script>
     
@@ -178,11 +211,15 @@
         </Container>
     </Navbar>
 
-    <Alert color="danger" class="mb-0 rounded-0" dismissible>
-        <Container sm>
-            Event เริ่มแล้ว เข้าร่วมได้ที่ IP : 154.208.140.118
-        </Container>
-    </Alert>
+    {#await getallevent() then test }
+        {#if test[0].status == 'wait'}
+            <Alert color="danger" class="mb-0 rounded-0" dismissible>
+                <Container sm>
+                    Event เริ่มแล้ว เข้าร่วมได้ที่ IP : 154.208.140.118
+                </Container>
+            </Alert>
+        {/if}
+    {/await}
     
     <Container fluid style="background-image: url('https://img.gs/fhcphvsghs/1920x1080,crop=left/https://imgul.teamquadb.in.th/images/2023/02/23/Survival_The_End.png');background-position: center center;background-repeat: no-repeat;background-size: cover;height: 500px;display: table; overflow: hidden;">
         <div style="display: table-cell; vertical-align: middle;text-align: center;color: white;">
@@ -275,7 +312,10 @@
         <Row>
             <Col class="text-center my-auto">
                 <h2>Server เริ่ม 23:30 น. ทุกวัน*</h2>
-                <p>*แต่ Event เริ่ม 00:00 น. ทุกวัน</p>
+                <!-- <p>*แต่ Event เริ่ม 00:00 น. ทุกวัน</p> -->
+                {#await getnexttimerun() then test }
+                    <p>{test}</p>
+                {/await}
             </Col>
             <Col class="d-flex justify-content-center">
                 <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/03/05/image.png" class="rounded-2 w-75 shadow my-2" alt="Minecraft">
@@ -330,11 +370,15 @@
                     <Col>
                         <FormGroup>
                             <Label for="exampleSelect">Event ทั้งหมด</Label>
-                            <Input type="select" name="select" id="exampleSelect">
+                            <Input type="select" name="select" id="exampleSelect" onChange={(e) => {event_id = e.target.value;}}>
                                 {#await getallevent() then test }
                                     {#each test as event}
-                                        {#if event.status == 'end'}
-                                            <option>{event.event_start_time} (จบแล้ว)</option>
+                                        {#if event.status == 'start'}
+                                            <option value="{event.id}">{event.event_start_time} (กำลังเล่น)</option>
+                                        {:else if event.status == 'end'}
+                                            <option value="{event.id}">{event.event_start_time} (จบแล้ว)</option>
+                                        {:else}
+                                            <option value="{event.id}">{event.event_start_time} (รอเริ่ม)</option>
                                         {/if}
                                     {/each}
                                 {/await}
@@ -347,7 +391,7 @@
                         </FormGroup>
                     </Col>
                     <Col>
-                        <Card body>ผู้ชนะ : test</Card>
+                        <Card body>ผู้ชนะ : {winner}</Card>
                     </Col>
                 </Row>
                 <Table bordered>
@@ -359,21 +403,30 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                        {#if event_id != ''}
+                            {#await getdata(event_id) then test }
+                                {#each test as event, i}
+                                    {#if i == 0}
+                                        <tr class="table-success">
+                                            <th scope="row">{i+1}</th>
+                                            <td>{event.name}</td>
+                                            <td>{event.alldamage}</td>
+                                        </tr>
+                                    {:else}
+                                        <tr>
+                                            <th scope="row">{i+1}</th>
+                                            <td>{event.name}</td>
+                                            <td>{event.alldamage}</td>
+                                        </tr>
+                                    {/if}
+                                {/each}
+                            {/await}
+                        {/if}
+                      <!-- <tr>
                         <th scope="row">1</th>
                         <td>Mark</td>
                         <td>Otto</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                      </tr>
+                      </tr> -->
                     </tbody>
                 </Table>
             </Col>
