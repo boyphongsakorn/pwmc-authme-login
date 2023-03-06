@@ -459,7 +459,23 @@
     <!-- {#if $page.data.props.disco_access_token !== undefined && $page.data.props.disco_access_token !== 'undefined' && $page.data.props.disco_access_token !== null}
     
     {/if} -->
-    <h1>Profile</h1>
+    <!-- <h1>Profile</h1> -->
+    <Row class="text-center">
+        <Col>
+            <h1>Profile</h1>
+        </Col>
+        <Col xs="3" class="my-auto">
+            <p>คุณ {$page.data.props.disco_name}</p>
+        </Col>
+        <Col xs="2">
+            <Avatar name="{$page.data.props.disco_name}" src="{$page.data.props.disco_img}" size="60px" />
+        </Col>
+        {#if $page.data.props.disco_name}
+            <Col xs="auto" class="my-auto">
+                <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a69f118df70ad7828d4_icon_clyde_blurple_RGB.svg" width="30px" /> เข้าสู่ระบบด้วยบัญชี Discord
+            </Col> 
+        {/if}
+    </Row>
     <Row>
         <Col>
             <Row class="text-center">
