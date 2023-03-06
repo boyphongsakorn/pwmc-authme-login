@@ -464,6 +464,30 @@
             </Col>
         </Row>       
     </Container>
+
+    <Container sm>
+        <!-- donate button Stripe and paypal.me -->
+        <Row>
+            <Col class="d-flex justify-content-center my-auto">
+                <div class="my-2 mx-2">
+                    <Button color="success" href="https://paypal.me/boyphongsakornw?country.x=TH&locale.x=th_TH" target="_blank">Donate ผ่าน Paypal</Button>
+                </div>
+                <div class="my-2">
+                    <Button href="https://buy.stripe.com/14k3dT9Q50l621aeUV" target="_blank" style="background-color: #7069fe; color: white;">Donate ผ่าน บัตร หรือ พร้อมเพย์</Button>
+                </div>
+            </Col>
+            <Col class="text-center my-auto">
+                <h2>Donate</h2>
+                <p>เพื่อให้เซิฟเวอร์ยังคงอยู่ต่อไปได้และการพัฒนาเซิฟเวอร์</p>
+            </Col>
+        </Row>
+    </Container>
+
+    <Container fluid class="bg-dark">
+        <Container sm class="text-center text-white py-2">
+            <h5 class="my-0">ติดต่อ : <a href="mailto:admin@bpminecraft.com" class="text-white text-decoration-none">admin@bpminecraft.com</a></h5>
+        </Container>
+    </Container>
     
     <div>
     <Modal isOpen={open} {toggle}>
