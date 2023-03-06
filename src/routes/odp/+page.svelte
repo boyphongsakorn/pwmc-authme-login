@@ -342,7 +342,7 @@
 
     <Container sm>
         <Row>
-            <Col class="text-center my-auto">
+            <Col xs="12" sm="6" class="text-center my-auto">
                 <h2>Server เริ่ม 23:30 น. ทุกวัน</h2>
                 <!-- <p>*แต่ Event เริ่ม 00:00 น. ทุกวัน</p> -->
                 {#await getnexttimerun() then test }
@@ -350,15 +350,15 @@
                 {/await}
             </Col>
             <Col class="d-flex justify-content-center">
-                <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/03/05/image.png" class="rounded-2 w-75 shadow my-2" alt="Minecraft">
+                <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/03/05/image.png" class="rounded-2 img-fluid w-75 shadow my-2" alt="Minecraft">
             </Col>
         </Row>
     </Container>
 
     <Container sm>
         <Row>
-            <Col class="d-flex justify-content-center">
-                <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/03/05/image3a87c256f2e1401e.png" class="rounded-2 w-75 shadow my-2" alt="Minecraft">
+            <Col xs="12" sm="6" class="d-flex justify-content-center">
+                <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/03/05/image3a87c256f2e1401e.png" class="rounded-2 img-fluid w-75 shadow my-2" alt="Minecraft">
             </Col>
             <Col class="text-center my-auto">
                 <h2>Event เริ่ม 00:00 น. ทุกวัน*</h2>
@@ -369,20 +369,20 @@
 
     <Container sm>
         <Row>
-            <Col class="text-center my-auto">
+            <Col xs="12" sm="6" class="text-center my-auto">
                 <h2>15 นาทีแรก PVP จะทำการปิด*</h2>
                 <p>*PVP คือ การโจมตีกัน ทำให้เกิดความเสียหายต่อผู้เล่นอื่นได้</p>
             </Col>
             <Col class="d-flex justify-content-center">
-                <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/03/05/imagefcb3ff56f8b33e46.png" class="rounded-2 w-75 shadow my-2" alt="Chat">
+                <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/03/05/imagefcb3ff56f8b33e46.png" class="rounded-2 img-fluid w-75 shadow my-2" alt="Chat">
             </Col>
         </Row>
     </Container>
 
     <Container sm>
         <Row>
-            <Col class="d-flex justify-content-center">
-                <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/03/05/image82a528ed86365039.png" class="rounded-2 w-75 shadow my-2" alt="Chat">
+            <Col xs="12" sm="6" class="d-flex justify-content-center">
+                <img src="https://img.gs/fhcphvsghs/quality=low/https://imgul.teamquadb.in.th/images/2023/03/05/image82a528ed86365039.png" class="rounded-2 img-fluid w-75 shadow my-2" alt="Chat">
             </Col>
             <Col class="text-center my-auto">
                 <h2>ผู้ชนะวัดจาก Damage ที่ทำให้ Ender Dragon*</h2>
@@ -393,7 +393,7 @@
 
     <Container sm>
         <Row>
-            <Col class="text-center my-auto">
+            <Col xs="12" sm="6" class="text-center my-auto">
                 <h2>ประวัติ Event*</h2>
                 <p>*แสดง 10 อันดับ Damage สูงสุด</p>
             </Col>
@@ -468,7 +468,7 @@
     <Container sm>
         <!-- donate button Stripe and paypal.me -->
         <Row>
-            <Col class="d-flex justify-content-center my-auto">
+            <Col xs="12" sm="6" class="d-flex justify-content-center my-auto">
                 <div class="my-2 mx-2">
                     <Button color="success" href="https://paypal.me/boyphongsakornw?country.x=TH&locale.x=th_TH" target="_blank">Donate ผ่าน Paypal</Button>
                 </div>
