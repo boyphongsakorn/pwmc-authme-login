@@ -203,13 +203,13 @@
                         <Card body>
                             <Row>
                                 <Col xs="auto">
-                                    <Avatar name="{test.motd.clean[0]}" src="{test.icon}" />
+                                    <Avatar name="{test.motd.clean[0]}" src="https://imgul.teamquadb.in.th/images/2023/03/05/image97c2b1afb8011c29.png" />
                                 </Col>
                                 <Col class="d-flex align-items-center">
                                     One Day Project
                                 </Col>
                                 <Col xs="auto" class="my-auto">
-                                    Event เริ่มแล้ว
+                                    Event เริ่มแล้ว สามารถเข้าเล่นได้ตอนนี้ IP: odp.bpminecraft.com
                                 </Col>
                                 <Col xs="auto" class="my-auto">
                                     {test.players.online}/50
