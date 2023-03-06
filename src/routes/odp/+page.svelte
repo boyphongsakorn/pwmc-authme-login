@@ -107,14 +107,14 @@
         }
     
         async function getmainserverinto() {
-            const response = await fetch('https://api.mcsrvstat.us/2/playmc.pwisetthon.com');
+            const response = await fetch('https://api.mcsrvstat.us/2/bpminecraft.com');
             const json = await response.json();
             //console.log(json);
             return json;
         }
     
         async function getodpserverinto() {
-            const response = await fetch('https://api.mcsrvstat.us/2/154.208.140.118');
+            const response = await fetch('https://api.mcsrvstat.us/2/odp.bpminecraft.com');
             const json = await response.json();
             //console.log(json);
             return json;
@@ -233,7 +233,7 @@
         {#if test[0].status == 'wait' || test[0].status == 'start'}
             <Alert color="danger" class="mb-0 rounded-0" dismissible>
                 <Container sm>
-                    Event เริ่มแล้ว เข้าร่วมได้ที่ IP : 154.208.140.118
+                    Event เริ่มแล้ว เข้าร่วมได้ที่ IP : odp.bpminecraft.com
                 </Container>
             </Alert>
         {/if}

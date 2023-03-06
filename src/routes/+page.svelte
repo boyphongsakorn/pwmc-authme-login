@@ -59,14 +59,14 @@
     });
 
     async function getmainserverinto() {
-        const response = await fetch('https://api.mcsrvstat.us/2/playmc.pwisetthon.com');
+        const response = await fetch('https://api.mcsrvstat.us/2/bpminecraft.com');
         const json = await response.json();
         //console.log(json);
         return json;
     }
 
     async function getodpserverinto() {
-        const response = await fetch('https://api.mcsrvstat.us/2/154.208.140.118');
+        const response = await fetch('https://api.mcsrvstat.us/2/odp.bpminecraft.com');
         const json = await response.json();
         //console.log(json);
         return json;
