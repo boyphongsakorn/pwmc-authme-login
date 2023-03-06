@@ -251,7 +251,7 @@
             <img src="https://img.gs/fhcphvsghs/quality=low/https://screenshot-xi.vercel.app/api?url=https://bpminecraft.com/chat&width=640&height=360" class="rounded-2 w-75 shadow my-2" alt="Chat">
         </Col>
         <Col class="text-center my-auto">
-            <a href="https://log.bpminecraft.com" class="text-decoration-none"><h2>Chat เซิฟเวอร์</h2></a>
+            <a href="https://bpminecraft.com/chat" class="text-decoration-none"><h2>Chat เซิฟเวอร์</h2></a>
             <p>ระบบ Chat ในเซิฟเวอร์บนหน้าเว็บ</p>
         </Col>
     </Row>
