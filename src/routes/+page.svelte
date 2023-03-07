@@ -76,7 +76,7 @@
             const response = await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/oneday/allevent');
             const json = await response.json();
             //if last event is not waiting
-            if (json[0].status != 'waiting') {
+            if (json[0].status != 'waiting' || json[0].status != 'start') {
                 //set next event as first event
                 let today = new Date();
                 //get timeleft from now to 23:30:00
