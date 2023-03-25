@@ -139,7 +139,7 @@
                 <DropdownItem>Reset</DropdownItem>
             </DropdownMenu>
             </Dropdown-->
-            {#if $page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null}
+            {#if $page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null || $page.data.props.disco_name === 'null'}
                 <NavItem>
                 <NavLink on:click={toggle}>ล็อกอินผ่านรหัสในเกม</NavLink>
                 </NavItem>
