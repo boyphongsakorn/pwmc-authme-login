@@ -33,5 +33,6 @@
 		"svelte-fa": "^3.0.3",
 		"sveltestrap": "^5.10.0",
 		"sweetalert2": "^11.7.2"
-	}
+	},
+	"packageManager": "pnpm@7.16.0",
 }
