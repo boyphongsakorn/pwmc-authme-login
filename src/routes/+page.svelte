@@ -22,7 +22,12 @@
         Row,
         Col,
         Card,
-        Alert
+        Alert,
+        Form, 
+        FormGroup, 
+        FormText, 
+        Input, 
+        Label
     } from 'sveltestrap';
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
@@ -36,6 +41,9 @@
     function handleUpdate(event) {
         isOpen = event.detail.isOpen;
     }
+
+    let mcUsername = '';
+    let mcPassword = '';
 
     let open = false;
     const toggle = () => (open = !open);
@@ -105,7 +113,34 @@
             }
             //console.log(json);
             // return json;
+    }
+
+    async function authmelogin() {
+        // const response = await fetch('https://api.mcsrvstat.us/2/odp.bpminecraft.com');
+        // const json = await response.json();
+        // //console.log(json);
+        // return json;
+        //http://localhost:3000/authme/check post with username and password
+
+        // const mcUsername = document.getElementById('mcUsername').value;
+        // const mcPassword = document.getElementById('mcPassword').value;
+        
+        let requestOption = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: mcUsername, password: mcPassword })
+        };
+
+        const response = await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/authme/check', requestOption);
+        const json = await response.json();
+        // console.log(json);
+        // alert(json.result);
+        if(json.result == 'Login success'){
+            alert('Login success');
+            //set cookie
+            document.cookie = "mc_username=" + mcUsername + "; path=/";
         }
+    }
 </script>
 
 <Styles />
@@ -139,13 +174,20 @@
                 <DropdownItem>Reset</DropdownItem>
             </DropdownMenu>
             </Dropdown-->
-            {#if $page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === null || $page.data.props.disco_name === undefined || $page.data.props.disco_name === null}
+            {#if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === null || $page.data.props.disco_name === undefined || $page.data.props.disco_name === null) && $page.data.props.authmeaccount === null}
                 <NavItem>
                 <NavLink on:click={toggle}>ล็อกอินผ่านรหัสในเกม</NavLink>
                 </NavItem>
                 <NavItem>
                     <Button style="background-color: #5865F2;" href="https://discord.com/api/oauth2/authorize?client_id=625822290675892234&redirect_uri=https%3A%2F%2Fbpminecraft.com%2Fapi%2Fdiscordcallback&response_type=code&scope=identify%20guilds">ล็อกอินผ่าน Discord</Button>
                 </NavItem>
+            {:else if $page.data.props.authmeaccount !== null}
+            <NavItem>
+                <NavLink href="https://bpminecraft.com/profile">คุณ {$page.data.props.authmeaccount}</NavLink>
+            </NavItem>
+            <NavItem>
+                <Button style="background-color: #5865F2;" href="https://bpminecraft.com/api/discordlogout" rel="external">ออกจากระบบ</Button>
+            </NavItem>
             {:else}
                 <NavItem>
                     <NavLink href="https://bpminecraft.com/profile">คุณ {$page.data.props.disco_name}</NavLink>
@@ -266,11 +308,33 @@
 <Modal isOpen={open} {toggle}>
     <ModalHeader {toggle}>Minecraft Authme Login</ModalHeader>
     <ModalBody>
-      Coming Soon
+        <Form>
+            <FormGroup>
+              <Label for="exampleEmail">Username / ชื่อในเกม</Label>
+              <Input
+                type="text"
+                name="username"
+                id="mcUsername"
+                placeholder="ชื่อในเกม"
+                bind:value={mcUsername}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="examplePassword">Password / รหัสผ่าน</Label>
+              <Input
+                type="password"
+                name="password"
+                id="mcPassword"
+                placeholder="รหัสผ่าน"
+                bind:value={mcPassword}
+              />
+            </FormGroup>
+        </Form>
     </ModalBody>
-    <!-- <ModalFooter>
-      <Button color="primary" on:click={toggle}>Do Something</Button>
-      <Button color="secondary" on:click={toggle}>Cancel</Button>
-    </ModalFooter> -->
+    <ModalFooter>
+      <!-- <Button color="primary" on:click={authmelogin()}>เข้าสู่ระบบ</Button> -->
+      <button type="button" class="btn btn-primary" on:click={authmelogin}>เข้าสู่ระบบ</button>
+      <!-- <Button color="secondary" on:click={toggle}>Cancel</Button> -->
+    </ModalFooter>
   </Modal>
 </div>

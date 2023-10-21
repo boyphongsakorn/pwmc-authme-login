@@ -26,7 +26,17 @@ export const load: PageServerLoad = async ({ cookies }) => {
             props: {
                 disco_access_token: cookies.get('disco_access_token'),
                 disco_refresh_token: cookies.get('disco_refresh_token'),
-                disco_name: disco_name
+                disco_name: disco_name,
+                authmeaccount: null
+            }
+        }
+    } else if (cookies.get('mc_username')) {
+        return {
+            props: {
+                disco_access_token: null,
+                disco_refresh_token: null,
+                disco_name: null,
+                authmeaccount: cookies.get('mc_username')
             }
         }
     } else {
@@ -34,7 +44,8 @@ export const load: PageServerLoad = async ({ cookies }) => {
             props: {
                 disco_access_token: null,
                 disco_refresh_token: null,
-                disco_name: null
+                disco_name: null,
+                authmeaccount: null
             }
         }
     }

@@ -34,7 +34,19 @@ export const load: PageServerLoad = async ({ cookies }) => {
                 disco_refresh_token: cookies.get('disco_refresh_token'),
                 disco_name: disco_name,
                 disco_img: 'https://cdn.discordapp.com/avatars/'+disco_id+'/'+disco_avatar+'.png',
-                disco_id: disco_id
+                disco_id: disco_id,
+                authmeaccount: null
+            }
+        }
+    } else if (cookies.get('mc_username')) {
+        return {
+            props: {
+                disco_access_token: null,
+                disco_refresh_token: null,
+                disco_name: null,
+                disco_img: null,
+                disco_id: null,
+                authmeaccount: cookies.get('mc_username')
             }
         }
     } else {
@@ -44,7 +56,8 @@ export const load: PageServerLoad = async ({ cookies }) => {
                 disco_refresh_token: null,
                 disco_name: null,
                 disco_img: null,
-                disco_id: null
+                disco_id: null,
+                authmeaccount: null
             }
         }
     }

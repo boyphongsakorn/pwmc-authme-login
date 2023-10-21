@@ -28,6 +28,13 @@ export async function load({ url, cookies }) {
         secure: !dev,
         maxAge: 0
     });
+    cookies.set('mc_username', '', {
+        path: '/',
+        httpOnly: true,
+        sameSite: 'strict',
+        secure: !dev,
+        maxAge: 0
+    });
     //redirect to main page
     throw redirect(307, '/');
 }

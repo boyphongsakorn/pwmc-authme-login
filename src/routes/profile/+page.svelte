@@ -150,7 +150,7 @@
     let skinchangeurl = '';
 
     onMount(async () => {
-        if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) {
+        if (($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) && $page.data.props.authmeaccount === null) {
             goto('/', { invalidateAll: true });
         } else {
             await fetch("https://cpsql.pwisetthon.com/discordmclink/checklink?discordid=" + $page.data.props.disco_id)
@@ -164,7 +164,9 @@
                         isdiscordlinkmc = false;
                     }
                 })
-                .catch(error => console.log('error', error));
+                .catch(error => {
+                    isdiscordlinkmc = false;
+                });
             if (isdiscordlinkmc == false) {
                 await fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + $page.data.props.disco_id)
                     .then(response => response.json())
@@ -442,9 +444,9 @@
                 <DropdownItem>Reset</DropdownItem>
             </DropdownMenu>
             </Dropdown-->
-            {#if $page.data.props.disco_access_token !== undefined && $page.data.props.disco_access_token !== 'undefined' && $page.data.props.disco_access_token !== null}
+            {#if ($page.data.props.disco_access_token !== undefined && $page.data.props.disco_access_token !== 'undefined' && $page.data.props.disco_access_token !== null) || $page.data.props.authmeaccount !== null}
                 <NavItem>
-                    <NavLink href="https://bpminecraft.com/profile">คุณ {$page.data.props.disco_name}</NavLink>
+                    <NavLink href="https://bpminecraft.com/profile">คุณ {$page.data.props.disco_name ?? $page.data.props.authmeaccount}</NavLink>
                 </NavItem>
                 <NavItem>
                     <Button style="background-color: #5865F2;" href="https://bpminecraft.com/api/discordlogout" rel="external">ออกจากระบบ</Button>
@@ -473,7 +475,11 @@
         {#if $page.data.props.disco_name}
             <Col xs="auto" class="my-auto text-right">
                 <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a69f118df70ad7828d4_icon_clyde_blurple_RGB.svg" width="30px" /> เข้าสู่ระบบด้วยบัญชี Discord
-            </Col> 
+            </Col>
+        {:else if $page.data.props.authmeaccount}
+            <Col xs="auto" class="my-auto text-right">
+                <img src="https://preview.redd.it/you-have-an-ugly-gray-creeper-instead-of-a-minecraft-icon-v0-y83ppc5i6r4b1.png?width=1024&format=png&auto=webp&s=12576cea991cd7c24bd277c1c43800e81ea0e73a" width="30px" /> เข้าสู่ระบบด้วยบัญชี Minecraft
+            </Col>
         {/if}
     </Row>
     <Row>
@@ -556,10 +562,14 @@
                             <CardTitle class="text-center">ชื่อในเกม : กำลังโหลด <Fa icon={faSpinner} size="lg" pulse /></CardTitle>
                         {/if}
                     {:else}
-                        <CardTitle class="text-center">ชื่อในเกม : ยังไม่ได้เชื่อมบัญชี</CardTitle>
+                        {#if $page.data.props.authmeaccount !== null}
+                            <CardTitle class="text-center">ชื่อในเกม : {$page.data.props.authmeaccount} (ยังไม่ได้เชื่อมบัญชี)</CardTitle>
+                        {:else}
+                            <CardTitle class="text-center">ชื่อในเกม : ยังไม่ได้เชื่อมบัญชี</CardTitle>
+                        {/if}
                     {/if}
                 </CardHeader>
-                {#if minecraftuuid !== null}
+                {#if minecraftuuid !== null || $page.data.props.authmeaccount !== null}
                     <CardBody class="text-center">
                         <!-- <CardSubtitle>Card subtitle</CardSubtitle>
                         <CardText>
@@ -567,12 +577,13 @@
                             the card's content.
                         </CardText> -->
                         {#if itchangeskin !== true}
-                            <img src="https://crafatar.com/renders/body/{minecraftuuid}" />
+                            <img src="https://crafatar.com/renders/body/{minecraftuuid ?? '0110b237-1102-4d74-81d4-5a1df9d14ca7'}" />
                         {:else}
                             <canvas id="skin_change_container"></canvas>
                         {/if}
                         <!-- <Button>Button</Button> -->
                         <br>
+                        {#if minecraftuuid !== null}
                         <Alert color="secondary">
                             <h5 class="text-center">เปลี่ยนสกิน</h5>
                             <FormGroup class="d-inline-block">
@@ -606,6 +617,7 @@
                                 <Button color="primary" on:click={confirmUploadSkinChange}>ยืนยันการเปลี่ยนสกิน</Button>
                             {/if}
                         </Alert>
+                        {/if}
                     </CardBody>
                 {/if}
                 <CardFooter class="text-center">
@@ -625,7 +637,11 @@
                                 {/if}
                             {/if}
                         {:else}
-                            <Button style="background-color: #5865F2;" on:click={toggle}>ลิงก์บัญชี Discord กับบัญชีเกม</Button>
+                            {#if $page.data.props.authmeaccount !== null}
+                                <Button style="background-color: #5865F2;" href="https://discord.com/api/oauth2/authorize?client_id=625822290675892234&redirect_uri=https%3A%2F%2Fbpminecraft.com%2Fapi%2Fdiscordcallback&response_type=code&scope=identify%20guilds">ลิงก์บัญชี บัญชีเกม กับ Discord</Button>
+                            {:else}
+                                <Button style="background-color: #5865F2;" on:click={toggle}>ลิงก์บัญชี Discord กับบัญชีเกม</Button>
+                            {/if}
                         {/if}
                     {/if}
                 </CardFooter>
