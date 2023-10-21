@@ -45,7 +45,8 @@ export const load: PageServerLoad = async ({ cookies }) => {
                 disco_refresh_token: null,
                 disco_name: null,
                 disco_img: null,
-                disco_id: null,
+                // disco_id: null,
+                disco_id: cookies.get('discord_id') ?? null,
                 authmeaccount: cookies.get('mc_username')
             }
         }

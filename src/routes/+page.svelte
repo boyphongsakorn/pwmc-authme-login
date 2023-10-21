@@ -136,11 +136,12 @@
         // console.log(json);
         // alert(json.result);
         if(json.result == 'Login success'){
-            alert('Login success');
+            // alert('Login success');
             //set cookie
             document.cookie = "mc_username=" + mcUsername + "; path=/";
+            document.cookie = "discord_id=" + json.info.discord + "; path=/";
             //refresh page
-            goto('/', {});
+            goto('/', { invalidateAll: true });
         }
     }
 </script>
