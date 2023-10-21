@@ -139,6 +139,8 @@
             alert('Login success');
             //set cookie
             document.cookie = "mc_username=" + mcUsername + "; path=/";
+            //refresh page
+            goto('/', {});
         }
     }
 </script>
