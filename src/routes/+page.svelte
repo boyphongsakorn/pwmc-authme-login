@@ -66,7 +66,10 @@
         }
 
         if ($page.url.searchParams.get('login') == 'true') {
-            toggle();
+            setTimeout(() => {
+                toggle();
+            }, 1000);
+            // toggle();
         }
     });
 
