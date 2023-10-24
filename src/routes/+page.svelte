@@ -141,7 +141,9 @@
             document.cookie = "mc_username=" + mcUsername + "; path=/";
             document.cookie = "discord_id=" + json.info.discord + "; path=/";
             //refresh page
-            goto('/', { invalidateAll: true });
+            // goto('/', {  });
+            toggle();
+            window.location.href = '/';
         }
     }
 </script>
@@ -186,14 +188,14 @@
                 </NavItem>
             {:else if $page.data.props.authmeaccount !== null}
             <NavItem>
-                <NavLink href="https://bpminecraft.com/profile">คุณ {$page.data.props.authmeaccount}</NavLink>
+                <NavLink href="/profile">คุณ {$page.data.props.authmeaccount}</NavLink>
             </NavItem>
             <NavItem>
                 <Button style="background-color: #5865F2;" href="https://bpminecraft.com/api/discordlogout" rel="external">ออกจากระบบ</Button>
             </NavItem>
             {:else}
                 <NavItem>
-                    <NavLink href="https://bpminecraft.com/profile">คุณ {$page.data.props.disco_name}</NavLink>
+                    <NavLink href="/profile">คุณ {$page.data.props.disco_name}</NavLink>
                 </NavItem>
                 <NavItem>
                     <Button style="background-color: #5865F2;" href="https://bpminecraft.com/api/discordlogout" rel="external">ออกจากระบบ</Button>
