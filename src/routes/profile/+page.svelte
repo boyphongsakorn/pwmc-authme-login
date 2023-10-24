@@ -183,6 +183,8 @@
             }
             if (minecraftuuid != null) {
                 let uuidnotfound = false;
+                //replace - from minecraftuuid
+                minecraftuuid = minecraftuuid.replace(/-/g, '');
                 await fetch("https://api.minetools.eu/uuid/"+minecraftuuid)
                     .then(response => response.json())
                     .then(result => {
