@@ -32,6 +32,16 @@ export const load: PageServerLoad = async ({ cookies }) => {
                 disco_id: disco_id
             }
         }
+    } else if (cookies.get('mc_username')) {
+        return {
+            props: {
+                disco_access_token: null,
+                disco_refresh_token: null,
+                disco_name: null,
+                disco_id: cookies.get('discord_id') ?? null,
+                authmeaccount: cookies.get('mc_username')
+            }
+        }
     } else {
         return {
             props: {
