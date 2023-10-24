@@ -500,7 +500,7 @@
                 <DropdownItem>Reset</DropdownItem>
             </DropdownMenu>
             </Dropdown-->
-				{#if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) && $page.data.props.authmeaccount === null}
+				{#if $page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null || $page.data.props.authmeaccount === null}
 					<NavItem>
 						<NavLink href="/?login=true&chat=true">ล็อกอินผ่านรหัสในเกม</NavLink>
 					</NavItem>
