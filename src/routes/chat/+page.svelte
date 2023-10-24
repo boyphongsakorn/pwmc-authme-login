@@ -500,9 +500,9 @@
                 <DropdownItem>Reset</DropdownItem>
             </DropdownMenu>
             </Dropdown-->
-				{#if $page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null}
+				{#if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) && $page.data.props.authmeaccount === null}
 					<NavItem>
-						<NavLink on:click={toggle}>ล็อกอินผ่านรหัสในเกม</NavLink>
+						<NavLink href="/?login=true&chat=true">ล็อกอินผ่านรหัสในเกม</NavLink>
 					</NavItem>
 					<NavItem>
 						<Button
@@ -514,7 +514,7 @@
 				{:else}
 					<NavItem>
 						<NavLink href="https://bpminecraft.com/profile"
-							>คุณ {$page.data.props.disco_name}</NavLink
+							>คุณ {$page.data.props.disco_name ?? $page.data.props.authmeaccount}</NavLink
 						>
 					</NavItem>
 					<NavItem>

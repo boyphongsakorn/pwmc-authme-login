@@ -64,6 +64,10 @@
         if ($page.url.searchParams.get('code')) {
             goto('/', { invalidateAll: true });
         }
+
+        if ($page.url.searchParams.get('login') == 'true') {
+            toggle();
+        }
     });
 
     async function getmainserverinto() {
@@ -143,7 +147,12 @@
             //refresh page
             // goto('/', {  });
             toggle();
-            window.location.href = '/';
+            // window.location.href = '/';
+            if($page.url.searchParams.get('chat') == 'true'){
+                goto('/chat', {  });
+            }else{
+                goto('/', {  });
+            }
         }
     }
 </script>
