@@ -527,7 +527,7 @@
 			//if front rowid is wc
 			if (rowid.includes('wc') && rowid != 'wc0') {
 				// await getuuidbyname(rowid.replace('wc', '')).then(async (uuid) => {
-					await fetch("https://api.minetools.eu/uuid/"+uuid.replace(/-/g, ''))
+					await fetch("https://api.minetools.eu/uuid/"+rowid.replace('wc', '').replace(/-/g, ''))
 						.then(response => response.json())
 						.then(result => {
 							if (result.status === 'OK') {
