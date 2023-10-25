@@ -556,12 +556,12 @@
 						//remove last # and everything after it
 						name = name.substring(0, index);
 						avatar = data.avatar.link;
-					}).catch((error) => {
-						return { user: 'Guest (จากเว็บ)', uuid: '00000000-0000-0000-0000-000000000000' };
-					});
-				return { user: name + ' (จากเว็บ)', uuid: 'discord-' + avatar };
+						return { user: name + ' (จากเว็บ)', uuid: 'discord-' + avatar };
+					}).catch((error) => {});
+				
+			} else {
+				return { user: 'Guest (จากเว็บ)', uuid: '00000000-0000-0000-0000-000000000000' };
 			}
-			return { user: 'Guest (จากเว็บ)', uuid: '00000000-0000-0000-0000-000000000000' };
 		}
 		const response = await fetch('https://cpsql.pwisetthon.com/user/find/id/' + rowid);
 		const json = await response.json();
