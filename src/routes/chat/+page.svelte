@@ -308,7 +308,7 @@
 							let isdiscordlinkmc = false;
 							let minecraftuuid = null;
 							let islinkfromweb = false;
-							await fetch("https://cpsql.pwisetthon.com/discordmclink/checklink?discordid=" + $page.data.props.disco_id)
+							await fetch("https://cpsql.pwisetthon.com/discordmclink/checklink?discordid=" + data[i].discord)
 								.then(response => response.json())
 								.then(result => {
 									if (result.status === 200) {
@@ -323,7 +323,7 @@
 									isdiscordlinkmc = false;
 								});
 							if (isdiscordlinkmc == false) {
-								await fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + $page.data.props.disco_id)
+								await fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + data[i].discord)
 									.then(response => response.json())
 									.then(result => {
 										if (result.status === 200) {
@@ -481,7 +481,7 @@
 									let isdiscordlinkmc = false;
 									let minecraftuuid = null;
 									let islinkfromweb = false;
-									await fetch("https://cpsql.pwisetthon.com/discordmclink/checklink?discordid=" + $page.data.props.disco_id)
+									await fetch("https://cpsql.pwisetthon.com/discordmclink/checklink?discordid=" + data[i].discord)
 										.then(response => response.json())
 										.then(result => {
 											if (result.status === 200) {
@@ -496,7 +496,7 @@
 											isdiscordlinkmc = false;
 										});
 									if (isdiscordlinkmc == false) {
-										await fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + $page.data.props.disco_id)
+										await fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + data[i].discord)
 											.then(response => response.json())
 											.then(result => {
 												if (result.status === 200) {
