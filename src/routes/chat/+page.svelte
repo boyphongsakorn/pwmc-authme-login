@@ -88,7 +88,7 @@
 				newMessage = $page.data.props.disco_name ?? $page.data.props.authmeaccount + ' (จากเว็บ) : ' + newMessage.replace('(Guest จากเว็บ) : ', '');
 				messagesinfo = [...messagesinfo, 'wc'+$page.data.props.disco_id];
 				discordid = $page.data.props.disco_id;
-				user = 2;
+				user = $page.data.props.authmeaccount ? 2 : 1;
 			} else {
 				messagesinfo = [...messagesinfo, 'wc0'];
 			}
