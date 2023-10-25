@@ -86,7 +86,8 @@
 				// newMessage =
 				// 	$page.data.props.disco_name + ' (จากเว็บ) : ' + newMessage.replace('(Guest จากเว็บ) : ', '');
 				newMessage = $page.data.props.disco_name ?? $page.data.props.authmeaccount + ' (จากเว็บ) : ' + newMessage.replace('(Guest จากเว็บ) : ', '');
-				messagesinfo = [...messagesinfo, 'wc'+$page.data.props.disco_id];
+				// messagesinfo = [...messagesinfo, 'wc'+$page.data.props.disco_id];
+				messagesinfo = [...messagesinfo, $page.data.props.authmeaccount ? 'wc'+$page.data.props.authmeaccount : 'wc'+$page.data.props.disco_id];
 				discordid = $page.data.props.disco_id;
 				user = $page.data.props.authmeaccount ? 2 : 1;
 			} else {
@@ -466,10 +467,23 @@
 
 	async function getplayerinfo(i) {
 		let rowid = messagesinfo[i];
-		console.log(messagesinfo);
+		console.log(rowid);
 		if (isNaN(rowid) || rowid == 0) {
 			//if front rowid is wc
 			if (rowid.includes('wc') && rowid != 'wc0') {
+				await getuuidbyname(rowid.replace('wc', '')).then(async (uuid) => {
+					await fetch("https://api.minetools.eu/uuid/"+uuid)
+						.then(response => response.json())
+						.then(result => {
+							if (result.status === 'OK') {
+								return { user: result.name + ' (จากเว็บ)', uuid: uuid };
+							}
+						})
+						.catch(error => {});
+				});
+				// if (rowid.replace('wc', '')) {
+					
+				// }
 				// const headers = {
 				//   'Authorization': 'Bot ' + import.meta.env.VITE_DISCORD_BOT_TOKEN
 				// };
