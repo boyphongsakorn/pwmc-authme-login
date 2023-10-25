@@ -463,14 +463,69 @@
 					});
 				await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/webchat/history')
 					.then((response) => response.json())
-					.then((data) => {
-						data.forEach(function (item) {
-							if (item.user === 0 || item.discord === null) {
-								item.user = 'wc' + item.user;
+					.then(async (data) => {
+						// data.forEach(function (item) {
+						// 	if (item.user === 0 || item.discord === null) {
+						// 		item.user = 'wc' + item.user;
+						// 	} else {
+						// 		item.user = 'wc' + item.discord;
+						// 	}
+						// });
+						for (let i = 0; i < data.length; i++) {
+							if (data[i].user === 0 || data[i].discord === null) {
+								data[i].user = 'wc' + data[i].user;
 							} else {
-								item.user = 'wc' + item.discord;
+								if (data[i].user === 1) {
+									data[i].user = 'wc' + data[i].discord;
+								} else if (data[i].user === 2) {
+									let isdiscordlinkmc = false;
+									let minecraftuuid = null;
+									let islinkfromweb = false;
+									await fetch("https://cpsql.pwisetthon.com/discordmclink/checklink?discordid=" + $page.data.props.disco_id)
+										.then(response => response.json())
+										.then(result => {
+											if (result.status === 200) {
+												isdiscordlinkmc = true;
+												minecraftuuid = result.minecraftid;
+												islinkfromweb = true;
+											} else {
+												isdiscordlinkmc = false;
+											}
+										})
+										.catch(error => {
+											isdiscordlinkmc = false;
+										});
+									if (isdiscordlinkmc == false) {
+										await fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + $page.data.props.disco_id)
+											.then(response => response.json())
+											.then(result => {
+												if (result.status === 200) {
+													isdiscordlinkmc = true;
+													minecraftuuid = result.minecraftid;
+													islinkfromweb = false;
+												} else {
+													isdiscordlinkmc = false;
+												}
+											})
+											.catch(error => console.log('error', error));
+									}
+									if (minecraftuuid != null) {
+										await fetch("https://api.minetools.eu/uuid/"+minecraftuuid.replace(/-/g, ''))
+											.then(response => response.json())
+											.then(result => {
+												if (result.status === 'OK') {
+													data[i].user = 'wc' + minecraftuuid;
+												} else {
+													data[i].user = 'wc0';
+												}
+											})
+											.catch(error => {
+												data[i].user = 'wc0';
+											});
+									}
+								}
 							}
-						});
+						}
 						//add data to allchat
 						allchat = [...allchat, ...data];
 						//ascending order data
