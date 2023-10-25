@@ -526,8 +526,8 @@
 		if (isNaN(rowid) || rowid == 0) {
 			//if front rowid is wc
 			if (rowid.includes('wc') && rowid != 'wc0') {
-				await getuuidbyname(rowid.replace('wc', '')).then(async (uuid) => {
-					await fetch("https://api.minetools.eu/uuid/"+uuid)
+				// await getuuidbyname(rowid.replace('wc', '')).then(async (uuid) => {
+					await fetch("https://api.minetools.eu/uuid/"+uuid.replace(/-/g, ''))
 						.then(response => response.json())
 						.then(result => {
 							if (result.status === 'OK') {
@@ -535,7 +535,7 @@
 							}
 						})
 						.catch(error => {});
-				});
+				// });
 				// if (rowid.replace('wc', '')) {
 					
 				// }
