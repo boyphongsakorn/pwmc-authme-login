@@ -88,7 +88,7 @@
 				newMessage = $page.data.props.disco_name ?? $page.data.props.authmeaccount + ' (จากเว็บ) : ' + newMessage.replace('(Guest จากเว็บ) : ', '');
 				messagesinfo = [...messagesinfo, 'wc'+$page.data.props.disco_id];
 				discordid = $page.data.props.disco_id;
-				user = 1;
+				user = 2;
 			} else {
 				messagesinfo = [...messagesinfo, 'wc0'];
 			}
@@ -242,11 +242,59 @@
 			.then((response) => response.json())
 			.then((data) => {
 				//add each user with text wc
-				data.forEach(function (item) {
+				data.forEach(async function (item) {
 					if (item.user === 0 || item.discord === null) {
 						item.user = 'wc' + item.user;
 					} else {
-						item.user = 'wc' + item.discord;
+						if (item.user === 1) {
+							item.user = 'wc' + item.discord;
+						} else if (item.user === 2) {
+							let isdiscordlinkmc = false;
+							let minecraftuuid = null;
+							let islinkfromweb = false;
+							await fetch("https://cpsql.pwisetthon.com/discordmclink/checklink?discordid=" + $page.data.props.disco_id)
+								.then(response => response.json())
+								.then(result => {
+									if (result.status === 200) {
+										isdiscordlinkmc = true;
+										minecraftuuid = result.minecraftid;
+										islinkfromweb = true;
+									} else {
+										isdiscordlinkmc = false;
+									}
+								})
+								.catch(error => {
+									isdiscordlinkmc = false;
+								});
+							if (isdiscordlinkmc == false) {
+								await fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + $page.data.props.disco_id)
+									.then(response => response.json())
+									.then(result => {
+										if (result.status === 200) {
+											isdiscordlinkmc = true;
+											minecraftuuid = result.minecraftid;
+											islinkfromweb = false;
+										} else {
+											isdiscordlinkmc = false;
+										}
+									})
+									.catch(error => console.log('error', error));
+							}
+							if (minecraftuuid != null) {
+								await fetch("https://api.minetools.eu/uuid/"+minecraftuuid.replace(/-/g, ''))
+									.then(response => response.json())
+									.then(result => {
+										if (result.status === 'OK') {
+											item.user = 'wc' + minecraftuuid;
+										} else {
+											item.user = 'wc0';
+										}
+									})
+									.catch(error => {
+										item.user = 'wc0';
+									});
+							}
+						}
 					}
 				});
 				//add data to allchat
