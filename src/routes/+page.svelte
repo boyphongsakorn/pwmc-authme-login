@@ -154,7 +154,8 @@
             if($page.url.searchParams.get('chat') == 'true'){
                 goto('/chat', {  });
             }else{
-                goto('/', {  });
+                // goto('/', {  });
+                window.location.href = '/';
             }
         }
     }
