@@ -531,7 +531,7 @@
 						.then(response => response.json())
 						.then(result => {
 							if (result.status === 'OK') {
-								return { user: result.name + ' (จากเว็บ)', uuid: uuid };
+								return { user: result.name + ' (จากเว็บ)', uuid: result.id };
 							}
 						})
 						.catch(error => {});
