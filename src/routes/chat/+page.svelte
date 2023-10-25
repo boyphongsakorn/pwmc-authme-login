@@ -564,8 +564,8 @@
 							name = 'Guest';
 							avatar = '00000000-0000-0000-0000-000000000000';
 						});
-					return { user: name + ' (จากเว็บ)', uuid: 'discord-' + avatar };
 				}
+				return { user: name + ' (จากเว็บ)', uuid: 'discord-' + avatar };
 			} else {
 				return { user: 'Guest (จากเว็บ)', uuid: '00000000-0000-0000-0000-000000000000' };
 			}
