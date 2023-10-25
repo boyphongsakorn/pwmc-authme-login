@@ -79,12 +79,13 @@
 		newMessage = '(Guest จากเว็บ) : ' + newMessage;
 		if (ogmessage.trim() !== '') {
 			if (
-				$page.data.props.disco_access_token != undefined &&
+				($page.data.props.disco_access_token != undefined &&
 				$page.data.props.disco_access_token !== 'undefined' &&
-				$page.data.props.disco_access_token !== null
+				$page.data.props.disco_access_token !== null) || $page.data.props.authmeaccount != null
 			) {
-				newMessage =
-					$page.data.props.disco_name + ' (จากเว็บ) : ' + newMessage.replace('(Guest จากเว็บ) : ', '');
+				// newMessage =
+				// 	$page.data.props.disco_name + ' (จากเว็บ) : ' + newMessage.replace('(Guest จากเว็บ) : ', '');
+				newMessage = $page.data.props.disco_name ?? $page.data.props.authmeaccount + ' (จากเว็บ) : ' + newMessage.replace('(Guest จากเว็บ) : ', '');
 				messagesinfo = [...messagesinfo, 'wc'+$page.data.props.disco_id];
 				discordid = $page.data.props.disco_id;
 				user = 1;
