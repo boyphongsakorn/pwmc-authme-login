@@ -243,7 +243,7 @@
                 </Card>
             {/await}
         </Col>
-        <!-- <Col>
+        <Col>
             {#await getnexttimerun() then test }
                 <a href="/odp" class="text-decoration-none text-dark">
                     {#if test != "เริ่มแล้วตอนนี้"}
@@ -256,8 +256,11 @@
                                     <Col class="d-flex align-items-center">
                                         One Day Project
                                     </Col>
-                                    <Col xs="auto" class="my-auto">
+                                    <!-- <Col xs="auto" class="my-auto">
                                         จะ{test}
+                                    </Col> -->
+                                    <Col xs="auto" class="my-auto">
+                                        ปิดชั่วคราว
                                     </Col>
                                 </Row>
                             </Card>
@@ -284,7 +287,7 @@
                     {/if}
                 </a>
             {/await}
-        </Col> -->
+        </Col>
     </Row>
 </Container>
 

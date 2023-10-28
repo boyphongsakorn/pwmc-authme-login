@@ -161,15 +161,15 @@
                 let minute = Math.floor((timeleft - hour * 3600) / 60);
                 let second = Math.floor(timeleft - hour * 3600 - minute * 60);
                 if (istoast == false) {
-                    toast.push('Event ครั้งต่อไปจะเริ่มในอีก ' + hour + ' ชั่วโมง ' + minute + ' นาที ' + second + ' วินาที', {
-                        theme: {
-                            '--toastColor': 'mintcream',
-                            '--toastBackground': 'rgba(255,69,0, 0.8)',
-                            '--toastBarBackground': '#8B0000'
-                        },
-                        duration: 20000
-                    })
-                    istoast = true;
+                    // toast.push('Event ครั้งต่อไปจะเริ่มในอีก ' + hour + ' ชั่วโมง ' + minute + ' นาที ' + second + ' วินาที', {
+                    //     theme: {
+                    //         '--toastColor': 'mintcream',
+                    //         '--toastBackground': 'rgba(255,69,0, 0.8)',
+                    //         '--toastBarBackground': '#8B0000'
+                    //     },
+                    //     duration: 20000
+                    // })
+                    // istoast = true;
                 }
                 return 'เริ่มในอีก ' + hour + ' ชั่วโมง ' + minute + ' นาที ' + second + ' วินาที';
             } else {
