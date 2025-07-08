@@ -309,14 +309,14 @@
             <p>เว็บไซต์ดู Map โลกของเซิฟเวอร์</p>
         </Col>
         <Col class="d-flex justify-content-center">
-            <img src="https://img.gs/fhcphvsghs/quality=low/https://screenshot-xi.vercel.app/api?url=https://map.bpminecraft.com&width=640&height=360" class="rounded-2 w-75 shadow my-2" alt="Map">
+            <img src="https://image.thum.io/get/maxAge/12/width/1024/https://map.bpminecraft.com" class="rounded-2 w-75 shadow my-2" alt="Map">
         </Col>
     </Row>
 </Container>
 <Container sm>
     <Row>
         <Col class="d-flex justify-content-center">
-            <img src="https://img.gs/fhcphvsghs/quality=low/https://screenshot-xi.vercel.app/api?url=https://bpminecraft.com/chat&width=640&height=360" class="rounded-2 w-75 shadow my-2" alt="Chat">
+            <img src="https://image.thum.io/get/maxAge/12/width/1024/https://bpminecraft.com/chat" class="rounded-2 w-75 shadow my-2" alt="Chat">
         </Col>
         <Col class="text-center my-auto">
             <a href="https://bpminecraft.com/chat" class="text-decoration-none"><h2>Chat เซิฟเวอร์</h2></a>
