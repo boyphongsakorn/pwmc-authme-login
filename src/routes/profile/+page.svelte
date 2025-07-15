@@ -183,10 +183,12 @@
             }
             if (minecraftuuid != null) {
                 let uuidnotfound = false;
-                await fetch("https://api.minetools.eu/uuid/"+minecraftuuid.replace(/-/g, ''))
+                //await fetch("https://api.minetools.eu/uuid/"+minecraftuuid.replace(/-/g, ''))
+                await fetch("https://api.minecraftservices.com/minecraft/profile/lookup/"+minecraftuuid.replace(/-/g, ''))
                     .then(response => response.json())
                     .then(result => {
-                        if (result.status === 'OK') {
+                        //if (result.status === 'OK') {
+                        if (!result.error) {
                             minecraftname = result.name;
                             ismccrack = false;
                         } else {
@@ -340,10 +342,12 @@
                 console.log('error', error);
                 linkmcsuccess = false;
             });
-        await fetch("https://api.minetools.eu/uuid/"+minecraftuser)
+        //await fetch("https://api.minetools.eu/uuid/"+minecraftuser)
+        await fetch("https://api.minecraftservices.com/minecraft/profile/lookup/"+minecraftuser)
             .then(response => response.json())
             .then(result => {
-                if (result.status === 'OK') {
+                //if (result.status === 'OK') {
+                if (!result.error) {
                     uuidsearch = result.id;
                 } else {
                     uuidsearch = null;
