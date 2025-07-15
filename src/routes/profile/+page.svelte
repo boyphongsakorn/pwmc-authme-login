@@ -199,7 +199,9 @@
                         }
                     })
                     .catch(error => {
-                        minecraftname = 'ไม่สามารถดึงข้อมูลได้ (API ขัดข้อง)';
+                        //minecraftname = 'ไม่สามารถดึงข้อมูลได้ (API ขัดข้อง)';
+                        uuidnotfound = true;
+                        ismccrack = true;
                     });
                 if (uuidnotfound == true){
                     await fetch("https://cpsql.pwisetthon.com/user/find/uuid/"+minecraftuuid)
