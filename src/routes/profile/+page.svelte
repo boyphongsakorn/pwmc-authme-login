@@ -184,7 +184,7 @@
             if (minecraftuuid != null) {
                 let uuidnotfound = false;
                 //await fetch("https://api.minetools.eu/uuid/"+minecraftuuid.replace(/-/g, ''))
-                await fetch("https://api.minecraftservices.com/minecraft/profile/lookup/"+minecraftuuid.replace(/-/g, ''))
+                await fetch("https://anywhere.pwisetthon.com/https://api.minecraftservices.com/minecraft/profile/lookup/"+minecraftuuid.replace(/-/g, ''))
                     .then(response => response.json())
                     .then(result => {
                         //if (result.status === 'OK') {
