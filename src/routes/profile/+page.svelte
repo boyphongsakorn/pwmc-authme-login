@@ -351,7 +351,7 @@
             .then(result => {
                 //if (result.status === 'OK') {
                 if (!result.message) {
-                    uuidsearch = result.id;
+                    uuidsearch = result.uuid.replace(/-/g, '');
                 } else {
                     uuidsearch = null;
                 }
