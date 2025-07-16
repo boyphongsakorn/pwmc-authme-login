@@ -345,11 +345,12 @@
                 linkmcsuccess = false;
             });
         //await fetch("https://api.minetools.eu/uuid/"+minecraftuser)
-        await fetch("https://api.minecraftservices.com/minecraft/profile/lookup/"+minecraftuser)
+        //await fetch("https://api.minecraftservices.com/minecraft/profile/lookup/"+minecraftuser)
+        await fetch("https://mcprofile.io/api/v1/java/username/"+minecraftuser)
             .then(response => response.json())
             .then(result => {
                 //if (result.status === 'OK') {
-                if (!result.error) {
+                if (!result.message) {
                     uuidsearch = result.id;
                 } else {
                     uuidsearch = null;
