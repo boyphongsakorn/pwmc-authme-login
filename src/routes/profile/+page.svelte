@@ -62,7 +62,7 @@
     function handleSkinName(event) {
         console.log(event);
         skinname = event.target.value;
-        fetch("https://anywhere.pwisetthon.com/https://minecraft-api.com/api/skins/"+skinname+"/body/10.5")
+        fetch("https://cors-fany.vercel.app/minecraft-api.com/api/skins/"+skinname+"/body/10.5")
             .then(response => response.text())
             .then(result => {
                 //console.log(result);
@@ -117,7 +117,7 @@
             body: raw        
         };
 
-        await fetch("https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/skinsrestorer/addskin", requestOptions)
+        await fetch("https://cors-fany.vercel.app/cpsql.pwisetthon.com/skinsrestorer/addskin", requestOptions)
             .then(response => response.json())
             .then(result => {
             })
@@ -184,7 +184,7 @@
             if (minecraftuuid != null) {
                 let uuidnotfound = false;
                 //await fetch("https://api.minetools.eu/uuid/"+minecraftuuid.replace(/-/g, ''))
-                await fetch("https://anywhere.pwisetthon.com/https://api.minecraftservices.com/minecraft/profile/lookup/"+minecraftuuid.replace(/-/g, ''))
+                await fetch("https://cors-fany.vercel.app/api.minecraftservices.com/minecraft/profile/lookup/"+minecraftuuid.replace(/-/g, ''))
                     .then(response => response.json())
                     .then(result => {
                         //if (result.status === 'OK') {
@@ -331,7 +331,7 @@
 
         let uuidsearch = "";
 
-        await fetch("https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/authme/check", requestOptions)
+        await fetch("https://cors-fany.vercel.app/cpsql.pwisetthon.com/authme/check", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result.result === 'Login success') {
@@ -373,7 +373,7 @@
                 body: raw        
             };
 
-            await fetch("https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/discordmclink/link", requestOptions)
+            await fetch("https://cors-fany.vercel.app/cpsql.pwisetthon.com/discordmclink/link", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     if (result.status === 200) {
