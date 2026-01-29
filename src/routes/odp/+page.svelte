@@ -121,7 +121,7 @@
         }
 
         async function getallevent() {
-            const response = await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/oneday/allevent');
+            const response = await fetch('https://cors-fany.vercel.app/cpsql.pwisetthon.com/oneday/allevent');
             const json = await response.json();
             json.forEach(element => {
                 element.event_start_time = unixToDateTime(element.event_start);
@@ -137,7 +137,7 @@
         }
 
         async function getdata(id) {
-            const response = await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/oneday/damage/' + id);
+            const response = await fetch('https://cors-fany.vercel.app/cpsql.pwisetthon.com/oneday/damage/' + id);
             const json = await response.json();
             winner = json[0].name;
             //console.log(json);
@@ -145,7 +145,7 @@
         }
 
         async function getnexttimerun() {
-            const response = await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/oneday/allevent');
+            const response = await fetch('https://cors-fany.vercel.app/cpsql.pwisetthon.com/oneday/allevent');
             const json = await response.json();
             json.sort(function (a, b) {
                 return b.event_start - a.event_start;
