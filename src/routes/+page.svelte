@@ -88,7 +88,7 @@
     }
 
     async function getnexttimerun() {
-            const response = await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/oneday/allevent');
+            const response = await fetch('https://cors-fany.vercel.app/cpsql.pwisetthon.com/oneday/allevent');
             const json = await response.json();
             json.sort(function (a, b) {
                 return b.event_start - a.event_start;
@@ -138,7 +138,7 @@
             body: JSON.stringify({ username: mcUsername, password: mcPassword })
         };
 
-        const response = await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/authme/check', requestOption);
+        const response = await fetch('https://cors-fany.vercel.app/cpsql.pwisetthon.com/authme/check', requestOption);
         const json = await response.json();
         // console.log(json);
         // alert(json.result);
