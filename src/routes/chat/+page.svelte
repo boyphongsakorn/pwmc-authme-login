@@ -147,7 +147,7 @@
 					};
 
 					await fetch(
-						'https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/webchat/newchat/',
+						'https://cors-fany.vercel.app/cpsql.pwisetthon.com/webchat/newchat/',
 						requestOptions
 					)
 						.then((response) => response.json())
@@ -218,7 +218,7 @@
 
 	onMount(async () => {
 		let allchat;
-		await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/chat/history/')
+		await fetch('https://cors-fany.vercel.app/cpsql.pwisetthon.com/chat/history/')
 			.then((response) => response.json())
 			.then((data) => {
 				data.sort(function (a, b) {
@@ -239,7 +239,7 @@
 				//     document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
 				// }, 100);
 			});
-		await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/webchat/history')
+		await fetch('https://cors-fany.vercel.app/cpsql.pwisetthon.com/webchat/history')
 			.then((response) => response.json())
 			.then(async (data) => {
 				//add each user with text wc
@@ -440,7 +440,7 @@
 				//         }
 				//     });
 				let allchat;
-				await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/chat/history/')
+				await fetch('https://cors-fany.vercel.app/cpsql.pwisetthon.com/chat/history/')
 					.then((response) => response.json())
 					.then((data) => {
 						data.sort(function (a, b) {
@@ -461,7 +461,7 @@
 						//     document.getElementById('cbbox').scrollTop = document.getElementById('cbbox').scrollHeight;
 						// }, 100);
 					});
-				await fetch('https://anywhere.pwisetthon.com/https://cpsql.pwisetthon.com/webchat/history')
+				await fetch('https://cors-fany.vercel.app/cpsql.pwisetthon.com/webchat/history')
 					.then((response) => response.json())
 					.then(async (data) => {
 						// data.forEach(function (item) {
