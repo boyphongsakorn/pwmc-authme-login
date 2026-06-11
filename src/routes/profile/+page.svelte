@@ -543,7 +543,7 @@
                 {#if chat_history !== null}
                     <CardBody class="text-left">
                         {#each chat_history as chat}
-                            <img src="https://crafatar.com/renders/head/{minecraftuuid}" width="30px" />
+                            <img src="https://render.crafty.gg/2d/head/{minecraftuuid}" width="30px" />
                             <p class="d-inline"> {minecraftname.replace(' (ตัวละคร Crack)', '')} พูดว่า "{chat.message}" เมื่อ {convertUnixTime(chat.time)}</p><br>
                             <!-- } : {chat.message} (เวลา {convertUnixTime(chat.time)})</p><br> -->
                         {/each}
@@ -584,7 +584,7 @@
                             the card's content.
                         </CardText> -->
                         {#if itchangeskin !== true}
-                            <img src="https://crafatar.com/renders/body/{minecraftuuid ?? '0110b237-1102-4d74-81d4-5a1df9d14ca7'}" />
+                            <img src="https://render.crafty.gg/3d/full/{minecraftuuid ?? '0110b237-1102-4d74-81d4-5a1df9d14ca7'}" />
                         {:else}
                             <canvas id="skin_change_container"></canvas>
                         {/if}
