@@ -202,23 +202,9 @@
                 <NavItem>
                     <Button style="background-color: #000000;" href="https://neon-granita-d423fd.netlify.app/sso?app=BPMinecraft&redirect_uri=https://bpminecraft.com/callback">ล็อกอินผ่าน 99 Account</Button>
                 </NavItem>
-            {:else if $page.data.props.sso_username !== null}
-            <NavItem>
-                <NavLink href="/profile">คุณ {$page.data.props.sso_username}</NavLink>
-            </NavItem>
-            <NavItem>
-                <Button style="background-color: #000000;" href="/api/ssologout" rel="external">ออกจากระบบ</Button>
-            </NavItem>
-            {:else if $page.data.props.authmeaccount !== null}
-            <NavItem>
-                <NavLink href="/profile">คุณ {$page.data.props.authmeaccount}</NavLink>
-            </NavItem>
-            <NavItem>
-                <Button style="background-color: #5865F2;" href="https://bpminecraft.com/api/discordlogout" rel="external">ออกจากระบบ</Button>
-            </NavItem>
             {:else}
-                <NavItem>
-                    <NavLink href="/profile">คุณ {$page.data.props.disco_name}</NavLink>
+            <NavItem>
+                <NavLink href="/profile">คุณ {$page.data.props.sso_username ?? $page.data.props.authmeaccount ?? $page.data.props.disco_name}</NavLink>
                 </NavItem>
                 <NavItem>
                     <Button style="background-color: #5865F2;" href="https://bpminecraft.com/api/discordlogout" rel="external">ออกจากระบบ</Button>

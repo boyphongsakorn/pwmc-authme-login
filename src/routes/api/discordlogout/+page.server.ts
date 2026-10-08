@@ -7,34 +7,15 @@ import { dev } from '$app/environment';
 
 export async function load({ url, cookies }) {
     //clear cookies
-    cookies.set('disco_access_token', '', {
-        path: '/',
-        httpOnly: true,
-        sameSite: 'strict',
-        secure: !dev,
-        maxAge: 0
-    });
-    cookies.set('disco_refresh_token', '', {
-        path: '/',
-        httpOnly: true,
-        sameSite: 'strict',
-        secure: !dev,
-        maxAge: 0
-    });
-    cookies.set('disco_name', '', {
-        path: '/',
-        httpOnly: true,
-        sameSite: 'strict',
-        secure: !dev,
-        maxAge: 0
-    });
-    cookies.set('mc_username', '', {
-        path: '/',
-        httpOnly: true,
-        sameSite: 'strict',
-        secure: !dev,
-        maxAge: 0
-    });
+    for (const name of ['disco_access_token', 'disco_refresh_token', 'disco_name', 'mc_username', 'sso_user_id', 'sso_username', 'sso_avatar', 'sso_provider']) {
+        cookies.set(name, '', {
+            path: '/',
+            httpOnly: true,
+            sameSite: 'lax',
+            secure: !dev,
+            maxAge: 0
+        });
+    }
     //redirect to main page
     throw redirect(307, '/');
 }
