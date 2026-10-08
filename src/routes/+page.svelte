@@ -194,7 +194,7 @@
             </Dropdown-->
             {#if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === null || $page.data.props.disco_name === undefined || $page.data.props.disco_name === null) && $page.data.props.authmeaccount === null && $page.data.props.sso_username === null}
                 <NavItem>
-                <NavLink on:click={toggle}>ล็อกอินผ่านรหัสในเกม</NavLink>
+                <Button style="background-color: #e67e22;" on:click={toggle}>ล็อกอินผานรหัสในเกม</Button>
                 </NavItem>
                 <NavItem>
                     <Button style="background-color: #5865F2;" href="https://discord.com/api/oauth2/authorize?client_id=625822290675892234&redirect_uri=https%3A%2F%2Fbpminecraft.com%2Fapi%2Fdiscordcallback&response_type=code&scope=identify%20guilds">ล็อกอินผ่าน Discord</Button>
