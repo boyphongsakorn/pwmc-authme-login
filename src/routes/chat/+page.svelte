@@ -81,11 +81,11 @@
 			if (
 				($page.data.props.disco_access_token != undefined &&
 				$page.data.props.disco_access_token !== 'undefined' &&
-				$page.data.props.disco_access_token !== null) || $page.data.props.authmeaccount != null
+				$page.data.props.disco_access_token !== null) || $page.data.props.authmeaccount != null || $page.data.props.sso_username != null
 			) {
 				// newMessage =
 				// 	$page.data.props.disco_name + ' (จากเว็บ) : ' + newMessage.replace('(Guest จากเว็บ) : ', '');
-				newMessage = $page.data.props.disco_name ?? $page.data.props.authmeaccount + ' (จากเว็บ) : ' + newMessage.replace('(Guest จากเว็บ) : ', '');
+				newMessage = ($page.data.props.disco_name ?? $page.data.props.authmeaccount ?? $page.data.props.sso_username) + ' (จากเว็บ) : ' + newMessage.replace('(Guest จากเว็บ) : ', '');
 				// messagesinfo = [...messagesinfo, 'wc'+$page.data.props.disco_id];
 				messagesinfo = [...messagesinfo, $page.data.props.authmeaccount ? 'wc'+$page.data.props.authmeaccount : 'wc'+$page.data.props.disco_id];
 				discordid = $page.data.props.disco_id;
@@ -685,7 +685,7 @@
                 <DropdownItem>Reset</DropdownItem>
             </DropdownMenu>
             </Dropdown-->
-				{#if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) && $page.data.props.authmeaccount === null}
+				{#if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) && $page.data.props.authmeaccount === null && $page.data.props.sso_username === null}
 					<NavItem>
 						<NavLink href="/?login=true&chat=true">ล็อกอินผ่านรหัสในเกม</NavLink>
 					</NavItem>
@@ -696,10 +696,17 @@
 							>ล็อกอินผ่าน Discord</Button
 						>
 					</NavItem>
+					<NavItem>
+						<Button
+							style="background-color: #000000;"
+							href="https://neon-granita-d423fd.netlify.app/sso?app=BPMinecraft&redirect_uri=https://bpminecraft.com/callback"
+							>ล็อกอินผ่าน 99 Account</Button
+						>
+					</NavItem>
 				{:else}
 					<NavItem>
 						<NavLink href="https://bpminecraft.com/profile"
-							>คุณ {$page.data.props.disco_name ?? $page.data.props.authmeaccount}</NavLink
+							>คุณ {$page.data.props.disco_name ?? $page.data.props.authmeaccount ?? $page.data.props.sso_username}</NavLink
 						>
 					</NavItem>
 					<NavItem>

@@ -30,7 +30,25 @@ export const load: PageServerLoad = async ({ cookies }) => {
                 disco_refresh_token: cookies.get('disco_refresh_token'),
                 disco_name: disco_name,
                 disco_id: disco_id,
-                authmeaccount: null
+                authmeaccount: null,
+                sso_username: null,
+                sso_user_id: null,
+                sso_avatar: null,
+                sso_provider: null
+            }
+        }
+    } else if (cookies.get('sso_username')) {
+        return {
+            props: {
+                disco_access_token: null,
+                disco_refresh_token: null,
+                disco_name: null,
+                disco_id: cookies.get('sso_user_id') ?? null,
+                authmeaccount: null,
+                sso_username: cookies.get('sso_username'),
+                sso_user_id: cookies.get('sso_user_id'),
+                sso_avatar: cookies.get('sso_avatar'),
+                sso_provider: cookies.get('sso_provider')
             }
         }
     } else if (cookies.get('mc_username')) {
@@ -40,7 +58,11 @@ export const load: PageServerLoad = async ({ cookies }) => {
                 disco_refresh_token: null,
                 disco_name: null,
                 disco_id: cookies.get('discord_id') ?? null,
-                authmeaccount: cookies.get('mc_username')
+                authmeaccount: cookies.get('mc_username'),
+                sso_username: null,
+                sso_user_id: null,
+                sso_avatar: null,
+                sso_provider: null
             }
         }
     } else {
@@ -50,7 +72,11 @@ export const load: PageServerLoad = async ({ cookies }) => {
                 disco_refresh_token: null,
                 disco_name: null,
                 disco_id: null,
-                authmeaccount: null
+                authmeaccount: null,
+                sso_username: null,
+                sso_user_id: null,
+                sso_avatar: null,
+                sso_provider: null
             }
         }
     }
