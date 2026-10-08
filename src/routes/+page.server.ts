@@ -27,6 +27,23 @@ export const load: PageServerLoad = async ({ cookies }) => {
                 disco_access_token: cookies.get('disco_access_token'),
                 disco_refresh_token: cookies.get('disco_refresh_token'),
                 disco_name: disco_name,
+                sso_username: null,
+                sso_user_id: null,
+                sso_avatar: null,
+                sso_provider: null,
+                authmeaccount: null
+            }
+        }
+    } else if (cookies.get('sso_username')) {
+        return {
+            props: {
+                disco_access_token: null,
+                disco_refresh_token: null,
+                disco_name: null,
+                sso_username: cookies.get('sso_username'),
+                sso_user_id: cookies.get('sso_user_id'),
+                sso_avatar: cookies.get('sso_avatar'),
+                sso_provider: cookies.get('sso_provider'),
                 authmeaccount: null
             }
         }
@@ -36,6 +53,10 @@ export const load: PageServerLoad = async ({ cookies }) => {
                 disco_access_token: null,
                 disco_refresh_token: null,
                 disco_name: null,
+                sso_username: null,
+                sso_user_id: null,
+                sso_avatar: null,
+                sso_provider: null,
                 authmeaccount: cookies.get('mc_username')
             }
         }
@@ -45,6 +66,10 @@ export const load: PageServerLoad = async ({ cookies }) => {
                 disco_access_token: null,
                 disco_refresh_token: null,
                 disco_name: null,
+                sso_username: null,
+                sso_user_id: null,
+                sso_avatar: null,
+                sso_provider: null,
                 authmeaccount: null
             }
         }

@@ -192,7 +192,7 @@
                 <DropdownItem>Reset</DropdownItem>
             </DropdownMenu>
             </Dropdown-->
-            {#if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === null || $page.data.props.disco_name === undefined || $page.data.props.disco_name === null) && $page.data.props.authmeaccount === null}
+            {#if ($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === null || $page.data.props.disco_name === undefined || $page.data.props.disco_name === null) && $page.data.props.authmeaccount === null && $page.data.props.sso_username === null}
                 <NavItem>
                 <NavLink on:click={toggle}>ล็อกอินผ่านรหัสในเกม</NavLink>
                 </NavItem>
@@ -202,6 +202,13 @@
                 <NavItem>
                     <Button style="background-color: #000000;" href="https://neon-granita-d423fd.netlify.app/sso?app=BPMinecraft&redirect_uri=https://bpminecraft.com/callback">ล็อกอินผ่าน 99 Account</Button>
                 </NavItem>
+            {:else if $page.data.props.sso_username !== null}
+            <NavItem>
+                <NavLink href="/profile">คุณ {$page.data.props.sso_username}</NavLink>
+            </NavItem>
+            <NavItem>
+                <Button style="background-color: #000000;" href="/api/ssologout" rel="external">ออกจากระบบ</Button>
+            </NavItem>
             {:else if $page.data.props.authmeaccount !== null}
             <NavItem>
                 <NavLink href="/profile">คุณ {$page.data.props.authmeaccount}</NavLink>
