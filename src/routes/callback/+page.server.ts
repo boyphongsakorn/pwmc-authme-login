@@ -21,25 +21,25 @@ export const load: PageServerLoad = async ({ url, cookies }) => {
         await cookies.set('sso_user_id', userData.id ?? '', {
             path: '/',
             httpOnly: true,
-            sameSite: 'strict',
+            sameSite: 'lax',
             maxAge: 60 * 60 * 24 * 30 // 30 days
         });
         await cookies.set('sso_username', userData.username ?? '', {
             path: '/',
             httpOnly: true,
-            sameSite: 'strict',
+            sameSite: 'lax',
             maxAge: 60 * 60 * 24 * 30
         });
         await cookies.set('sso_avatar', userData.avatar ?? '', {
             path: '/',
             httpOnly: true,
-            sameSite: 'strict',
+            sameSite: 'lax',
             maxAge: 60 * 60 * 24 * 30
         });
         await cookies.set('sso_provider', userData.provider ?? '', {
             path: '/',
             httpOnly: true,
-            sameSite: 'strict',
+            sameSite: 'lax',
             maxAge: 60 * 60 * 24 * 30
         });
 
