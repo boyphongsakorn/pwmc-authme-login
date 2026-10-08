@@ -150,36 +150,38 @@
     let skinchangeurl = '';
 
     onMount(async () => {
-        if (($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) && $page.data.props.authmeaccount === null) {
+        if (($page.data.props.disco_access_token === undefined || $page.data.props.disco_access_token === 'undefined' || $page.data.props.disco_access_token === null) && $page.data.props.authmeaccount === null && $page.data.props.sso_username === null) {
             goto('/', { invalidateAll: true });
         } else {
-            await fetch("https://cpsql.pwisetthon.com/discordmclink/checklink?discordid=" + $page.data.props.disco_id)
-                .then(response => response.json())
-                .then(result => {
-                    if (result.status === 200) {
-                        isdiscordlinkmc = true;
-                        minecraftuuid = result.minecraftid;
-                        islinkfromweb = true;
-                    } else {
-                        isdiscordlinkmc = false;
-                    }
-                })
-                .catch(error => {
-                    isdiscordlinkmc = false;
-                });
-            if (isdiscordlinkmc == false) {
-                await fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + $page.data.props.disco_id)
+            if ($page.data.props.disco_id) {
+                await fetch("https://cpsql.pwisetthon.com/discordmclink/checklink?discordid=" + $page.data.props.disco_id)
                     .then(response => response.json())
                     .then(result => {
                         if (result.status === 200) {
                             isdiscordlinkmc = true;
                             minecraftuuid = result.minecraftid;
-                            islinkfromweb = false;
+                            islinkfromweb = true;
                         } else {
                             isdiscordlinkmc = false;
                         }
                     })
-                    .catch(error => console.log('error', error));
+                    .catch(error => {
+                        isdiscordlinkmc = false;
+                    });
+                if (isdiscordlinkmc == false) {
+                    await fetch("https://cpsql.pwisetthon.com/discordsrv_accounts/checklink?discordid=" + $page.data.props.disco_id)
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.status === 200) {
+                                isdiscordlinkmc = true;
+                                minecraftuuid = result.minecraftid;
+                                islinkfromweb = false;
+                            } else {
+                                isdiscordlinkmc = false;
+                            }
+                        })
+                        .catch(error => console.log('error', error));
+                }
             }
             if (minecraftuuid != null) {
                 let uuidnotfound = false;
@@ -451,9 +453,9 @@
                 <DropdownItem>Reset</DropdownItem>
             </DropdownMenu>
             </Dropdown-->
-            {#if ($page.data.props.disco_access_token !== undefined && $page.data.props.disco_access_token !== 'undefined' && $page.data.props.disco_access_token !== null) || $page.data.props.authmeaccount !== null}
+            {#if ($page.data.props.disco_access_token !== undefined && $page.data.props.disco_access_token !== 'undefined' && $page.data.props.disco_access_token !== null) || $page.data.props.authmeaccount !== null || $page.data.props.sso_username !== null}
                 <NavItem>
-                    <NavLink href="https://bpminecraft.com/profile">คุณ {$page.data.props.disco_name ?? $page.data.props.authmeaccount}</NavLink>
+                    <NavLink href="https://bpminecraft.com/profile">คุณ {$page.data.props.disco_name ?? $page.data.props.authmeaccount ?? $page.data.props.sso_username}</NavLink>
                 </NavItem>
                 <NavItem>
                     <Button style="background-color: #5865F2;" href="https://bpminecraft.com/api/discordlogout" rel="external">ออกจากระบบ</Button>
